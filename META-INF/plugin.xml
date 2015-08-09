@@ -43,11 +43,13 @@
     <action class="ca.rightsomegoodgames.mayacharm.actions.SendBufferAction" id="mayacharm.SendBuffer"
             text="Execute Document in Maya" description="Executes the current document in Maya">
       <add-to-group group-id="RunMenu"/>
+      <keyboard-shortcut first-keystroke="alt A" keymap="$default"/>
     </action>
 
     <action class="ca.rightsomegoodgames.mayacharm.actions.SendSelectionAction" id="mayacharm.SendSelection"
             text="Execute selection in Maya" description="Executes the current selection in Maya">
       <add-to-group group-id="RunMenu"/>
+      <keyboard-shortcut first-keystroke="alt S" keymap="$default"/>
     </action>
 
     <group id="MayaCharmActions">
