@@ -1,0 +1,59 @@
+<idea-plugin version="2">
+  <id>ca.rightsomegoodgames.mayacharm</id>
+  <name>MayaCharm</name>
+  <version>1.1</version>
+  <vendor email="chris@rightsomegoodgames.ca" url="http://www.rightsomegoodgames.ca">Chris Cunningham</vendor>
+
+  <description><![CDATA[
+        Execute the contents of a selection or document in Autodesk Maya.</br>
+        This plugin will save out the current document or selection to a temp file which will than be executed in maya
+        via the command port.
+    ]]></description>
+
+  <change-notes><![CDATA[
+        Major refactoring for future features.
+    ]]>
+  </change-notes>
+
+  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="131"/>
+  <depends>com.intellij.modules.python</depends>
+
+  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <projectService serviceImplementation="ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider"/>
+    <projectConfigurable instance="ca.rightsomegoodgames.mayacharm.settings.MayaCharmConfig"/>
+    <toolWindow id="Maya Log" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.MayaLogWindow"/>
+  </extensions>
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+    <action class="ca.rightsomegoodgames.mayacharm.actions.SendBufferAction" id="mayacharm.SendBuffer"
+            text="Execute Document in Maya" description="Executes the current document in Maya">
+      <add-to-group group-id="RunMenu"/>
+    </action>
+
+    <action class="ca.rightsomegoodgames.mayacharm.actions.SendSelectionAction" id="mayacharm.SendSelection"
+            text="Execute selection in Maya" description="Executes the current selection in Maya">
+      <add-to-group group-id="RunMenu"/>
+    </action>
+
+    <group id="MayaCharmActions">
+      <reference id="mayacharm.SendBuffer"/>
+      <reference id="mayacharm.SendSelection"/>
+    </group>
+  </actions>
+
+</idea-plugin>
