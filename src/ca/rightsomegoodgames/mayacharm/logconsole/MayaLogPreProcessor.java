@@ -13,8 +13,9 @@ public class MayaLogPreProcessor implements LogContentPreprocessor {
     @Override
     public List<LogFragment> parseLogLine(String s) {
         final List<LogFragment> lFrag = new ArrayList<>();
-        Key outType = (s.contains(PythonStrings.PYSTDERR) || s.contains(PythonStrings.MELSTDERR)) ?
-                ProcessOutputTypes.STDERR : ProcessOutputTypes.STDOUT;
+        boolean checks = s.startsWith(PythonStrings.PYSTDERR) || s.startsWith(PythonStrings.MELSTDERR) ||
+                s.startsWith(PythonStrings.MELSRDWRN) || s.startsWith(PythonStrings.PYSTDWRN);
+        Key outType = (checks) ? ProcessOutputTypes.STDERR : ProcessOutputTypes.STDOUT;
         lFrag.add(new LogFragment(s, outType));
         return lFrag;
     }
