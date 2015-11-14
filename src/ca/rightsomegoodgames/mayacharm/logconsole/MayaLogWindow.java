@@ -1,6 +1,5 @@
 package ca.rightsomegoodgames.mayacharm.logconsole;
 
-import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommInterface;
 import ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
@@ -18,7 +17,7 @@ import java.nio.charset.Charset;
 public class MayaLogWindow implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(@NotNull final Project project, @NotNull ToolWindow toolWindow) {
-        final MCSettingsProvider settings = MCSettingsProvider.getInstance(project);
+//        final MCSettingsProvider settings = MCSettingsProvider.getInstance(project);
         final ContentManager contentManager = toolWindow.getContentManager();
         final ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         final String mayaLogPath = PathManager.getPluginTempPath() + "/mayaLog.txt";
@@ -35,8 +34,8 @@ public class MayaLogWindow implements ToolWindowFactory {
             console.clear();
             console.activate();
 
-            MayaCommInterface maya = new MayaCommInterface(settings.getHost(), settings.getPort());
-            maya.connectMayaLog();
+//            MayaCommInterface maya = new MayaCommInterface(settings.getHost(), settings.getPort());
+//            maya.connectMayaLog();
         });
     }
 }

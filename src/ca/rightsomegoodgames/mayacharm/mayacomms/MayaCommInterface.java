@@ -1,6 +1,5 @@
 package ca.rightsomegoodgames.mayacharm.mayacomms;
 
-import ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider;
 import com.intellij.notification.Notifications;
 import ca.rightsomegoodgames.mayacharm.resources.MayaNotifications;
 import ca.rightsomegoodgames.mayacharm.resources.PythonStrings;
