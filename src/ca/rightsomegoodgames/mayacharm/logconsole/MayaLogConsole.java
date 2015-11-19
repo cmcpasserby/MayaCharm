@@ -16,7 +16,6 @@ public class MayaLogConsole extends LogConsoleImpl {
         super.setContentPreprocessor(new MayaLogPreProcessor());
     }
 
-
     @Override
     public boolean isActive() {
         return true;
