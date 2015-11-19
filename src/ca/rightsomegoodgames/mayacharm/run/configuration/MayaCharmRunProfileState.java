@@ -27,6 +27,7 @@ public class MayaCharmRunProfileState implements RunProfileState {
     @Override
     public ExecutionResult execute(Executor executor, @NotNull ProgramRunner programRunner) throws ExecutionException {
         final MayaCommInterface mayaPipe = new MayaCommInterface(settings.getHost(), settings.getPort());
+        mayaPipe.sendToMaya("print 'ItWorks'");
         return null;
     }
 }
