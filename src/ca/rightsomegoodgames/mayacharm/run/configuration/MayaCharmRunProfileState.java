@@ -1,6 +1,7 @@
 package ca.rightsomegoodgames.mayacharm.run.configuration;
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommInterface;
+import ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
@@ -14,16 +15,18 @@ import org.jetbrains.annotations.Nullable;
 public class MayaCharmRunProfileState implements RunProfileState {
     private final ExecutionEnvironment executionEnvironment;
     private final Project project;
+    private final MCSettingsProvider settings;
 
     public MayaCharmRunProfileState(ExecutionEnvironment executionEnvironment, Project project) {
         this.executionEnvironment = executionEnvironment;
         this.project = project;
+        settings = MCSettingsProvider.getInstance(project);
     }
 
     @Nullable
     @Override
     public ExecutionResult execute(Executor executor, @NotNull ProgramRunner programRunner) throws ExecutionException {
-        MayaCommInterface mayaPipe = new MayaCommInterface("localHost", 12345);
+        final MayaCommInterface mayaPipe = new MayaCommInterface(settings.getHost(), settings.getPort());
         return null;
     }
 }
