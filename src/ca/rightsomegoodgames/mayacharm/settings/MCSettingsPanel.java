@@ -1,6 +1,9 @@
 package ca.rightsomegoodgames.mayacharm.settings;
 
+import com.intellij.openapi.fileTypes.FileTypeManager;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.ui.EditorTextField;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -10,13 +13,15 @@ public class MCSettingsPanel {
     private JPanel myPanel;
     private JTextField hostField;
     private JTextField portField;
-    private JTextArea mayaString;
+    private EditorTextField mayaString;
 
     private final String mayaDefaultString;
     private final  MCSettingsProvider mcSettingsProvider;
+    private Project project;
 
-    public MCSettingsPanel(MCSettingsProvider provider) {
+    public MCSettingsPanel(MCSettingsProvider provider, Project project) {
         mcSettingsProvider = provider;
+        this.project = project;
         mayaDefaultString = mayaString.getText();
 
         portField.getDocument().addDocumentListener(new DocumentListener() {
@@ -66,10 +71,17 @@ public class MCSettingsPanel {
     public void apply() {
         mcSettingsProvider.setPort(getPythonCommandPort());
         mcSettingsProvider.setHost(getPythonHost());
+        reset();
     }
 
     public void reset() {
         setPythonCommandPort(mcSettingsProvider.getPort());
         setPythonHost(mcSettingsProvider.getHost());
+    }
+
+    private void createUIComponents() {
+        mayaString = new EditorTextField("", project, FileTypeManager.getInstance().getFileTypeByExtension(".py"));
+        mayaString.setOneLineMode(false);
+        mayaString.setEnabled(false);
     }
 }
