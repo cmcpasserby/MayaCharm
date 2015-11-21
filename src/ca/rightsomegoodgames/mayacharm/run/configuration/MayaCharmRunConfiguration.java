@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class MayaCharmRunConfiguration extends RunConfigurationBase {
     private String scriptFilePath;
     private String scriptCodeText;
+    private boolean useCode;
 
     public MayaCharmRunConfiguration(Project project, MayaCharmConfigurationFactory configFactory, String name) {
         super(project, configFactory, name);
@@ -51,5 +52,13 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase {
 
     public void setScriptCodeText(String scriptCodeText) {
         this.scriptCodeText = scriptCodeText;
+    }
+
+    public boolean getUseCode() {
+        return useCode;
+    }
+
+    public void setUseCode(boolean useCode) {
+        this.useCode = useCode;
     }
 }

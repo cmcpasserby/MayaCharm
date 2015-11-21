@@ -19,6 +19,14 @@ public class MayaCharmConfigForm {
 
     public MayaCharmConfigForm(Project project) {
         this.project = project;
+        UpdateControls();
+        fileRadioButton.addItemListener(e -> UpdateControls());
+        codeRadioButton.addItemListener(e -> UpdateControls());
+    }
+
+    private void UpdateControls() {
+        codeField.setEnabled(codeRadioButton.isSelected());
+        fileField.setEnabled(fileRadioButton.isSelected());
     }
 
     public JComponent getRootPanel() {
@@ -39,6 +47,15 @@ public class MayaCharmConfigForm {
 
     public void setFilePath(String value) {
         fileField.setText(value);
+    }
+
+    public boolean getUseCode() {
+        return codeRadioButton.isSelected();
+    }
+
+    public void setUseCode(boolean value) {
+        codeRadioButton.setSelected(value);
+        fileRadioButton.setSelected(!value);
     }
 
     private void createUIComponents() {

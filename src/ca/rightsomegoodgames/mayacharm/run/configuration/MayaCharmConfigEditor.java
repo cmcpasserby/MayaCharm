@@ -17,12 +17,14 @@ public class MayaCharmConfigEditor extends SettingsEditor<MayaCharmRunConfigurat
     protected void resetEditorFrom(MayaCharmRunConfiguration configuration) {
         myForm.setFilePath(configuration.getScriptFilePath());
         myForm.setCodeText(configuration.getScriptCodeText());
+        myForm.setUseCode(configuration.getUseCode());
     }
 
     @Override
     protected void applyEditorTo(MayaCharmRunConfiguration configuration) throws ConfigurationException {
         configuration.setScriptCodeText(myForm.getCodeText());
         configuration.setScriptFilePath(myForm.getFilePath());
+        configuration.setUseCode(myForm.getUseCode());
     }
 
     @NotNull
