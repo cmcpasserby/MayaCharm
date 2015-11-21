@@ -25,6 +25,14 @@ public class MayaCharmConfigForm {
         return rootPanel;
     }
 
+    public String getInitCode() {
+        return codeField.getText();
+    }
+
+    public String getScriptPath() {
+        return fileField.getText();
+    }
+
     private void createUIComponents() {
         FileChooserDescriptor fileTypeFilter = new FileChooserDescriptor(true, false, false, false, false, false);
         fileField = new TextFieldWithBrowseButton();
@@ -32,21 +40,5 @@ public class MayaCharmConfigForm {
 
         codeField = new EditorTextField("", project, FileTypeManager.getInstance().getFileTypeByExtension(".py"));
         codeField.setOneLineMode(false);
-    }
-
-    public String getCodeSnippet() {
-        return codeField.getText();
-    }
-
-    public void setCodeSnippet(String snippet) {
-        codeField.setText(snippet);
-    }
-
-    public String getFilePath() {
-        return fileField.getText();
-    }
-
-    public void setFilePath(String path) {
-        fileField.setText(path);
     }
 }

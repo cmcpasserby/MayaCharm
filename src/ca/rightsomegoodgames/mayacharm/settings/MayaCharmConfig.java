@@ -16,10 +16,8 @@ public class MayaCharmConfig implements Configurable, SearchableConfigurable, Co
     public static final String CONSOLE_SETTINGS_HELP_REFERENCE = "reference.settings.ssh.terminal";
     private MCSettingsPanel myPanel;
     private final MCSettingsProvider mcSettingsProvider;
-    private Project project;
 
     public MayaCharmConfig(Project project) {
-        this.project = project;
         mcSettingsProvider = MCSettingsProvider.getInstance(project);
     }
 
@@ -55,7 +53,7 @@ public class MayaCharmConfig implements Configurable, SearchableConfigurable, Co
     @Nullable
     @Override
     public JComponent createComponent() {
-        myPanel = new MCSettingsPanel(mcSettingsProvider, project);
+        myPanel = new MCSettingsPanel(mcSettingsProvider);
         return myPanel.createPanel();
     }
 

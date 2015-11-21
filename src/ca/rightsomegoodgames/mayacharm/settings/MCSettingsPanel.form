@@ -102,9 +102,11 @@
               <text value="Add the following to Maya's &quot;userSetup.py&quot; or Run in Maya's python console:"/>
             </properties>
           </component>
-          <component id="f8fb" class="com.intellij.ui.EditorTextField" binding="mayaString" custom-create="true">
+          <component id="d246f" class="javax.swing.JTextArea" binding="mayaString">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="50"/>
+              </grid>
             </constraints>
             <properties>
               <text value="import maya.cmds as cmds&#10;if not cmds.commandPort(':%s', q=True):&#10;    cmds.commandPort(n=':%s') "/>
