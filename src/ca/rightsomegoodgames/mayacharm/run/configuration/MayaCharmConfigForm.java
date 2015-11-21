@@ -25,12 +25,20 @@ public class MayaCharmConfigForm {
         return rootPanel;
     }
 
-    public String getInitCode() {
+    public String getCodeText() {
         return codeField.getText();
     }
 
-    public String getScriptPath() {
+    public void setCodeText(String value) {
+        codeField.setText(value);
+    }
+
+    public String getFilePath() {
         return fileField.getText();
+    }
+
+    public void setFilePath(String value) {
+        fileField.setText(value);
     }
 
     private void createUIComponents() {

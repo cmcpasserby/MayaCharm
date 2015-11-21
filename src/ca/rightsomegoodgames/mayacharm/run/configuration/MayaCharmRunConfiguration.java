@@ -13,6 +13,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class MayaCharmRunConfiguration extends RunConfigurationBase {
+    private String scriptFilePath;
+    private String scriptCodeText;
+
     public MayaCharmRunConfiguration(Project project, MayaCharmConfigurationFactory configFactory, String name) {
         super(project, configFactory, name);
     }
@@ -32,5 +35,21 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase {
     @Override
     public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException {
         return new MayaCharmRunProfileState(executionEnvironment, getProject());
+    }
+
+    public String getScriptFilePath() {
+        return scriptFilePath;
+    }
+
+    public void setScriptFilePath(String scriptFilePath) {
+        this.scriptFilePath = scriptFilePath;
+    }
+
+    public String getScriptCodeText() {
+        return scriptCodeText;
+    }
+
+    public void setScriptCodeText(String scriptCodeText) {
+        this.scriptCodeText = scriptCodeText;
     }
 }
