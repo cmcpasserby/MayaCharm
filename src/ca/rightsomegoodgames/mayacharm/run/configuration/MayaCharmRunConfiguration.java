@@ -35,7 +35,7 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase {
     @Nullable
     @Override
     public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException {
-        return new MayaCharmRunProfileState(executionEnvironment, getProject());
+        return new MayaCharmRunProfileState(executionEnvironment, getProject(), this);
     }
 
     public String getScriptFilePath() {

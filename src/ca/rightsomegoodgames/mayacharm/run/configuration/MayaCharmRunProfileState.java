@@ -16,10 +16,12 @@ public class MayaCharmRunProfileState implements RunProfileState {
     private final ExecutionEnvironment executionEnvironment;
     private final Project project;
     private final MCSettingsProvider settings;
+    private final MayaCharmRunConfiguration configuration;
 
-    public MayaCharmRunProfileState(ExecutionEnvironment executionEnvironment, Project project) {
+    public MayaCharmRunProfileState(ExecutionEnvironment executionEnvironment, Project project, MayaCharmRunConfiguration configuration) {
         this.executionEnvironment = executionEnvironment;
         this.project = project;
+        this.configuration = configuration;
         settings = MCSettingsProvider.getInstance(project);
     }
 
@@ -27,7 +29,14 @@ public class MayaCharmRunProfileState implements RunProfileState {
     @Override
     public ExecutionResult execute(Executor executor, @NotNull ProgramRunner programRunner) throws ExecutionException {
         final MayaCommInterface mayaPipe = new MayaCommInterface(settings.getHost(), settings.getPort());
-        mayaPipe.sendCodeToMaya("print 'ItWorks'");
+
+        if (configuration.getUseCode()) {
+            mayaPipe.sendCodeToMaya(configuration.getScriptCodeText());
+        }
+        else {
+            mayaPipe.sendFileToMaya(configuration.getScriptFilePath());
+        }
+
         return null;
     }
 }
