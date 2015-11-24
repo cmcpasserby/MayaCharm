@@ -32,6 +32,6 @@ public class SendSelectionAction extends BaseSendAction {
         }
 
         MayaCommInterface maya = new MayaCommInterface(settings.getHost(), settings.getPort());
-        maya.sendToMaya(selectedText);
+        maya.sendCodeToMaya(selectedText);
     }
 }
