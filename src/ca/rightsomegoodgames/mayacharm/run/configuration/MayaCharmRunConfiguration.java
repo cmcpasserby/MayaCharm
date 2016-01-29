@@ -9,13 +9,23 @@ import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.WriteExternalException;
+import com.intellij.util.xmlb.SkipDefaultsSerializationFilter;
+import com.intellij.util.xmlb.XmlSerializer;
+import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class MayaCharmRunConfiguration extends RunConfigurationBase {
+import java.io.File;
+
+
+public class MayaCharmRunConfiguration extends RunConfigurationBase  {
     private String scriptFilePath;
     private String scriptCodeText;
     private boolean useCode;
+
+    public static final SkipDefaultsSerializationFilter SERIALIZATION_FILTERS = new SkipDefaultsSerializationFilter();
 
     public MayaCharmRunConfiguration(Project project, MayaCharmConfigurationFactory configFactory, String name) {
         super(project, configFactory, name);
@@ -28,8 +38,37 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase {
     }
 
     @Override
-    public void checkConfiguration() throws RuntimeConfigurationException {
+    public void readExternal(Element element) throws InvalidDataException {
+        super.readExternal(element);
+        ConfigurationState state = XmlSerializer.deserialize(element, ConfigurationState.class);
+        if (state != null) {
+            scriptFilePath = state.ScriptFilePath;
+            scriptCodeText = state.ScriptCodeText;
+            useCode = state.UseCode;
+        }
+    }
 
+    @Override
+    public void writeExternal(Element element) throws WriteExternalException {
+        ConfigurationState state = new ConfigurationState();
+        state.ScriptFilePath = scriptFilePath;
+        state.ScriptCodeText = scriptCodeText;
+        state.UseCode = useCode;
+
+        XmlSerializer.serializeInto(state, element, SERIALIZATION_FILTERS);
+        super.writeExternal(element);
+    }
+
+    @Override
+    public void checkConfiguration() throws RuntimeConfigurationException {
+        if (getUseCode()) {
+            if (scriptCodeText == null || scriptCodeText.isEmpty())
+                throw new RuntimeConfigurationException("Code field is empty!");
+        }
+        else {
+            if (scriptFilePath == null || scriptFilePath.isEmpty() || !new File(scriptFilePath).isFile())
+                throw new RuntimeConfigurationException("File does not exist!");
+        }
     }
 
     @Nullable
@@ -60,5 +99,11 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase {
 
     public void setUseCode(boolean useCode) {
         this.useCode = useCode;
+    }
+
+    public static class ConfigurationState {
+        public String ScriptFilePath;
+        public String ScriptCodeText;
+        public boolean UseCode;
     }
 }
