@@ -69,8 +69,13 @@ public class MayaCommInterface {
         }
     }
 
-    public void sendToMaya(String message) {
+    public void sendCodeToMaya(String message) {
         File file = writeFile(message);
+        sendToPort(file);
+    }
+
+    public void sendFileToMaya(String path) {
+        File file = new File(path);
         sendToPort(file);
     }
 
@@ -80,7 +85,7 @@ public class MayaCommInterface {
 
         try {
             createMayaLog(mayaLogPath);
-            sendToMaya(message);
+            sendCodeToMaya(message);
         }
         catch (IOException e) {
             e.printStackTrace();
