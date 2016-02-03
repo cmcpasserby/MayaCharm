@@ -18,6 +18,7 @@ public class SendBufferAction extends BaseSendAction {
         if (data != null) document = FileDocumentManager.getInstance().getDocument(data);
         if (document != null) {
             MayaCommInterface maya = new MayaCommInterface(settings.getHost(), settings.getPort());
+            maya.connectMayaLog();
             maya.sendCodeToMaya(document.getText());
         }
     }
