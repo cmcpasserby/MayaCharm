@@ -58,10 +58,10 @@
       <add-to-group group-id="RunMenu"/>
     </action>
 
-    <group id="MayaCharmActions">
-      <reference id="mayacharm.SendBuffer"/>
+<!--    <group id="MayaCharmActions">
       <reference id="mayacharm.SendSelection"/>
-    </group>
+      <reference id="mayacharm.SendBuffer"/>
+    </group>-->
   </actions>
 
 </idea-plugin>
