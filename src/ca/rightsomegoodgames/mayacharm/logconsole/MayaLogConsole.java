@@ -26,7 +26,10 @@ public class MayaLogConsole extends LogConsoleImpl {
         super.clear();
         final String mayaLogPath = PathManager.getPluginTempPath() + "/mayaLog.txt";
         try {
-            new PrintWriter(mayaLogPath).close();
+            PrintWriter writer = new PrintWriter(mayaLogPath);
+            writer.print("");
+            writer.close();
+            System.out.print("Clear Log File");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
