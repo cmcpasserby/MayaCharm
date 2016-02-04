@@ -30,6 +30,7 @@
     <projectConfigurable instance="ca.rightsomegoodgames.mayacharm.settings.MayaCharmConfig"/>
     <toolWindow id="Maya Log" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.MayaLogWindow"/>
     <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.configuration.MayaCharmConfigurationType"/>
+    <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugConfigType"/>
   </extensions>
 
   <application-components>
