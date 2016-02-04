@@ -14,13 +14,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class MayaCharmRunProfileState implements RunProfileState {
     private final ExecutionEnvironment executionEnvironment;
-    private final Project project;
     private final MCSettingsProvider settings;
     private final MayaCharmRunConfiguration configuration;
 
     public MayaCharmRunProfileState(ExecutionEnvironment executionEnvironment, Project project, MayaCharmRunConfiguration configuration) {
         this.executionEnvironment = executionEnvironment;
-        this.project = project;
         this.configuration = configuration;
         settings = MCSettingsProvider.getInstance(project);
     }
@@ -37,7 +35,6 @@ public class MayaCharmRunProfileState implements RunProfileState {
         else {
             mayaPipe.sendFileToMaya(configuration.getScriptFilePath());
         }
-
         return null;
     }
 }
