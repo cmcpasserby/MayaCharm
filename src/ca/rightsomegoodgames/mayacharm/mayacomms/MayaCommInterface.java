@@ -25,6 +25,7 @@ public class MayaCommInterface {
         try {
             tempFile = File.createTempFile("MayaCharmTemp", ".py");
             if (!tempFile.exists()) {
+                //noinspection ResultOfMethodCallIgnored
                 tempFile.createNewFile();
             }
 
@@ -95,6 +96,7 @@ public class MayaCommInterface {
     private File createMayaLog(String path) throws IOException {
         final File mayaLog = new File(path);
         if (!mayaLog.exists()) {
+            //noinspection ResultOfMethodCallIgnored
             mayaLog.createNewFile();
         }
         return mayaLog;

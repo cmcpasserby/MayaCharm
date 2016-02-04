@@ -57,7 +57,6 @@
             text="Connect to Maya's log" description="Connects the MayaCharm console to Maya's script editor log">
       <add-to-group group-id="RunMenu"/>
     </action>
-
   </actions>
 
 </idea-plugin>
