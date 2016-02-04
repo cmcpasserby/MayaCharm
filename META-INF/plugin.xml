@@ -53,15 +53,11 @@
       <keyboard-shortcut first-keystroke="alt S" keymap="$default"/>
     </action>
 
-<!--    <action class="ca.rightsomegoodgames.mayacharm.actions.ConnectMayaLogAction" id="mayacharm.ConnectMayaLog"
+    <action class="ca.rightsomegoodgames.mayacharm.actions.ConnectMayaLogAction" id="mayacharm.ConnectMayaLog"
             text="Connect to Maya's log" description="Connects the MayaCharm console to Maya's script editor log">
       <add-to-group group-id="RunMenu"/>
-    </action>-->
+    </action>
 
-<!--    <group id="MayaCharmActions">
-      <reference id="mayacharm.SendSelection"/>
-      <reference id="mayacharm.SendBuffer"/>
-    </group>-->
   </actions>
 
 </idea-plugin>
