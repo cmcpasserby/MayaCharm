@@ -30,6 +30,6 @@ public class MayaCharmDebugConfigType extends PyRemoteDebugConfigurationType {
 
     @Override
     public ConfigurationFactory[] getConfigurationFactories() {
-        return super.getConfigurationFactories();
+        return new ConfigurationFactory[] {new MayaCharmDebugConfigFactory(this)};
     }
 }
