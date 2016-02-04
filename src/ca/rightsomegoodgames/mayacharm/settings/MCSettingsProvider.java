@@ -19,7 +19,7 @@ public class MCSettingsProvider implements PersistentStateComponent<MCSettingsPr
     }
 
     public int getPort() {
-        return myState.Port;
+        return (myState.Port == -1 || myState.Port == 0) ? 4434 : myState.Port;
     }
 
     public void setHost(String host) {
@@ -27,7 +27,7 @@ public class MCSettingsProvider implements PersistentStateComponent<MCSettingsPr
     }
 
     public String getHost() {
-        return myState.Host;
+        return (myState.Host == null || myState.Host.isEmpty()) ? "localhost" : myState.Host;
     }
 
     public static MCSettingsProvider getInstance(Project project) {

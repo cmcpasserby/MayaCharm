@@ -1,6 +1,5 @@
 package ca.rightsomegoodgames.mayacharm.mayacomms;
 
-import ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider;
 import com.intellij.notification.Notifications;
 import ca.rightsomegoodgames.mayacharm.resources.MayaNotifications;
 import ca.rightsomegoodgames.mayacharm.resources.PythonStrings;
@@ -26,6 +25,7 @@ public class MayaCommInterface {
         try {
             tempFile = File.createTempFile("MayaCharmTemp", ".py");
             if (!tempFile.exists()) {
+                //noinspection ResultOfMethodCallIgnored
                 tempFile.createNewFile();
             }
 
@@ -70,8 +70,13 @@ public class MayaCommInterface {
         }
     }
 
-    public void sendToMaya(String message) {
+    public void sendCodeToMaya(String message) {
         File file = writeFile(message);
+        sendToPort(file);
+    }
+
+    public void sendFileToMaya(String path) {
+        File file = new File(path);
         sendToPort(file);
     }
 
@@ -81,7 +86,7 @@ public class MayaCommInterface {
 
         try {
             createMayaLog(mayaLogPath);
-            sendToMaya(message);
+            sendCodeToMaya(message);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -91,6 +96,7 @@ public class MayaCommInterface {
     private File createMayaLog(String path) throws IOException {
         final File mayaLog = new File(path);
         if (!mayaLog.exists()) {
+            //noinspection ResultOfMethodCallIgnored
             mayaLog.createNewFile();
         }
         return mayaLog;

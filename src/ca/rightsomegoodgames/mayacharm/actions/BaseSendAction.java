@@ -1,6 +1,5 @@
 package ca.rightsomegoodgames.mayacharm.actions;
 
-import ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;

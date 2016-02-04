@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>ca.rightsomegoodgames.mayacharm</id>
   <name>MayaCharm</name>
-  <version>1.1</version>
+  <version>1.2</version>
   <vendor email="chris@rightsomegoodgames.ca" url="http://www.rightsomegoodgames.ca">Chris Cunningham</vendor>
 
   <description><![CDATA[
@@ -29,6 +29,7 @@
     <projectService serviceImplementation="ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider"/>
     <projectConfigurable instance="ca.rightsomegoodgames.mayacharm.settings.MayaCharmConfig"/>
     <toolWindow id="Maya Log" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.MayaLogWindow"/>
+    <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.configuration.MayaCharmConfigurationType"/>
   </extensions>
 
   <application-components>
@@ -56,11 +57,6 @@
             text="Connect to Maya's log" description="Connects the MayaCharm console to Maya's script editor log">
       <add-to-group group-id="RunMenu"/>
     </action>
-
-    <group id="MayaCharmActions">
-      <reference id="mayacharm.SendBuffer"/>
-      <reference id="mayacharm.SendSelection"/>
-    </group>
   </actions>
 
 </idea-plugin>
