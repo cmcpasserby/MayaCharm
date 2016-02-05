@@ -17,6 +17,6 @@ public class MayaCharmDebugEditor extends PyRemoteDebugConfigurationEditor {
     @NotNull
     @Override
     protected JComponent createEditor() {
-        return myForm.GetPanel();
+        return myForm.getPanel();
     }
 }
