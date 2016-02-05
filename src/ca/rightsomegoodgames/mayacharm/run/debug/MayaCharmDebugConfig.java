@@ -10,6 +10,7 @@ import com.intellij.openapi.project.Project;
 import com.jetbrains.python.debugger.remote.PyRemoteDebugConfiguration;
 import org.jetbrains.annotations.NotNull;
 
+
 public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration {
 
     public MayaCharmDebugConfig(Project project, MayaCharmDebugConfigFactory configurationFactory, String s) {
