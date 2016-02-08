@@ -23,10 +23,12 @@ public class MayaCharmDebugProcess extends PyRemoteDebugProcess {
     @Override
     protected void afterConnect() {
         super.afterConnect();
+        System.out.print("MayaCharm Connected");
     }
 
     @Override
     public void stop() {
         super.stop();
+        System.out.print("MayaCharm Connected");
     }
 }
