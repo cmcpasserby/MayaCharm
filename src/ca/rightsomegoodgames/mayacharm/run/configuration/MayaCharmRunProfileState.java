@@ -13,12 +13,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class MayaCharmRunProfileState implements RunProfileState {
-    private final ExecutionEnvironment executionEnvironment;
     private final MCSettingsProvider settings;
     private final MayaCharmRunConfiguration configuration;
 
     public MayaCharmRunProfileState(ExecutionEnvironment executionEnvironment, Project project, MayaCharmRunConfiguration configuration) {
-        this.executionEnvironment = executionEnvironment;
         this.configuration = configuration;
         settings = MCSettingsProvider.getInstance(project);
     }
