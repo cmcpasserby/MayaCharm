@@ -37,7 +37,7 @@ public class MayaCharmDebugProcess extends PyRemoteDebugProcess {
         super.beforeConnect();
         if (canConnect) {
             mayaCommInterface.connectMayaLog();
-            mayaCommInterface.setTrace(socket.getLocalPort());
+            mayaCommInterface.setTrace(socket.getLocalPort(), config.isSuspendAfterConnect(), config.isRedirectOutput());
         }
     }
 

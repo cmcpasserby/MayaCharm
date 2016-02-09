@@ -80,8 +80,8 @@ public class MayaCommInterface {
         sendToPort(file);
     }
 
-    public void setTrace(int port) {
-        sendCodeToMaya(String.format(PythonStrings.SETTRACE, port));
+    public void setTrace(int port, boolean suspend, boolean print) {
+        sendCodeToMaya(String.format(PythonStrings.SETTRACE, port, suspend ? "True" : "False", print ? "True" : "False"));
     }
 
     public void stopTrace() {
