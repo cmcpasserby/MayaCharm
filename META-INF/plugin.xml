@@ -15,15 +15,9 @@
     ]]>
   </change-notes>
 
-  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="131"/>
   <depends>com.intellij.modules.python</depends>
 
-  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
 
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider"/>
@@ -32,6 +26,7 @@
     <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.configuration.MayaCharmConfigurationType"/>
     <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugConfigType"/>
     <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugRunner" order="first"/>
+    <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmRunner" order="first"/>
   </extensions>
 
   <application-components>
@@ -60,5 +55,4 @@
       <add-to-group group-id="RunMenu"/>
     </action>
   </actions>
-
 </idea-plugin>

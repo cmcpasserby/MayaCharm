@@ -12,7 +12,6 @@ import com.intellij.xdebugger.XDebugProcessStarter;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
 import com.jetbrains.python.debugger.PyDebugRunner;
-import com.jetbrains.python.debugger.PyRemoteDebugProcess;
 import com.jetbrains.python.debugger.remote.PyRemoteDebugRunner;
 import com.jetbrains.python.debugger.remote.vfs.PyRemotePositionConverter;
 import org.jetbrains.annotations.NotNull;
