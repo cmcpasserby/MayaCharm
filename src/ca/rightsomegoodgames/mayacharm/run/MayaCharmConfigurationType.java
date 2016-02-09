@@ -10,7 +10,7 @@ import javax.swing.*;
 public class MayaCharmConfigurationType implements ConfigurationType {
     @Override
     public String getDisplayName() {
-        return "MayaCharm";
+        return "MayaCharm Runner";
     }
 
     @Override

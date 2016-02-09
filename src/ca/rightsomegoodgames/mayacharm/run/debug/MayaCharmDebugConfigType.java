@@ -9,7 +9,7 @@ import javax.swing.*;
 public class MayaCharmDebugConfigType extends PyRemoteDebugConfigurationType {
     @Override
     public String getDisplayName() {
-        return "MayaCharmDebugger";
+        return "MayaCharm Debugger";
     }
 
     @Override
