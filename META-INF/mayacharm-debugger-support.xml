@@ -1,0 +1,6 @@
+<idea-plugin version="2">
+    <extensions defaultExtensionNs="com.intellij">
+        <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugConfigType"/>
+        <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugRunner" order="first"/>
+    </extensions>
+</idea-plugin>

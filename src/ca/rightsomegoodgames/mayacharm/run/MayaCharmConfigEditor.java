@@ -1,4 +1,4 @@
-package ca.rightsomegoodgames.mayacharm.run.configuration;
+package ca.rightsomegoodgames.mayacharm.run;
 
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;

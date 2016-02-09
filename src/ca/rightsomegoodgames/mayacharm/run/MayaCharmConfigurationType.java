@@ -1,4 +1,4 @@
-package ca.rightsomegoodgames.mayacharm.run.configuration;
+package ca.rightsomegoodgames.mayacharm.run;
 
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
@@ -10,7 +10,7 @@ import javax.swing.*;
 public class MayaCharmConfigurationType implements ConfigurationType {
     @Override
     public String getDisplayName() {
-        return "MayaCharm";
+        return "MayaCharm Runner";
     }
 
     @Override

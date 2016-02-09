@@ -28,9 +28,6 @@ public class MayaLogWindow implements ToolWindowFactory {
 
         toolWindow.setAvailable(true, null);
         toolWindow.setToHideOnEmptyContent(true);
-        toolWindow.activate(() -> {
-            console.clear();
-            console.activate();
-        });
+        toolWindow.activate(console::activate);
     }
 }

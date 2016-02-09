@@ -1,4 +1,4 @@
-package ca.rightsomegoodgames.mayacharm.run.configuration;
+package ca.rightsomegoodgames.mayacharm.run;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 
 
-public class MayaCharmRunConfiguration extends RunConfigurationBase  {
+public class MayaCharmRunConfiguration extends RunConfigurationBase implements MayaCharmRunProfile {
     private String scriptFilePath;
     private String scriptCodeText;
     private boolean useCode;
@@ -74,7 +74,7 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase  {
     @Nullable
     @Override
     public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException {
-        return new MayaCharmRunProfileState(executionEnvironment, getProject(), this);
+        return (executor1, programRunner) -> null;
     }
 
     public String getScriptFilePath() {

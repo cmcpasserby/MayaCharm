@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>ca.rightsomegoodgames.mayacharm</id>
   <name>MayaCharm</name>
-  <version>1.2</version>
+  <version>2.0</version>
   <vendor email="chris@rightsomegoodgames.ca" url="http://www.rightsomegoodgames.ca">Chris Cunningham</vendor>
 
   <description><![CDATA[
@@ -15,21 +15,16 @@
     ]]>
   </change-notes>
 
-  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="131"/>
-  <depends>com.intellij.modules.python</depends>
 
-  <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-       on how to target different products -->
-  <!-- uncomment to enable plugin in all products
-  <depends>com.intellij.modules.lang</depends>
-  -->
+  <depends>com.intellij.modules.python</depends>
+  <depends optional="true" config-file="mayacharm-debugger-support.xml">org.jetbrains.plugins.python-remote-interpreter</depends>
+  <depends optional="true" config-file="mayacharm-runner-support.xml">com.intellij.modules.python</depends>
 
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider"/>
     <projectConfigurable instance="ca.rightsomegoodgames.mayacharm.settings.MayaCharmConfig"/>
     <toolWindow id="Maya Log" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.MayaLogWindow"/>
-    <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.configuration.MayaCharmConfigurationType"/>
   </extensions>
 
   <application-components>
@@ -48,7 +43,7 @@
     </action>
 
     <action class="ca.rightsomegoodgames.mayacharm.actions.SendSelectionAction" id="mayacharm.SendSelection"
-            text="Execute selection in Maya" description="Executes the current selection in Maya">
+            text="Execute Selection in Maya" description="Executes the current selection in Maya">
       <add-to-group group-id="RunMenu"/>
       <keyboard-shortcut first-keystroke="alt S" keymap="$default"/>
     </action>
@@ -58,5 +53,4 @@
       <add-to-group group-id="RunMenu"/>
     </action>
   </actions>
-
 </idea-plugin>
