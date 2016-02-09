@@ -1,7 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.run;
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommInterface;
-import ca.rightsomegoodgames.mayacharm.run.MayaCharmRunProfile;
 import ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.RunProfile;
