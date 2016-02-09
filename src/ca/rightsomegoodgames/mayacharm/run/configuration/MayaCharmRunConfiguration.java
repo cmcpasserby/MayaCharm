@@ -1,12 +1,15 @@
 package ca.rightsomegoodgames.mayacharm.run.configuration;
 
+import ca.rightsomegoodgames.mayacharm.run.MayaCharmRunProfile;
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.configurations.RunConfigurationBase;
 import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
@@ -20,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 
 
-public class MayaCharmRunConfiguration extends RunConfigurationBase  {
+public class MayaCharmRunConfiguration extends RunConfigurationBase implements MayaCharmRunProfile {
     private String scriptFilePath;
     private String scriptCodeText;
     private boolean useCode;
@@ -74,7 +77,7 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase  {
     @Nullable
     @Override
     public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException {
-        return new MayaCharmRunProfileState(executionEnvironment, getProject(), this);
+        return (executor1, programRunner) -> null;
     }
 
     public String getScriptFilePath() {

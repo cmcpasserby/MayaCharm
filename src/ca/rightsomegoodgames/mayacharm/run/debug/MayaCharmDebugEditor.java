@@ -16,7 +16,7 @@ public class MayaCharmDebugEditor extends PyRemoteDebugConfigurationEditor {
         final MayaCharmDebugConfig config = (MayaCharmDebugConfig) pyRemoteDebugConfiguration;
         myForm.setFilePath(config.getScriptFilePath());
         myForm.setCodeText(config.getScriptCodeText());
-        myForm.setUseCode(config.isUseCode());
+        myForm.setUseCode(config.getUseCode());
         myForm.setHost(config.getHost());
         myForm.setPort(config.getPort());
         myForm.setRedirectOutput(config.isRedirectOutput());

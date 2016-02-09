@@ -25,8 +25,8 @@
     <toolWindow id="Maya Log" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.MayaLogWindow"/>
     <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.configuration.MayaCharmConfigurationType"/>
     <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugConfigType"/>
-    <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugRunner" order="first"/>
     <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmRunner" order="first"/>
+    <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugRunner" order="first"/>
   </extensions>
 
   <application-components>

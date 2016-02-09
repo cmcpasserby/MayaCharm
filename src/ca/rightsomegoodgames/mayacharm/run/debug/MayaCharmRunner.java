@@ -1,7 +1,7 @@
 package ca.rightsomegoodgames.mayacharm.run.debug;
 
-import ca.rightsomegoodgames.mayacharm.logconsole.MayaLogWindow;
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommInterface;
+import ca.rightsomegoodgames.mayacharm.run.MayaCharmRunProfile;
 import ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.RunProfile;
@@ -24,14 +24,14 @@ public class MayaCharmRunner extends GenericProgramRunner {
 
     @Override
     public boolean canRun(@NotNull String s, @NotNull RunProfile runProfile) {
-        return runProfile instanceof MayaCharmDebugConfig && s.equals("Run");
+        return runProfile instanceof MayaCharmRunProfile && s.equals("Run");
     }
 
     @Nullable
     @Override
     protected RunContentDescriptor doExecute(@NotNull Project project, @NotNull RunProfileState state,
                                              @Nullable RunContentDescriptor contentToReuse, @NotNull ExecutionEnvironment environment) throws ExecutionException {
-        final MayaCharmDebugConfig configuration = (MayaCharmDebugConfig) environment.getRunProfile();
+        final MayaCharmRunProfile configuration = (MayaCharmRunProfile) environment.getRunProfile();
         final MCSettingsProvider settingsProvider = MCSettingsProvider.getInstance(project);
         final MayaCommInterface mayaCommInterface = new MayaCommInterface(settingsProvider.getHost(), settingsProvider.getPort());
 
@@ -39,7 +39,7 @@ public class MayaCharmRunner extends GenericProgramRunner {
         mayaLogWindow.activate(null, true, true);
 
         mayaCommInterface.connectMayaLog();
-        if (configuration.isUseCode()) {
+        if (configuration.getUseCode()) {
             mayaCommInterface.sendCodeToMaya(configuration.getScriptCodeText());
         }
         else {

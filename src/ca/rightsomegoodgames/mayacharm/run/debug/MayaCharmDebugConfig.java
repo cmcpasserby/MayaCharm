@@ -1,10 +1,7 @@
 package ca.rightsomegoodgames.mayacharm.run.debug;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.Executor;
+import ca.rightsomegoodgames.mayacharm.run.MayaCharmRunProfile;
 import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.execution.configurations.RunProfileState;
-import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
@@ -16,7 +13,7 @@ import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 
 
-public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration {
+public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements MayaCharmRunProfile {
     private static final SkipDefaultsSerializationFilter SERIALIZATION_FILTER = new SkipDefaultsSerializationFilter();
     private String scriptFilePath;
     private String scriptCodeText;
@@ -78,7 +75,7 @@ public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration {
         this.scriptCodeText = scriptCodeText;
     }
 
-    public boolean isUseCode() {
+    public boolean getUseCode() {
         return useCode;
     }
 

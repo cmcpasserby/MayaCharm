@@ -44,7 +44,7 @@ public class MayaCharmDebugProcess extends PyRemoteDebugProcess {
     @Override
     protected void afterConnect() {
         super.afterConnect();
-        if (config.isUseCode()) {
+        if (config.getUseCode()) {
             mayaCommInterface.sendCodeToMaya(config.getScriptCodeText());
         }
         else {
