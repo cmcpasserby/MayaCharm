@@ -45,7 +45,7 @@
     </action>
 
     <action class="ca.rightsomegoodgames.mayacharm.actions.SendSelectionAction" id="mayacharm.SendSelection"
-            text="Execute selection in Maya" description="Executes the current selection in Maya">
+            text="Execute Selection in Maya" description="Executes the current selection in Maya">
       <add-to-group group-id="RunMenu"/>
       <keyboard-shortcut first-keystroke="alt S" keymap="$default"/>
     </action>
