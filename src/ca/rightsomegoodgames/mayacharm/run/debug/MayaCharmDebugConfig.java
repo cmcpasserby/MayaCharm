@@ -2,6 +2,7 @@ package ca.rightsomegoodgames.mayacharm.run.debug;
 
 import ca.rightsomegoodgames.mayacharm.run.MayaCharmRunProfile;
 import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
@@ -11,6 +12,8 @@ import com.intellij.util.xmlb.XmlSerializer;
 import com.jetbrains.python.debugger.remote.PyRemoteDebugConfiguration;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
 
 
 public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements MayaCharmRunProfile {
@@ -59,6 +62,20 @@ public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements 
 //        super.writeExternal(element);
     }
 
+    @Override
+    public void checkConfiguration() throws RuntimeConfigurationException {
+        super.checkConfiguration();
+
+        if (getUseCode()) {
+            if (scriptCodeText == null || scriptCodeText.isEmpty())
+                throw new RuntimeConfigurationException("Code field is empty!");
+        }
+        else {
+            if (scriptFilePath == null || scriptFilePath.isEmpty() || !new File(scriptFilePath).isFile())
+                throw new RuntimeConfigurationException("File does not exist!");
+        }
+    }
+
     public String getScriptFilePath() {
         return scriptFilePath;
     }
@@ -81,6 +98,12 @@ public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements 
 
     public void setUseCode(boolean useCode) {
         this.useCode = useCode;
+    }
+
+    @Override
+    public int getPort() {
+        int port = super.getPort();
+        return (port == 0 || port == -1) ? 60059 : port;
     }
 
     public static class ConfigurationState {
