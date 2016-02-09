@@ -1,4 +1,4 @@
-package ca.rightsomegoodgames.mayacharm.run.debug;
+package ca.rightsomegoodgames.mayacharm.run;
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommInterface;
 import ca.rightsomegoodgames.mayacharm.run.MayaCharmRunProfile;

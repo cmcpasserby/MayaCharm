@@ -1,15 +1,12 @@
-package ca.rightsomegoodgames.mayacharm.run.configuration;
+package ca.rightsomegoodgames.mayacharm.run;
 
-import ca.rightsomegoodgames.mayacharm.run.MayaCharmRunProfile;
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.configurations.RunConfigurationBase;
 import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;

@@ -1,4 +1,4 @@
-package ca.rightsomegoodgames.mayacharm.run.configuration;
+package ca.rightsomegoodgames.mayacharm.run;
 
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
