@@ -19,13 +19,12 @@
 
   <depends>com.intellij.modules.python</depends>
   <depends optional="true" config-file="mayacharm-debugger-support.xml">org.jetbrains.plugins.python-remote-interpreter</depends>
+  <depends optional="true" config-file="mayacharm-runner-support.xml">com.intellij.modules.python</depends>
 
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider"/>
     <projectConfigurable instance="ca.rightsomegoodgames.mayacharm.settings.MayaCharmConfig"/>
     <toolWindow id="Maya Log" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.MayaLogWindow"/>
-    <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmConfigurationType"/>
-    <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmRunner" order="first"/>
   </extensions>
 
   <application-components>
