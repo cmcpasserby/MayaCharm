@@ -80,6 +80,14 @@ public class MayaCommInterface {
         sendToPort(file);
     }
 
+    public void setTrace(int port) {
+        sendCodeToMaya(String.format(PythonStrings.SETTRACE, port));
+    }
+
+    public void stopTrace() {
+        sendCodeToMaya(PythonStrings.STOPTRACE);
+    }
+
     public void connectMayaLog() {
         final String mayaLogPath = PathManager.getPluginTempPath() + "/mayalog.txt";
         final String message = MessageFormat.format(PythonStrings.CONNECT_LOG, mayaLogPath);

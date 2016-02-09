@@ -1,7 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.run.debug;
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommInterface;
-import ca.rightsomegoodgames.mayacharm.resources.PythonStrings;
 import ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.ui.ExecutionConsole;
@@ -13,13 +12,18 @@ import org.jetbrains.annotations.Nullable;
 import java.net.ServerSocket;
 
 public class MayaCharmDebugProcess extends PyRemoteDebugProcess {
-    private ServerSocket socket;
-    private MayaCommInterface mayaCommInterface;
+    final private ServerSocket socket;
+    final private MayaCharmDebugConfig config;
+    final private MCSettingsProvider settings;
+    final private MayaCommInterface mayaCommInterface;
     private boolean canConnect;
 
     public MayaCharmDebugProcess(@NotNull XDebugSession xDebugSession, @NotNull ServerSocket serverSocket, @NotNull ExecutionConsole executionConsole, @Nullable ProcessHandler processHandler, @Nullable String s) {
         super(xDebugSession, serverSocket, executionConsole, processHandler, s);
         socket = serverSocket;
+        config = (MayaCharmDebugConfig) xDebugSession.getRunProfile();
+        settings = MCSettingsProvider.getInstance(getProject());
+        mayaCommInterface = new MayaCommInterface(settings.getHost(), settings.getPort());
     }
 
     @Override
@@ -32,23 +36,26 @@ public class MayaCharmDebugProcess extends PyRemoteDebugProcess {
     protected void beforeConnect() {
         super.beforeConnect();
         if (canConnect) {
-            MCSettingsProvider mcSettingsProvider = MCSettingsProvider.getInstance(getProject());
-            if (mcSettingsProvider != null) {
-                mayaCommInterface = new MayaCommInterface(mcSettingsProvider.getHost(), mcSettingsProvider.getPort());
-            }
-            if (mayaCommInterface != null) {
-                mayaCommInterface.connectMayaLog();
-                mayaCommInterface.sendCodeToMaya(String.format(PythonStrings.SETTRACE, socket.getLocalPort()));
-            }
+            mayaCommInterface.connectMayaLog();
+            mayaCommInterface.setTrace(socket.getLocalPort());
+        }
+    }
+
+    @Override
+    protected void afterConnect() {
+        super.afterConnect();
+        if (config.isUseCode()) {
+            mayaCommInterface.sendCodeToMaya(config.getScriptCodeText());
+        }
+        else {
+            mayaCommInterface.sendFileToMaya(config.getScriptFilePath());
         }
     }
 
     @Override
     public void stop() {
         canConnect = false;
-        if (mayaCommInterface != null) {
-            mayaCommInterface.sendCodeToMaya(PythonStrings.STOPTRACE);
-        }
+        mayaCommInterface.stopTrace();
         super.stop();
     }
 

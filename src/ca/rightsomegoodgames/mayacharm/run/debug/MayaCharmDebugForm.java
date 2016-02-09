@@ -109,7 +109,6 @@ public class MayaCharmDebugForm implements PyRemoteDebugConfigurationParams {
 
     @Override
     public void setMappingSettings(PathMappingSettings pathMappingSettings) {
-
     }
 
     @Override
