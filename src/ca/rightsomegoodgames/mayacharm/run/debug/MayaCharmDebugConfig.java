@@ -62,11 +62,6 @@ public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration {
 //        super.writeExternal(element);
     }
 
-    @Override
-    public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException {
-        return new MayaCharmDebugProfileState(getProject(), executionEnvironment);
-    }
-
     public String getScriptFilePath() {
         return scriptFilePath;
     }
