@@ -8,8 +8,5 @@ public final class PythonStrings {
     public static final String STOPTRACE = "import pydevd; pydevd.stoptrace()";
 
     public static final String PYSTDERR = "# Error: ";
-    public static final String MELSTDERR = "// Error: ";
-
     public static final String PYSTDWRN = "# Warning: ";
-    public static final String MELSRDWRN = "// Warning: ";
 }
