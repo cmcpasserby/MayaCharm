@@ -1,50 +1,49 @@
-package ca.rightsomegoodgames.mayacharm.run.configuration;
+package ca.rightsomegoodgames.mayacharm.run.debug;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.Executor;
+import ca.rightsomegoodgames.mayacharm.run.MayaCharmRunProfile;
 import com.intellij.execution.configurations.RunConfiguration;
-import com.intellij.execution.configurations.RunConfigurationBase;
-import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.configurations.RuntimeConfigurationException;
-import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.xmlb.SkipDefaultsSerializationFilter;
 import com.intellij.util.xmlb.XmlSerializer;
+import com.jetbrains.python.debugger.remote.PyRemoteDebugConfiguration;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 
 
-public class MayaCharmRunConfiguration extends RunConfigurationBase  {
+public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements MayaCharmRunProfile {
+    private static final SkipDefaultsSerializationFilter SERIALIZATION_FILTER = new SkipDefaultsSerializationFilter();
     private String scriptFilePath;
     private String scriptCodeText;
     private boolean useCode;
 
-    public static final SkipDefaultsSerializationFilter SERIALIZATION_FILTERS = new SkipDefaultsSerializationFilter();
-
-    public MayaCharmRunConfiguration(Project project, MayaCharmConfigurationFactory configFactory, String name) {
-        super(project, configFactory, name);
+    public MayaCharmDebugConfig(Project project, MayaCharmDebugConfigFactory configurationFactory, String s) {
+        super(project, configurationFactory, s);
     }
 
     @NotNull
     @Override
     public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
-        return new MayaCharmConfigEditor(this);
+        return new MayaCharmDebugEditor(getProject(), this);
     }
 
     @Override
     public void readExternal(Element element) throws InvalidDataException {
-        super.readExternal(element);
+//        super.readExternal(element);
         ConfigurationState state = XmlSerializer.deserialize(element, ConfigurationState.class);
         if (state != null) {
             scriptFilePath = state.ScriptFilePath;
             scriptCodeText = state.ScriptCodeText;
-            useCode = state.UseCode;
+            useCode = state.IsUseCode;
+            setHost(state.Host);
+            setPort(state.Port);
+            setRedirectOutput(state.IsRedirectOutput);
+            setSuspendAfterConnect(state.IsSuspend);
         }
     }
 
@@ -53,14 +52,20 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase  {
         ConfigurationState state = new ConfigurationState();
         state.ScriptFilePath = scriptFilePath;
         state.ScriptCodeText = scriptCodeText;
-        state.UseCode = useCode;
+        state.IsUseCode = useCode;
+        state.Host = getHost();
+        state.Port = getPort();
+        state.IsRedirectOutput = isRedirectOutput();
+        state.IsSuspend = isSuspendAfterConnect();
 
-        XmlSerializer.serializeInto(state, element, SERIALIZATION_FILTERS);
-        super.writeExternal(element);
+        XmlSerializer.serializeInto(state, element, SERIALIZATION_FILTER);
+//        super.writeExternal(element);
     }
 
     @Override
     public void checkConfiguration() throws RuntimeConfigurationException {
+        super.checkConfiguration();
+
         if (getUseCode()) {
             if (scriptCodeText == null || scriptCodeText.isEmpty())
                 throw new RuntimeConfigurationException("Code field is empty!");
@@ -69,12 +74,6 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase  {
             if (scriptFilePath == null || scriptFilePath.isEmpty() || !new File(scriptFilePath).isFile())
                 throw new RuntimeConfigurationException("File does not exist!");
         }
-    }
-
-    @Nullable
-    @Override
-    public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment) throws ExecutionException {
-        return new MayaCharmRunProfileState(executionEnvironment, getProject(), this);
     }
 
     public String getScriptFilePath() {
@@ -101,9 +100,19 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase  {
         this.useCode = useCode;
     }
 
+    @Override
+    public int getPort() {
+        int port = super.getPort();
+        return (port == 0 || port == -1) ? 60059 : port;
+    }
+
     public static class ConfigurationState {
         public String ScriptFilePath;
         public String ScriptCodeText;
-        public boolean UseCode;
+        public boolean IsUseCode;
+        public String Host;
+        public int Port;
+        public boolean IsRedirectOutput;
+        public boolean IsSuspend;
     }
 }

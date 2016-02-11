@@ -4,9 +4,13 @@ import com.intellij.notification.Notifications;
 import ca.rightsomegoodgames.mayacharm.resources.MayaNotifications;
 import ca.rightsomegoodgames.mayacharm.resources.PythonStrings;
 import com.intellij.openapi.application.PathManager;
+import org.apache.sanselan.util.IOUtils;
 
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 
 public class MayaCommInterface {
@@ -78,6 +82,31 @@ public class MayaCommInterface {
     public void sendFileToMaya(String path) {
         File file = new File(path);
         sendToPort(file);
+    }
+
+    public void pyDevSetup() {
+        Path installDir = Paths.get(PathManager.getBinPath()).getParent();
+        File debugEggPath = new File(installDir.toString(), "debug-eggs" + File.separator + "pycharm-debug.egg");
+        ClassLoader classLoader = getClass().getClassLoader();
+
+        InputStream resourceAsStream = classLoader.getResourceAsStream("python/pydev_setup.py");
+        String lines = "";
+        try {
+            byte[] bytes = IOUtils.getInputStreamBytes(resourceAsStream);
+            lines = new String(bytes, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        lines = String.format(lines, debugEggPath);
+        sendCodeToMaya(lines);
+    }
+
+    public void setTrace(int port, boolean suspend, boolean print) {
+        sendCodeToMaya(String.format(PythonStrings.SETTRACE, port, suspend ? "True" : "False", print ? "True" : "False"));
+    }
+
+    public void stopTrace() {
+        sendCodeToMaya(PythonStrings.STOPTRACE);
     }
 
     public void connectMayaLog() {
