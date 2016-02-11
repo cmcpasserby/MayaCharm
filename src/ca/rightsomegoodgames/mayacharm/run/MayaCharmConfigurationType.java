@@ -2,7 +2,7 @@ package ca.rightsomegoodgames.mayacharm.run;
 
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
-import com.intellij.icons.AllIcons;
+import com.intellij.openapi.util.IconLoader;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -20,7 +20,7 @@ public class MayaCharmConfigurationType implements ConfigurationType {
 
     @Override
     public Icon getIcon() {
-        return AllIcons.FileTypes.Config;
+        return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png");
     }
 
     @NotNull

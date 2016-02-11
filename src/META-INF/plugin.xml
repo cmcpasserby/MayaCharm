@@ -24,7 +24,7 @@
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider"/>
     <projectConfigurable instance="ca.rightsomegoodgames.mayacharm.settings.MayaCharmConfig"/>
-    <toolWindow id="Maya Log" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.MayaLogWindow"/>
+    <toolWindow id="Maya Log" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.MayaLogWindow" icon="/icons/MayaCharm_ToolWindow.png"/>
   </extensions>
 
   <application-components>
@@ -37,19 +37,19 @@
 
   <actions>
     <action class="ca.rightsomegoodgames.mayacharm.actions.SendBufferAction" id="mayacharm.SendBuffer"
-            text="Execute Document in Maya" description="Executes the current document in Maya">
+            text="Execute Document in Maya" description="Executes the current document in Maya" icon="/icons/MayaCharm_Action.png">
       <add-to-group group-id="RunMenu"/>
       <keyboard-shortcut first-keystroke="alt A" keymap="$default"/>
     </action>
 
     <action class="ca.rightsomegoodgames.mayacharm.actions.SendSelectionAction" id="mayacharm.SendSelection"
-            text="Execute Selection in Maya" description="Executes the current selection in Maya">
+            text="Execute Selection in Maya" description="Executes the current selection in Maya" icon="/icons/MayaCharm_Action.png">
       <add-to-group group-id="RunMenu"/>
       <keyboard-shortcut first-keystroke="alt S" keymap="$default"/>
     </action>
 
     <action class="ca.rightsomegoodgames.mayacharm.actions.ConnectMayaLogAction" id="mayacharm.ConnectMayaLog"
-            text="Connect to Maya's log" description="Connects the MayaCharm console to Maya's script editor log">
+            text="Connect to Maya's log" description="Connects the MayaCharm console to Maya's script editor log" icon="/icons/MayaCharm_Action.png">
       <add-to-group group-id="RunMenu"/>
     </action>
   </actions>

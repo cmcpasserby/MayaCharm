@@ -1,6 +1,7 @@
 package ca.rightsomegoodgames.mayacharm.run.debug;
 
 import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.openapi.util.IconLoader;
 import com.jetbrains.python.debugger.remote.PyRemoteDebugConfigurationType;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +20,7 @@ public class MayaCharmDebugConfigType extends PyRemoteDebugConfigurationType {
 
     @Override
     public Icon getIcon() {
-        return super.getIcon();
+        return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png");
     }
 
     @NotNull
