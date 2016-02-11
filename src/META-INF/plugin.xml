@@ -18,8 +18,8 @@
   <idea-version since-build="131"/>
 
   <depends>com.intellij.modules.python</depends>
-  <depends optional="true" config-file="mayacharm-debugger-support.xml">org.jetbrains.plugins.python-remote-interpreter</depends>
-  <depends optional="true" config-file="mayacharm-runner-support.xml">com.intellij.modules.python</depends>
+  <depends config-file="mayacharm-debugger-support.xml" optional="true">org.jetbrains.plugins.python-remote-interpreter</depends>
+  <depends config-file="mayacharm-runner-support.xml" optional="true">com.intellij.modules.python</depends>
 
   <extensions defaultExtensionNs="com.intellij">
     <projectService serviceImplementation="ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider"/>
