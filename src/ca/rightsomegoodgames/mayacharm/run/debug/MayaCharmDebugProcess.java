@@ -28,21 +28,22 @@ public class MayaCharmDebugProcess extends PyRemoteDebugProcess {
 
     @Override
     public void sessionInitialized() {
-        super.sessionInitialized();
         canConnect = true;
+        super.sessionInitialized();
     }
 
     @Override
     protected void beforeConnect() {
-        super.beforeConnect();
         if (canConnect) {
-            mayaCommInterface.connectMayaLog();
+            mayaCommInterface.pyDevSetup();
             mayaCommInterface.setTrace(socket.getLocalPort(), config.isSuspendAfterConnect(), config.isRedirectOutput());
         }
+        super.beforeConnect();
     }
 
     @Override
     protected void afterConnect() {
+        canConnect = false;
         super.afterConnect();
         if (config.getUseCode()) {
             mayaCommInterface.sendCodeToMaya(config.getScriptCodeText());
