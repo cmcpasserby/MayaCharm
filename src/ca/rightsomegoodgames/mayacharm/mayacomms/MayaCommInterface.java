@@ -4,12 +4,11 @@ import com.intellij.notification.Notifications;
 import ca.rightsomegoodgames.mayacharm.resources.MayaNotifications;
 import ca.rightsomegoodgames.mayacharm.resources.PythonStrings;
 import com.intellij.openapi.application.PathManager;
-import org.apache.commons.lang.CharSet;
+import org.apache.sanselan.util.IOUtils;
 
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.MessageFormat;
@@ -89,16 +88,15 @@ public class MayaCommInterface {
         Path installDir = Paths.get(PathManager.getBinPath()).getParent();
         File debugEggPath = new File(installDir.toString(), "debug-eggs" + File.separator + "pycharm-debug.egg");
         ClassLoader classLoader = getClass().getClassLoader();
-        File pydevSetupFile = new File(classLoader.getResource("python/pydev_setup.py").getFile());
-        String lines = "";
 
+        InputStream resourceAsStream = classLoader.getResourceAsStream("python/pydev_setup.py");
+        String lines = "";
         try {
-            byte[] encodedLines = Files.readAllBytes(Paths.get(pydevSetupFile.toURI()));
-            lines = new String(encodedLines, StandardCharsets.UTF_8);
+            byte[] bytes = IOUtils.getInputStreamBytes(resourceAsStream);
+            lines = new String(bytes, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         lines = String.format(lines, debugEggPath);
         sendCodeToMaya(lines);
     }
