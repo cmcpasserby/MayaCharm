@@ -41,7 +41,6 @@ public class MayaLogConsole extends LogConsoleImpl {
             PrintWriter writer = new PrintWriter(mayaLogPath);
             writer.print("");
             writer.close();
-            System.out.print("Clear Log File");
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
