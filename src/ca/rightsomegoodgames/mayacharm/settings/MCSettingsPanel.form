@@ -109,7 +109,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="import maya.cmds as cmds&#10;try: cmds.commandPort(n=':%s', stp='python')&#10;except: cmds.warning(&quot;MayaCharm command port failed to open)"/>
+              <text value="import maya.cmds as cmds&#10;if not cmds.commandPort(':%s', q=True):&#10;    cmds.commandPort(n=':%s') "/>
             </properties>
           </component>
         </children>

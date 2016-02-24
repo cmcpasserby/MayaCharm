@@ -1,17 +1,17 @@
 package ca.rightsomegoodgames.mayacharm.logconsole;
 
-import com.intellij.diagnostic.logging.DefaultLogFilterModel;
-import com.intellij.diagnostic.logging.LogConsoleBase;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.ui.content.Content;
 import com.intellij.ui.content.ContentFactory;
 import com.intellij.ui.content.ContentManager;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.*;
+import java.io.File;
+import java.nio.charset.Charset;
 
 public class MayaLogWindow implements ToolWindowFactory {
     @Override
@@ -20,27 +20,8 @@ public class MayaLogWindow implements ToolWindowFactory {
         final ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
         final String mayaLogPath = PathManager.getPluginTempPath() + "/mayaLog.txt";
 
-//        final MayaLogConsole console = new MayaLogConsole(project, new File(mayaLogPath),
-//                Charset.defaultCharset(), 0L, "MayaLog", false, GlobalSearchScope.allScope(project));
-
-        InputStreamReader reader = null;
-        try {
-            reader = new InputStreamReader(new FileInputStream(mayaLogPath));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        final LogConsoleBase console = new LogConsoleBase(project, reader, "Maya Log", false, new DefaultLogFilterModel(project)) {
-            @Override
-            public void activate() {
-                super.activate();
-            }
-
-            @Override
-            public boolean isActive() {
-                return true;
-            }
-        };
+        final MayaLogConsole console = new MayaLogConsole(project, new File(mayaLogPath),
+                Charset.defaultCharset(), 0L, "MayaLog", false, GlobalSearchScope.allScope(project));
 
         final Content content = contentFactory.createContent(console.getComponent(), "", false);
         contentManager.addContent(content);
