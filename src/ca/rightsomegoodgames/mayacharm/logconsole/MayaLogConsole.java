@@ -36,7 +36,7 @@ public class MayaLogConsole extends LogConsoleImpl {
     @Override
     public synchronized void clear() {
         super.clear();
-        final String mayaLogPath = PathManager.getPluginTempPath() + "/mayaLog.txt";
+        final String mayaLogPath = PathManager.getPluginTempPath() + "/mayalog.txt";
         try {
             PrintWriter writer = new PrintWriter(mayaLogPath);
             writer.print("");
