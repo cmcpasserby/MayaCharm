@@ -18,7 +18,7 @@ public class MayaLogWindow implements ToolWindowFactory {
     public void createToolWindowContent(@NotNull final Project project, @NotNull ToolWindow toolWindow) {
         final ContentManager contentManager = toolWindow.getContentManager();
         final ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
-        final String mayaLogPath = PathManager.getPluginTempPath() + "/mayaLog.txt";
+        final String mayaLogPath = PathManager.getPluginTempPath() + "/mayalog.txt";
 
         final MayaLogConsole console = new MayaLogConsole(project, new File(mayaLogPath),
                 Charset.defaultCharset(), 0L, "MayaLog", false, GlobalSearchScope.allScope(project));
