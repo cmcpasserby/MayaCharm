@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.logconsole;
 
+import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommInterface;
 import ca.rightsomegoodgames.mayacharm.resources.PythonStrings;
 import com.intellij.diagnostic.logging.LogConsoleImpl;
 import com.intellij.diagnostic.logging.LogFragment;
@@ -36,7 +37,7 @@ public class MayaLogConsole extends LogConsoleImpl {
     @Override
     public synchronized void clear() {
         super.clear();
-        final String mayaLogPath = PathManager.getPluginTempPath() + "/mayalog.txt";
+        final String mayaLogPath = PathManager.getPluginTempPath() + MayaCommInterface.LOG_FILENAME_STRING;
         try {
             PrintWriter writer = new PrintWriter(mayaLogPath);
             writer.print("");
