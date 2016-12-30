@@ -14,6 +14,8 @@ import java.nio.file.Paths;
 import java.text.MessageFormat;
 
 public class MayaCommInterface {
+    public static final String LOG_FILENAME_STRING = "/mayalog.txt";
+
     final private String host;
     final private int port;
 
@@ -110,7 +112,7 @@ public class MayaCommInterface {
     }
 
     public void connectMayaLog() {
-        final String mayaLogPath = PathManager.getPluginTempPath() + "/mayalog.txt";
+        final String mayaLogPath = PathManager.getPluginTempPath() + LOG_FILENAME_STRING;
         final String message = MessageFormat.format(PythonStrings.CONNECT_LOG, mayaLogPath);
 
         try {
