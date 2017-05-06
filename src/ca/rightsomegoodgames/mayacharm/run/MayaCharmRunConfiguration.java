@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.run;
 
+import ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugConfig;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -23,7 +24,7 @@ import java.io.File;
 public class MayaCharmRunConfiguration extends RunConfigurationBase implements MayaCharmRunProfile {
     private String scriptFilePath;
     private String scriptCodeText;
-    private boolean useCode;
+    private MayaCharmDebugConfig.ExecutionType executionType = MayaCharmDebugConfig.ExecutionType.FILE;
 
     public static final SkipDefaultsSerializationFilter SERIALIZATION_FILTERS = new SkipDefaultsSerializationFilter();
 
@@ -44,7 +45,7 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase implements M
         if (state != null) {
             scriptFilePath = state.ScriptFilePath;
             scriptCodeText = state.ScriptCodeText;
-            useCode = state.UseCode;
+            executionType = state.ExecutionType;
         }
     }
 
@@ -53,7 +54,7 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase implements M
         ConfigurationState state = new ConfigurationState();
         state.ScriptFilePath = scriptFilePath;
         state.ScriptCodeText = scriptCodeText;
-        state.UseCode = useCode;
+        state.ExecutionType = executionType;
 
         XmlSerializer.serializeInto(state, element, SERIALIZATION_FILTERS);
         super.writeExternal(element);
@@ -61,13 +62,15 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase implements M
 
     @Override
     public void checkConfiguration() throws RuntimeConfigurationException {
-        if (getUseCode()) {
-            if (scriptCodeText == null || scriptCodeText.isEmpty())
-                throw new RuntimeConfigurationException("Code field is empty!");
-        }
-        else {
-            if (scriptFilePath == null || scriptFilePath.isEmpty() || !new File(scriptFilePath).isFile())
-                throw new RuntimeConfigurationException("File does not exist!");
+        switch (getExecutionType()) {
+            case CODE:
+                if (scriptCodeText == null || scriptCodeText.isEmpty())
+                    throw new RuntimeConfigurationException("Code field is empty!");
+                break;
+            case FILE:
+                if (scriptFilePath == null || scriptFilePath.isEmpty() || !new File(scriptFilePath).isFile())
+                    throw new RuntimeConfigurationException("File does not exist!");
+                break;
         }
     }
 
@@ -93,17 +96,17 @@ public class MayaCharmRunConfiguration extends RunConfigurationBase implements M
         this.scriptCodeText = scriptCodeText;
     }
 
-    public boolean getUseCode() {
-        return useCode;
+    public MayaCharmDebugConfig.ExecutionType getExecutionType() {
+        return executionType;
     }
 
-    public void setUseCode(boolean useCode) {
-        this.useCode = useCode;
+    public void setExecutionType(MayaCharmDebugConfig.ExecutionType type) {
+        executionType = type;
     }
 
     public static class ConfigurationState {
         public String ScriptFilePath;
         public String ScriptCodeText;
-        public boolean UseCode;
+        public MayaCharmDebugConfig.ExecutionType ExecutionType = MayaCharmDebugConfig.ExecutionType.FILE;
     }
 }

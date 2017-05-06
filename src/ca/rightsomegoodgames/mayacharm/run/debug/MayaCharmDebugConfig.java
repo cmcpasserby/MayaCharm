@@ -20,7 +20,7 @@ public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements 
     private static final SkipDefaultsSerializationFilter SERIALIZATION_FILTER = new SkipDefaultsSerializationFilter();
     private String scriptFilePath;
     private String scriptCodeText;
-    private boolean useCode;
+    private ExecutionType executionType = ExecutionType.DEBUG;
 
     public MayaCharmDebugConfig(Project project, MayaCharmDebugConfigFactory configurationFactory, String s) {
         super(project, configurationFactory, s);
@@ -39,7 +39,7 @@ public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements 
         if (state != null) {
             scriptFilePath = state.ScriptFilePath;
             scriptCodeText = state.ScriptCodeText;
-            useCode = state.IsUseCode;
+            executionType = state.ExecutionType;
             setHost(state.Host);
             setPort(state.Port);
             setRedirectOutput(state.IsRedirectOutput);
@@ -52,7 +52,7 @@ public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements 
         ConfigurationState state = new ConfigurationState();
         state.ScriptFilePath = scriptFilePath;
         state.ScriptCodeText = scriptCodeText;
-        state.IsUseCode = useCode;
+        state.ExecutionType = executionType;
         state.Host = getHost();
         state.Port = getPort();
         state.IsRedirectOutput = isRedirectOutput();
@@ -66,13 +66,15 @@ public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements 
     public void checkConfiguration() throws RuntimeConfigurationException {
         super.checkConfiguration();
 
-        if (getUseCode()) {
-            if (scriptCodeText == null || scriptCodeText.isEmpty())
-                throw new RuntimeConfigurationException("Code field is empty!");
-        }
-        else {
-            if (scriptFilePath == null || scriptFilePath.isEmpty() || !new File(scriptFilePath).isFile())
-                throw new RuntimeConfigurationException("File does not exist!");
+        switch (getExecutionType()) {
+            case FILE:
+                if (scriptFilePath == null || scriptFilePath.isEmpty() || !new File(scriptFilePath).isFile())
+                    throw new RuntimeConfigurationException("File does not exist!");
+                break;
+            case CODE:
+                if (scriptCodeText == null || scriptCodeText.isEmpty())
+                    throw new RuntimeConfigurationException("Code field is empty!");
+                break;
         }
     }
 
@@ -92,12 +94,12 @@ public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements 
         this.scriptCodeText = scriptCodeText;
     }
 
-    public boolean getUseCode() {
-        return useCode;
+    public ExecutionType getExecutionType() {
+        return executionType;
     }
 
-    public void setUseCode(boolean useCode) {
-        this.useCode = useCode;
+    public void setExecutionType(ExecutionType executionType) {
+        this.executionType = executionType;
     }
 
     @Override
@@ -106,10 +108,14 @@ public class MayaCharmDebugConfig extends PyRemoteDebugConfiguration implements 
         return (port == 0 || port == -1) ? 60059 : port;
     }
 
+    public enum ExecutionType {
+        DEBUG, FILE, CODE
+    }
+
     public static class ConfigurationState {
         public String ScriptFilePath;
         public String ScriptCodeText;
-        public boolean IsUseCode;
+        public ExecutionType ExecutionType = MayaCharmDebugConfig.ExecutionType.DEBUG;
         public String Host;
         public int Port;
         public boolean IsRedirectOutput;

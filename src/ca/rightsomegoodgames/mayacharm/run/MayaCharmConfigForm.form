@@ -67,7 +67,7 @@
         </constraints>
         <properties>
           <selected value="true"/>
-          <text value="File:"/>
+          <text value="Attach debugger and execute file"/>
         </properties>
       </component>
       <component id="20915" class="javax.swing.JRadioButton" binding="codeRadioButton" default-binding="true">
@@ -75,7 +75,7 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Code:"/>
+          <text value="Attach debugger and execute code"/>
         </properties>
       </component>
     </children>
@@ -84,6 +84,7 @@
     <group name="actionTypeGroup">
       <member id="194b1"/>
       <member id="20915"/>
+      <member id="186b4"/>
     </group>
   </buttonGroups>
 </form>
