@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.run;
 
+import ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugConfig;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.project.Project;
@@ -49,13 +50,17 @@ public class MayaCharmConfigForm {
         fileField.setText(value);
     }
 
-    public boolean getUseCode() {
-        return codeRadioButton.isSelected();
+    public MayaCharmDebugConfig.ExecutionType getExecutionType() {
+        if (codeRadioButton.isSelected()) {
+            return MayaCharmDebugConfig.ExecutionType.CODE;
+        }
+        return MayaCharmDebugConfig.ExecutionType.FILE;
     }
 
-    public void setUseCode(boolean value) {
-        codeRadioButton.setSelected(value);
-        fileRadioButton.setSelected(!value);
+    public void setExecutionType(MayaCharmDebugConfig.ExecutionType type) {
+        Boolean isCode = type == MayaCharmDebugConfig.ExecutionType.CODE;
+        codeRadioButton.setSelected(isCode);
+        fileRadioButton.setSelected(!isCode);
     }
 
     private void createUIComponents() {

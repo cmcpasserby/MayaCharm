@@ -38,11 +38,14 @@ public class MayaCharmRunner extends GenericProgramRunner {
         mayaLogWindow.activate(null, true, true);
 
         mayaCommInterface.connectMayaLog();
-        if (configuration.getUseCode()) {
-            mayaCommInterface.sendCodeToMaya(configuration.getScriptCodeText());
-        }
-        else {
-            mayaCommInterface.sendFileToMaya(configuration.getScriptFilePath());
+
+        switch (configuration.getExecutionType()) {
+            case CODE:
+                mayaCommInterface.sendCodeToMaya(configuration.getScriptCodeText());
+                break;
+            case FILE:
+                mayaCommInterface.sendFileToMaya(configuration.getScriptFilePath());
+                break;
         }
         return null;
     }

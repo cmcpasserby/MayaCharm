@@ -1,7 +1,9 @@
 package ca.rightsomegoodgames.mayacharm.run;
 
+import ca.rightsomegoodgames.mayacharm.run.debug.MayaCharmDebugConfig;
+
 public interface MayaCharmRunProfile {
-    boolean getUseCode();
+    MayaCharmDebugConfig.ExecutionType getExecutionType();
     String getScriptFilePath();
     String getScriptCodeText();
 }

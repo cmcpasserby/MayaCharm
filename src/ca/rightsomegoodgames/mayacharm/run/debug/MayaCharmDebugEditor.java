@@ -12,11 +12,11 @@ public class MayaCharmDebugEditor extends PyRemoteDebugConfigurationEditor {
     private MayaCharmDebugForm myForm;
 
     @Override
-    protected void resetEditorFrom(PyRemoteDebugConfiguration pyRemoteDebugConfiguration) {
+    protected void resetEditorFrom(@NotNull PyRemoteDebugConfiguration pyRemoteDebugConfiguration) {
         final MayaCharmDebugConfig config = (MayaCharmDebugConfig) pyRemoteDebugConfiguration;
         myForm.setFilePath(config.getScriptFilePath());
         myForm.setCodeText(config.getScriptCodeText());
-        myForm.setUseCode(config.getUseCode());
+        myForm.setExecutionType(config.getExecutionType());
         myForm.setHost(config.getHost());
         myForm.setPort(config.getPort());
         myForm.setRedirectOutput(config.isRedirectOutput());
@@ -25,11 +25,11 @@ public class MayaCharmDebugEditor extends PyRemoteDebugConfigurationEditor {
     }
 
     @Override
-    protected void applyEditorTo(PyRemoteDebugConfiguration pyRemoteDebugConfiguration) throws ConfigurationException {
+    protected void applyEditorTo(@NotNull PyRemoteDebugConfiguration pyRemoteDebugConfiguration) throws ConfigurationException {
         final MayaCharmDebugConfig config = (MayaCharmDebugConfig) pyRemoteDebugConfiguration;
         config.setScriptFilePath(myForm.getFilePath());
         config.setScriptCodeText(myForm.getCodeText());
-        config.setUseCode(myForm.getUseCode());
+        config.setExecutionType(myForm.getExecutionType());
         config.setHost(myForm.getHost());
         config.setPort(myForm.getPort());
         config.setRedirectOutput(myForm.isRedirectOutput());

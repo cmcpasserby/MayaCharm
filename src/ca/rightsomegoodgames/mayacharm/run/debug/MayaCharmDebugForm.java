@@ -18,6 +18,7 @@ public class MayaCharmDebugForm implements PyRemoteDebugConfigurationParams {
     private JPanel rootPanel;
     private JRadioButton fileRadioButton;
     private JRadioButton codeRadioButton;
+    private JRadioButton debugRadioButton;
     private TextFieldWithBrowseButton fileField;
     private EditorTextField codeField;
     private JTextField hostnameField;
@@ -31,6 +32,7 @@ public class MayaCharmDebugForm implements PyRemoteDebugConfigurationParams {
         UpdateControls();
         fileRadioButton.addItemListener(e -> UpdateControls());
         codeRadioButton.addItemListener(e -> UpdateControls());
+        debugRadioButton.addItemListener(e -> UpdateControls());
     }
 
     private void UpdateControls() {
@@ -58,13 +60,28 @@ public class MayaCharmDebugForm implements PyRemoteDebugConfigurationParams {
         fileField.setText(value);
     }
 
-    public boolean getUseCode() {
-        return codeRadioButton.isSelected();
+    public MayaCharmDebugConfig.ExecutionType getExecutionType() {
+        if (codeRadioButton.isSelected()) return MayaCharmDebugConfig.ExecutionType.CODE;
+        if (fileRadioButton.isSelected()) return MayaCharmDebugConfig.ExecutionType.FILE;
+        return MayaCharmDebugConfig.ExecutionType.DEBUG;
     }
 
-    public void setUseCode(boolean value) {
-        codeRadioButton.setSelected(value);
-        fileRadioButton.setSelected(!value);
+    public void setExecutionType(MayaCharmDebugConfig.ExecutionType type) {
+        debugRadioButton.setSelected(false);
+        codeRadioButton.setSelected(false);
+        fileRadioButton.setSelected(false);
+
+        switch (type) {
+            case DEBUG:
+                debugRadioButton.setSelected(true);
+                break;
+            case CODE:
+                codeRadioButton.setSelected(true);
+                break;
+            case FILE:
+                fileRadioButton.setSelected(true);
+                break;
+        }
     }
 
     @Override
