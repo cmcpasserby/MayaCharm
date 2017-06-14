@@ -14,14 +14,16 @@ import java.nio.file.Paths;
 import java.text.MessageFormat;
 
 public class MayaCommInterface {
-    public static final String LOG_FILENAME_STRING = "/mayalog.txt";
+    public static final String LOG_FILENAME_STRING = "/mayalog%s.txt";
 
     final private String host;
     final private int port;
+    final private String logFilename;
 
     public MayaCommInterface(String host, int port) {
         this.host = host;
         this.port = port;
+        this.logFilename = String.format(LOG_FILENAME_STRING, this.port);
     }
 
     private File writeFile(String text) {
@@ -112,7 +114,7 @@ public class MayaCommInterface {
     }
 
     public void connectMayaLog() {
-        final String mayaLogPath = PathManager.getPluginTempPath() + LOG_FILENAME_STRING;
+        final String mayaLogPath = PathManager.getPluginTempPath() + logFilename;
         final String message = MessageFormat.format(PythonStrings.CONNECT_LOG, mayaLogPath);
 
         try {

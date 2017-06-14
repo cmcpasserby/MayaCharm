@@ -2,6 +2,7 @@ package ca.rightsomegoodgames.mayacharm.logconsole;
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommInterface;
 import ca.rightsomegoodgames.mayacharm.resources.PythonStrings;
+import ca.rightsomegoodgames.mayacharm.settings.MCSettingsProvider;
 import com.intellij.diagnostic.logging.LogConsoleImpl;
 import com.intellij.diagnostic.logging.LogFragment;
 import com.intellij.execution.process.ProcessOutputTypes;
@@ -18,8 +19,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MayaLogConsole extends LogConsoleImpl {
+    private final MCSettingsProvider settings;
+
     public MayaLogConsole(Project project, File file, Charset charset, long l, String s, boolean b, GlobalSearchScope globalSearchScope) {
         super(project, file, charset, l, s, b, globalSearchScope);
+
+        settings = MCSettingsProvider.getInstance(project);
+
         super.setContentPreprocessor(x-> {
             final List<LogFragment> lFrag = new ArrayList<>();
             boolean checks = x.startsWith(PythonStrings.PYSTDERR) || x.startsWith(PythonStrings.PYSTDWRN);
@@ -37,7 +43,8 @@ public class MayaLogConsole extends LogConsoleImpl {
     @Override
     public synchronized void clear() {
         super.clear();
-        final String mayaLogPath = PathManager.getPluginTempPath() + MayaCommInterface.LOG_FILENAME_STRING;
+        final String mayaLogPath = PathManager.getPluginTempPath()
+                + String.format(MayaCommInterface.LOG_FILENAME_STRING, settings.getPort());
         try {
             PrintWriter writer = new PrintWriter(mayaLogPath);
             writer.print("");
