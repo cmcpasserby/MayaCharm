@@ -1,8 +1,8 @@
 <idea-plugin version="2">
   <id>ca.rightsomegoodgames.mayacharm</id>
   <name>MayaCharm</name>
-  <version>2.1.2</version>
-  <vendor email="chris@rightsomegoodgames.ca" url="http://www.rightsomegoodgames.ca">Chris Cunningham</vendor>
+  <version>2.1.3</version>
+  <vendor email="chris@rightsomegoodgames.ca">Chris Cunningham</vendor>
 
   <description><![CDATA[
         <p>Maya integration with run and debug configurations for Maya.
@@ -12,12 +12,16 @@
         <ul>
         <li><a href="https://github.com/cmcpasserby/MayaCharm">GitGub Repository</a>: documentation and contributing</li>
         <li><a href="https://github.com/cmcpasserby/MayaCharm/issues">Issue Tracker</a>: feature requests and bug reports</li>
+        <li><a href="https://github.com/cmcpasserby/MayaCharm/blob/master/LICENSE">License</a>: MIT</li>
         </ul>
     ]]></description>
 
   <change-notes><![CDATA[
-        Major bit of refactoring and have re-implemented most features as Run Configurations now.
-        Fixed minor bug relaged to case in file names.
+    <ul>
+        <li>Log files are not stored and accessed with the port number as a suffix, to better allow for use on multiple maya instances.</li>
+        <li>Major bit of refactoring and have re-implemented most features as Run Configurations now.</li>
+        <li>Fixed minor bug related to case in file names.</li>
+    </ul>
     ]]>
   </change-notes>
 
