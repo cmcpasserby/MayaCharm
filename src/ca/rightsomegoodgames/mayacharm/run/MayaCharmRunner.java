@@ -37,8 +37,6 @@ public class MayaCharmRunner extends GenericProgramRunner {
         ToolWindow mayaLogWindow = ToolWindowManager.getInstance(project).getToolWindow("Maya Log");
         mayaLogWindow.activate(null, true, true);
 
-        mayaCommInterface.connectMayaLog();
-
         switch (configuration.getExecutionType()) {
             case CODE:
                 mayaCommInterface.sendCodeToMaya(configuration.getScriptCodeText());
