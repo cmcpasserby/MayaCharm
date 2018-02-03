@@ -15,7 +15,6 @@ public class SendBufferAction extends BaseSendAction {
         final VirtualFile data = e.getData(LangDataKeys.VIRTUAL_FILE);
         if (data != null) {
             MayaCommInterface maya = new MayaCommInterface(settings.getHost(), settings.getPort());
-            maya.connectMayaLog();
             maya.sendFileToMaya(data.getPath());
         }
     }

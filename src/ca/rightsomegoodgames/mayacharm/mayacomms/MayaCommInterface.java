@@ -115,7 +115,8 @@ public class MayaCommInterface {
 
     public void connectMayaLog() {
         final String mayaLogPath = PathManager.getPluginTempPath() + logFilename;
-        final String message = MessageFormat.format(PythonStrings.CONNECT_LOG, mayaLogPath);
+        String message = PythonStrings.CLOSE_LOG;
+        message += System.lineSeparator() + MessageFormat.format(PythonStrings.OPEN_LOG, mayaLogPath);
 
         try {
             createMayaLog(mayaLogPath);
