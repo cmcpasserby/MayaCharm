@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94fd6bca-8d39-4f0d-b98d-c4d5a836a97b" name="Default" comment="">
+    <list default="true" id="94fd6bca-8d39-4f0d-b98d-c4d5a836a97b" name="Default" comment="pCONNECTING TO THE MAYA LOG IS NOW A EXPLICIT ACTION, TO PREVENT ISSUES CAUSED BY EXCESSIVE CONNECTS&#10;CONNECT TO LOG ACTION, NOW CLOSES ALL OPEN LOG FILES FIRST">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/SendBufferAction.java" afterPath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/SendBufferAction.java" />
-      <change beforePath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/SendSelectionAction.java" afterPath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/SendSelectionAction.java" />
-      <change beforePath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/mayacomms/MayaCommInterface.java" afterPath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/mayacomms/MayaCommInterface.java" />
-      <change beforePath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/resources/PythonStrings.java" afterPath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/resources/PythonStrings.java" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/src/META-INF/plugin.xml" />
     </list>
     <ignored path="MayaCharm2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,16 +26,12 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="MayaLogConsole.java" pinned="false" current-in-tab="false">
+          <file leaf-file-name="MayaLogConsole.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/MayaLogConsole.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="561">
-                  <caret line="51" column="8" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                    <element signature="e#1592#1593#0" expanded="true" />
-                    <element signature="e#1619#1620#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="17">
+                  <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -46,8 +39,8 @@
           <file leaf-file-name="MayaLogWindow.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/MayaLogWindow.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
-                  <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
+                <state relative-caret-position="493">
+                  <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -63,31 +56,23 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="BaseSendAction.java" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/BaseSendAction.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="MayaCharmRunner.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunner.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="850">
                   <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-                  <folding />
+                  <folding>
+                    <marker date="1517691021879" expanded="true" signature="2205:2211" ph="{...}" />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="MayaCharmDebugProcess.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="MayaCharmDebugProcess.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/debug/MayaCharmDebugProcess.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="435">
-                  <caret line="29" column="37" lean-forward="false" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+                <state relative-caret-position="935">
+                  <caret line="55" column="9" lean-forward="true" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
                   <folding />
                 </state>
               </provider>
@@ -97,11 +82,21 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="MayaCommInterface.java" pinned="false" current-in-tab="true">
+          <file leaf-file-name="MayaCommInterface.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/mayacomms/MayaCommInterface.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="901">
+                <state relative-caret-position="783">
                   <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="plugin.xml" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/META-INF/plugin.xml">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="357">
+                  <caret line="21" column="87" lean-forward="false" selection-start-line="21" selection-start-column="87" selection-end-line="21" selection-end-column="87" />
                   <folding />
                 </state>
               </provider>
@@ -124,7 +119,7 @@
             <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/ConnectMayaLogAction.java">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="340">
-                  <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+                  <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -206,7 +201,6 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/settings/MCSettingsPanel.form" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/debug/MayaCharmDebugRunner.java" />
-        <option value="$PROJECT_DIR$/src/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/debug/MayaCharmDebugForm.form" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunProfile.java" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/debug/MayaCharmDebugProcess.java" />
@@ -218,13 +212,14 @@
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunConfiguration.java" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/debug/MayaCharmDebugConfig.java" />
         <option value="$USER_HOME$/AppData/Local/JetBrains/Toolbox/apps/PyCharm-P/ch-0/171.4424.42/lib/pycharm.jar!/com/intellij/diagnostic/logging/LogConsoleImpl.class" />
-        <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/MayaLogWindow.java" />
-        <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/MayaLogConsole.java" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/resources/PythonStrings.java" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/mayacomms/MayaCommInterface.java" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/SendSelectionAction.java" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/SendBufferAction.java" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunner.java" />
+        <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/MayaLogWindow.java" />
+        <option value="$PROJECT_DIR$/src/META-INF/plugin.xml" />
+        <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/MayaLogConsole.java" />
       </list>
     </option>
   </component>
@@ -303,8 +298,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -312,16 +305,102 @@
               <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
               <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+              <item name="actions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+              <item name="logconsole" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacomms" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+              <item name="run" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+              <item name="run" type="462c0819:PsiDirectoryNode" />
+              <item name="debug" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+              <item name="run" type="462c0819:PsiDirectoryNode" />
+              <item name="debug" type="462c0819:PsiDirectoryNode" />
+              <item name="MayaCharmDebugForm" type="e9f4de52:FormNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+              <item name="settings" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+              <item name="settings" type="462c0819:PsiDirectoryNode" />
+              <item name="MCSettingsPanel" type="e9f4de52:FormNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="editor.preferences.folding" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="327" />
@@ -821,6 +900,7 @@
       <workItem from="1517190838091" duration="148000" />
       <workItem from="1517191030318" duration="745000" />
       <workItem from="1517674563187" duration="2888000" />
+      <workItem from="1517688743399" duration="4586000" />
     </task>
     <task id="LOCAL-00001" summary="Connecting to the Maya Log is now a explicit action, to prevent issues caused by excessive connects&#10;Connect to log action, now closes all open log files first">
       <created>1517677467340</created>
@@ -833,10 +913,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16573000" />
+    <option name="totallyTimeSpent" value="21159000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="2576" height="1426" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -846,14 +927,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26836812" sideWeight="0.5186084" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294621" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26821706" sideWeight="0.48139158" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15620032" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15063593" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869297" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3361858" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -869,6 +949,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
       <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32869297" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -987,13 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/mayacharm-debugger-support.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/settings/MCSettingsProvider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1039,13 +1113,6 @@
       </provider>
       <provider selected="true" editor-type-id="ui-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/mayacharm-runner-support.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="104" lean-forward="false" selection-start-line="3" selection-start-column="104" selection-end-line="3" selection-end-column="104" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/debug/MayaCharmDebugConfigFactory.java">
@@ -1149,34 +1216,6 @@
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/JetBrains/Toolbox/apps/PyCharm-P/ch-0/171.4424.42/lib/pycharm.jar!/com/intellij/diagnostic/logging/LogConsoleImpl.class" />
-    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/MayaLogConsole.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="51" column="8" lean-forward="false" selection-start-line="51" selection-start-column="8" selection-end-line="51" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1592#1593#0" expanded="true" />
-            <element signature="e#1619#1620#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="4" lean-forward="false" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/MayaLogWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="45" lean-forward="false" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/resources/PythonStrings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -1201,18 +1240,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/BaseSendAction.java">
+    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/BaseSendAction.java" />
+    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/ConnectMayaLogAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+        <state relative-caret-position="340">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/ConnectMayaLogAction.java">
+    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/mayacomms/MayaCommInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="783">
+          <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/META-INF/mayacharm-runner-support.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="104" lean-forward="false" selection-start-line="3" selection-start-column="104" selection-end-line="3" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/META-INF/mayacharm-debugger-support.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1232,22 +1288,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
           <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/mayacomms/MayaCommInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="53" column="30" lean-forward="false" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
-          <folding />
+          <folding>
+            <marker date="1517691021879" expanded="true" signature="2205:2211" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/debug/MayaCharmDebugProcess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="37" lean-forward="false" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+        <state relative-caret-position="935">
+          <caret line="55" column="9" lean-forward="true" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/MayaLogWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/MayaLogConsole.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="87" lean-forward="false" selection-start-line="21" selection-start-column="87" selection-end-line="21" selection-end-column="87" />
           <folding />
         </state>
       </provider>

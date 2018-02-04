@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>ca.rightsomegoodgames.mayacharm</id>
   <name>MayaCharm</name>
-  <version>2.1.3</version>
+  <version>2.1.4</version>
   <vendor email="chris@rightsomegoodgames.ca">Chris Cunningham</vendor>
 
   <description><![CDATA[
@@ -18,9 +18,8 @@
 
   <change-notes><![CDATA[
     <ul>
-        <li>Log files are not stored and accessed with the port number as a suffix, to better allow for use on multiple maya instances.</li>
-        <li>Major bit of refactoring and have re-implemented most features as Run Configurations now.</li>
-        <li>Fixed minor bug related to case in file names.</li>
+    <li>Fixed bug with text being out of order in the Maya Log Window.</li>
+    <li>Now user explicitly has to connect to the maya log to see logout in PyCharm</li>
     </ul>
     ]]>
   </change-notes>
