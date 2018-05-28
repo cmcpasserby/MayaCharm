@@ -61,5 +61,10 @@
             text="Connect to Maya's log" description="Connects the MayaCharm console to Maya's script editor log" icon="/icons/MayaCharm_Action.png">
       <add-to-group group-id="RunMenu"/>
     </action>
+
+    <action class="ca.rightsomegoodgames.mayacharm.actions.AttachToLocalMayaProcessAction" id="mayacharm.AttachLocalMaya"
+            text="Debug local Maya..." description="Attach PyCharm debugger to a local Maya session" icon="/icons/MayaCharm_Action.png">
+      <add-to-group group-id="RunMenu"/>
+    </action>
   </actions>
 </idea-plugin>
