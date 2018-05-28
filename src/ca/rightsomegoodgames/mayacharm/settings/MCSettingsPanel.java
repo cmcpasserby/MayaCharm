@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.settings;
 
+import ca.rightsomegoodgames.mayacharm.resources.PythonStrings;
 import com.intellij.openapi.util.text.StringUtil;
 
 import javax.swing.*;
@@ -12,27 +13,24 @@ public class MCSettingsPanel {
     private JTextField portField;
     private JTextArea mayaString;
 
-    private final String mayaDefaultString;
     private final  MCSettingsProvider mcSettingsProvider;
 
     public MCSettingsPanel(MCSettingsProvider provider) {
         mcSettingsProvider = provider;
-        mayaDefaultString = mayaString.getText();
-
         portField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                mayaString.setText(String.format(mayaDefaultString, portField.getText(), portField.getText()));
+                mayaString.setText(String.format(PythonStrings.CMDPORT_SETUP_SCRIPT, portField.getText()));
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                mayaString.setText(String.format(mayaDefaultString, portField.getText(), portField.getText()));
+                mayaString.setText(String.format(PythonStrings.CMDPORT_SETUP_SCRIPT, portField.getText()));
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                mayaString.setText(String.format(mayaDefaultString, portField.getText(), portField.getText()));
+                mayaString.setText(String.format(PythonStrings.CMDPORT_SETUP_SCRIPT, portField.getText()));
             }
         });
         reset();
