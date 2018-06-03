@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>ca.rightsomegoodgames.mayacharm</id>
   <name>MayaCharm</name>
-  <version>2.1.4</version>
+  <version>2.1.5</version>
   <vendor email="chris@rightsomegoodgames.ca">Chris Cunningham</vendor>
 
   <description><![CDATA[
@@ -18,8 +18,8 @@
 
   <change-notes><![CDATA[
     <ul>
-    <li>Fixed bug with text being out of order in the Maya Log Window.</li>
-    <li>Now user explicitly has to connect to the maya log to see logout in PyCharm</li>
+    <li>Added sdk flavor for "mayapy"</li>
+    <li>python string data is read from a resource file now</li>
     </ul>
     ]]>
   </change-notes>
