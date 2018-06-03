@@ -36,6 +36,10 @@
     <toolWindow id="Maya Log" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.MayaLogWindow" icon="/icons/MayaCharm_ToolWindow.png"/>
   </extensions>
 
+  <extensions defaultExtensionNs="Pythonid">
+    <pythonFlavorProvider implementation="ca.rightsomegoodgames.mayacharm.flavors.MayaFlavorProvider"/>
+  </extensions>
+
   <application-components>
     <!-- Add your application components here -->
   </application-components>
