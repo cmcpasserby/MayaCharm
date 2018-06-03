@@ -109,7 +109,7 @@
               </grid>
             </constraints>
             <properties>
-              <text value="import maya.cmds as cmds&#10;if not cmds.commandPort(':%s', q=True):&#10;    cmds.commandPort(n=':%s') "/>
+              <text value=""/>
             </properties>
           </component>
         </children>
