@@ -1,0 +1,66 @@
+<idea-plugin>
+  <id>ca.rightsomegoodgames.mayacharm</id>
+  <name>MayaCharm</name>
+  <version>3.0.0</version>
+  <vendor email="chris@rightsomegoodgames.ca" url="https://github.com/cmcpasserby">Chris Cunningham</vendor>
+
+  <description><![CDATA[
+        <p>Maya integration with run and debug configurations for Maya.
+        MayaCharm lets you execute the current document or arbitrary code as if it was in Maya from PyCharm.
+        For users of the professional version of PyCharm it will also setup and connect the pydev debugger to Maya as well.</p>
+        <p>See also:
+            <ul>
+                <li><a href="https://github.com/cmcpasserby/MayaCharm">GitGub Repository</a>: documentation and contributing</li>
+                <li><a href="https://github.com/cmcpasserby/MayaCharm/issues">Issue Tracker</a>: feature requests and bug reports</li>
+                <li><a href="https://github.com/cmcpasserby/MayaCharm/blob/master/LICENSE">License</a>: MIT</li>
+            </ul>
+        </p>
+    ]]></description>
+
+  <change-notes><![CDATA[
+    <ul>
+        <li>Rewrite that allows MayaCharm to work with the Local Interpreter</li>
+    </ul>
+    ]]>
+  </change-notes>
+
+  <idea-version since-build="171.0"/>
+  <depends>com.intellij.modules.python</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <projectService serviceImplementation="ca.rightsomegoodgames.mayacharm.settings.SettingsProvider"/>
+    <projectConfigurable instance="ca.rightsomegoodgames.mayacharm.settings.ProjectConfig"/>
+    <toolWindow id="MayaLog" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.LogWindow" icon="/icons/MayaCharm_ToolWindow.png"/>
+  </extensions>
+
+  <extensions defaultExtensionNs="Pythonid">
+    <pythonFlavorProvider implementation="ca.rightsomegoodgames.mayacharm.flavors.MayaFlavorProvider"/>
+  </extensions>
+
+  <actions>
+
+    <action id="ca.rightsomegoodgames.mayacharm.actions.SendBufferAction"
+            class="ca.rightsomegoodgames.mayacharm.actions.SendBufferAction" text="Execute Document in Maya"
+            description="Executes the current document in Maya"
+            icon="/icons/MayaCharm_Action.png">
+      <add-to-group group-id="RunMenu" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="alt A"/>
+    </action>
+
+    <action id="ca.rightsomegoodgames.mayacharm.actions.SendSelectionAction"
+            class="ca.rightsomegoodgames.mayacharm.actions.SendSelectionAction" text="Execute Selection in Maya"
+            description="Execute the current selection in Maya"
+            icon="/icons/MayaCharm_Action.png">
+      <add-to-group group-id="RunMenu" anchor="last"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="alt S"/>
+    </action>
+
+    <action id="ca.rightsomegoodgames.mayacharm.actions.ConnectToMayaLogAction"
+            class="ca.rightsomegoodgames.mayacharm.actions.ConnectToMayaLogAction" text="Connect To Maya&#39;s log"
+            description="Connects the MayaCharm console to Maya&#39;s script editor log"
+            icon="/icons/MayaCharm_Action.png">
+      <add-to-group group-id="RunMenu" anchor="last"/>
+    </action>
+  </actions>
+
+</idea-plugin>

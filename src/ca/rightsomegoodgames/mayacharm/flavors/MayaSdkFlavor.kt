@@ -1,15 +1,15 @@
 package ca.rightsomegoodgames.mayacharm.flavors
 
-import com.jetbrains.python.sdk.flavors.PythonSdkFlavor
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.VirtualFile
 import com.jetbrains.python.sdk.flavors.PythonFlavorProvider
+import com.jetbrains.python.sdk.flavors.PythonSdkFlavor
 import icons.PythonIcons
 import java.io.File
 import javax.swing.Icon
 
 class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
-    override fun isValidSdkHome(path: String): Boolean {
+    override fun isValidSdkHome(path: String?): Boolean {
         val file = File(path)
         return file.isFile && isValidSdkPath(file) || isMayaFolder(file)
     }
@@ -20,7 +20,7 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
     }
 
     override fun getVersionOption(): String {
-        return  "--version"
+        return "--version"
     }
 
     override fun getName(): String {
@@ -39,9 +39,9 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
     }
 
     companion object {
-        var INSTANCE: MayaSdkFlavor = MayaSdkFlavor()
+        val INSTANCE: MayaSdkFlavor = MayaSdkFlavor()
 
-        private fun isMayaFolder(file: File): Boolean {
+        private fun isMayaFolder(file: File) : Boolean {
             return file.isDirectory && file.name == "Maya.app"
         }
     }

@@ -7,33 +7,37 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class MCSettingsPanel {
+public class SettingsPanel {
     private JPanel myPanel;
     private JTextField hostField;
     private JTextField portField;
     private JTextArea mayaString;
 
-    private final  MCSettingsProvider mcSettingsProvider;
+    private final  SettingsProvider mcSettingsProvider;
 
-    public MCSettingsPanel(MCSettingsProvider provider) {
+    public SettingsPanel(SettingsProvider provider) {
         mcSettingsProvider = provider;
         portField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                mayaString.setText(String.format(PythonStrings.CMDPORT_SETUP_SCRIPT, portField.getText()));
+                mayaString.setText(formatCmdText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                mayaString.setText(String.format(PythonStrings.CMDPORT_SETUP_SCRIPT, portField.getText()));
+                mayaString.setText(formatCmdText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                mayaString.setText(String.format(PythonStrings.CMDPORT_SETUP_SCRIPT, portField.getText()));
+                mayaString.setText(formatCmdText());
             }
         });
         reset();
+    }
+
+    private String formatCmdText() {
+        return String.format(PythonStrings.INSTANCE.getCmdportSetupScript(), portField.getText());
     }
 
     public JComponent createPanel() {
