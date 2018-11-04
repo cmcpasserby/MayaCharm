@@ -9,6 +9,7 @@ import com.intellij.execution.configurations.RunnerSettings
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.execution.runners.GenericProgramRunner
 import com.intellij.execution.ui.RunContentDescriptor
+import com.intellij.openapi.fileEditor.FileDocumentManager
 
 class MayaCharmRunner : GenericProgramRunner<RunnerSettings>() {
     override fun getRunnerId(): String {
@@ -21,6 +22,8 @@ class MayaCharmRunner : GenericProgramRunner<RunnerSettings>() {
 
     @Throws(ExecutionException::class)
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
+        FileDocumentManager.getInstance().saveAllDocuments()
+
         val config = environment.runProfile as MayaCharmRunConfiguration
         val settings = ProjectSettings.getInstance(environment.project)
         val maya = MayaCommandInterface(settings.host, settings.port)
