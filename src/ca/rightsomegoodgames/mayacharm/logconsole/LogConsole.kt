@@ -2,7 +2,7 @@ package ca.rightsomegoodgames.mayacharm.logconsole
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.LOG_FILENAME_STRING
 import ca.rightsomegoodgames.mayacharm.resources.PythonStrings
-import ca.rightsomegoodgames.mayacharm.settings.SettingsProvider
+import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
 import com.intellij.diagnostic.logging.LogConsoleImpl
 import com.intellij.diagnostic.logging.LogFragment
 import com.intellij.execution.process.ProcessOutputTypes
@@ -16,7 +16,7 @@ import java.nio.charset.Charset
 class LogConsole(project: Project, file: File, charset: Charset, skippedContents: Long, title: String, buildInActions: Boolean, searchScope: GlobalSearchScope?)
     : LogConsoleImpl(project, file, charset, skippedContents, title, buildInActions, searchScope) {
 
-    private val settings = SettingsProvider.getInstance(project)
+    private val settings = ProjectSettings.getInstance(project)
 
     init {
         super.setContentPreprocessor(fun(it: String): MutableList<LogFragment> {

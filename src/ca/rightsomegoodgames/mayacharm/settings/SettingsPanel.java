@@ -13,10 +13,10 @@ public class SettingsPanel {
     private JTextField portField;
     private JTextArea mayaString;
 
-    private final  SettingsProvider mcSettingsProvider;
+    private final ProjectSettings mcProjectSettings;
 
-    public SettingsPanel(SettingsProvider provider) {
-        mcSettingsProvider = provider;
+    public SettingsPanel(ProjectSettings provider) {
+        mcProjectSettings = provider;
         portField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -45,8 +45,8 @@ public class SettingsPanel {
     }
 
     public boolean isModified(){
-        return getPythonCommandPort() != mcSettingsProvider.getPort() ||
-                !getPythonHost().equals(mcSettingsProvider.getHost());
+        return getPythonCommandPort() != mcProjectSettings.getPort() ||
+                !getPythonHost().equals(mcProjectSettings.getHost());
     }
 
     public int getPythonCommandPort() {
@@ -66,12 +66,12 @@ public class SettingsPanel {
     }
 
     public void apply() {
-        mcSettingsProvider.setPort(getPythonCommandPort());
-        mcSettingsProvider.setHost(getPythonHost());
+        mcProjectSettings.setPort(getPythonCommandPort());
+        mcProjectSettings.setHost(getPythonHost());
     }
 
     public void reset() {
-        setPythonCommandPort(mcSettingsProvider.getPort());
-        setPythonHost(mcSettingsProvider.getHost());
+        setPythonCommandPort(mcProjectSettings.getPort());
+        setPythonHost(mcProjectSettings.getHost());
     }
 }

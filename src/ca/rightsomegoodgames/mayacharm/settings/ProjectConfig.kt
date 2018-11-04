@@ -10,7 +10,7 @@ import javax.swing.JComponent
 const val CONSOLE_SETTINGS_HELP_REFERENCE = "reference.settings.ssh.terminal"
 
 class ProjectConfig(project: Project) : Configurable, SearchableConfigurable, Configurable.NoScroll, Disposable {
-    private val settingsProvider: SettingsProvider = SettingsProvider.getInstance(project)
+    private val projectSettings: ProjectSettings = ProjectSettings.getInstance(project)
     private var myPanel: SettingsPanel? = null
 
     override fun getDisplayName(): String {
@@ -30,7 +30,7 @@ class ProjectConfig(project: Project) : Configurable, SearchableConfigurable, Co
     }
 
     override fun createComponent(): JComponent? {
-        myPanel = SettingsPanel(settingsProvider)
+        myPanel = SettingsPanel(projectSettings)
         return myPanel?.createPanel()
     }
 

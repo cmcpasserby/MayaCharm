@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project
         name = "MCSettingsProvider",
         storages = [Storage(value = StoragePathMacros.WORKSPACE_FILE)]
 )
-class SettingsProvider : PersistentStateComponent<SettingsProvider.State> {
+class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
     data class State(var Port: Int = 0, var Host: String = "")
     private var myState = State()
 
@@ -29,8 +29,8 @@ class SettingsProvider : PersistentStateComponent<SettingsProvider.State> {
         set(value) {myState.Host = value}
 
     companion object {
-        fun getInstance(project: Project):SettingsProvider {
-            return ServiceManager.getService(project, SettingsProvider::class.java)
+        fun getInstance(project: Project):ProjectSettings {
+            return ServiceManager.getService(project, ProjectSettings::class.java)
         }
     }
 }

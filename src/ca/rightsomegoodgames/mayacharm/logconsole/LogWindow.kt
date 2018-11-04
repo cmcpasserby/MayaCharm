@@ -1,7 +1,7 @@
 package ca.rightsomegoodgames.mayacharm.logconsole
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.LOG_FILENAME_STRING
-import ca.rightsomegoodgames.mayacharm.settings.SettingsProvider
+import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
 import com.intellij.openapi.application.PathManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
@@ -13,7 +13,7 @@ import java.nio.charset.Charset
 
 class LogWindow : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val settings = SettingsProvider.getInstance(project)
+        val settings = ProjectSettings.getInstance(project)
 
         val contentManager = toolWindow.contentManager
         val contentFactory = ContentFactory.SERVICE.getInstance()
