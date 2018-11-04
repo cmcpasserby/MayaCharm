@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b79e35e-c156-46e4-aee3-fa9c23293182" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/RunConfigEditor.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/RunConfigForm.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/RunConfigForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunner.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmConfigType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmConfigType.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunConfiguration.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunConfiguration.kt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -73,7 +73,7 @@
     <session id="433729615">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.8" value="1" />
@@ -84,33 +84,35 @@
         <counts>
           <entry key="dummy" value="21" />
           <entry key="java" value="18" />
-          <entry key="kt" value="3302" />
-          <entry key="txt" value="142" />
-          <entry key="xml" value="59" />
+          <entry key="kt" value="4180" />
+          <entry key="txt" value="160" />
+          <entry key="xml" value="110" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="18" />
-          <entry key="Kotlin" value="3302" />
-          <entry key="PLAIN_TEXT" value="163" />
-          <entry key="XML" value="59" />
+          <entry key="Kotlin" value="4180" />
+          <entry key="PLAIN_TEXT" value="181" />
+          <entry key="XML" value="110" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="1" />
-          <entry key="form" value="1" />
+          <entry key="class" value="6" />
+          <entry key="form" value="2" />
           <entry key="java" value="2" />
-          <entry key="kt" value="9" />
+          <entry key="kt" value="16" />
+          <entry key="xml" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="1" />
-          <entry key="GUI_DESIGNER_FORM" value="1" />
+          <entry key="CLASS" value="6" />
+          <entry key="GUI_DESIGNER_FORM" value="2" />
           <entry key="JAVA" value="2" />
-          <entry key="Kotlin" value="9" />
+          <entry key="Kotlin" value="16" />
+          <entry key="XML" value="2" />
         </counts>
       </usages-collector>
     </session>
@@ -118,28 +120,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmConfigType.kt">
+        <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="65" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunConfiguration.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="59" column="75" selection-start-line="59" selection-start-column="75" selection-end-line="59" selection-end-column="75" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/RunConfigForm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="604">
+              <caret line="36" column="103" selection-start-line="36" selection-start-column="103" selection-end-line="36" selection-end-column="103" />
             </state>
           </provider>
         </entry>
@@ -149,6 +133,33 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
               <caret line="17" column="50" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmConfigType.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunConfiguration.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1142">
+              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunner.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
@@ -187,14 +198,14 @@
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/LogConsole.kt" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/LogWindow.kt" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/actions/ConnectToMayaLogAction.kt" />
-        <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunner.kt" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/debugger/attach/MayaPyLocalAttachDebuggerProvider.kt" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/debugger/attach/MayaPyLocalAttachDebugger.kt" />
-        <option value="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
-        <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmConfigType.kt" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/RunConfigForm.java" />
-        <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunConfiguration.kt" />
         <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/RunConfigEditor.kt" />
+        <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunner.kt" />
+        <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmConfigType.kt" />
+        <option value="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
+        <option value="$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunConfiguration.kt" />
       </list>
     </option>
   </component>
@@ -262,6 +273,30 @@
               <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MayaCharm" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MayaCharm" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="mayacharm" type="462c0819:PsiDirectoryNode" />
+              <item name="run" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -273,7 +308,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="582" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541345399930" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541354214850" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../MayaCharm_Old" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -356,7 +391,7 @@
       <workItem from="1541282545773" duration="93000" />
       <workItem from="1541282867792" duration="14089000" />
       <workItem from="1541339369928" duration="819000" />
-      <workItem from="1541340920503" duration="4473000" />
+      <workItem from="1541340920503" duration="11872000" />
     </task>
     <task id="LOCAL-00001" summary="vcs settings for intellij">
       <created>1541282952333</created>
@@ -393,11 +428,18 @@
       <option name="project" value="LOCAL" />
       <updated>1541341825862</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="run config UI work">
+      <created>1541345502414</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1541345502414</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41165000" />
+    <option name="totallyTimeSpent" value="48564000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="22" width="2576" height="1426" extended-state="6" />
@@ -411,7 +453,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32972136" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49920508" weight="0.3993808" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -419,7 +461,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32972136" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5007949" side_tool="true" weight="0.32972136" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="10" visible="true" weight="0.32972136" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32972136" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49920508" weight="0.32972136" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -447,7 +489,22 @@
     <MESSAGE value="getting run configs set back up" />
     <MESSAGE value="workspace file changes" />
     <MESSAGE value="added run config types" />
-    <option name="LAST_COMMIT_MESSAGE" value="added run config types" />
+    <MESSAGE value="run config UI work" />
+    <option name="LAST_COMMIT_MESSAGE" value="run config UI work" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>runProfile is MayaCharmRunConfiguration</expression-string>
+        <language-id>kotlin</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>runProfile is MayaCharmRunConfiguration &amp;&amp; s == &quot;Run&quot;</expression-string>
+        <language-id>kotlin</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/flavors/MayaSdkFlavor.kt">
@@ -476,13 +533,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="7" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/settings/ProjectConfig.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
         </state>
       </provider>
     </entry>
@@ -538,21 +588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunner.kt" />
-    <entry file="jar://$USER_HOME$/AppData/Local/JetBrains/Toolbox/apps/PyCharm-P/ch-0/182.4505.26/lib/openapi.jar!/com/intellij/execution/configurations/RunProfileState.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/settings/SettingsProvider.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="73" selection-start-line="27" selection-start-column="73" selection-end-line="27" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/logconsole/LogWindow.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -564,13 +599,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="100" selection-start-line="34" selection-start-column="100" selection-end-line="34" selection-end-column="100" />
         </state>
       </provider>
     </entry>
@@ -598,17 +626,31 @@
     <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/RunConfigForm.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmConfigType.kt">
+    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/settings/ProjectConfig.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="65" selection-start-line="33" selection-start-column="65" selection-end-line="33" selection-end-column="65" />
+        <state relative-caret-position="323">
+          <caret line="19" column="40" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/RunConfigEditor.kt">
+    <entry file="jar://$USER_HOME$/AppData/Local/JetBrains/Toolbox/apps/PyCharm-P/ch-0/182.4505.26/lib/openapi.jar!/com/intellij/execution/configurations/RunnerSettings.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="50" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+        <state relative-caret-position="102">
+          <caret line="9" column="48" lean-forward="true" selection-start-line="9" selection-start-column="48" selection-end-line="9" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/JetBrains/Toolbox/apps/PyCharm-P/ch-0/182.4505.26/lib/util.jar!/com/intellij/openapi/util/JDOMExternalizable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/JetBrains/Toolbox/apps/PyCharm-P/ch-0/182.4505.26/lib/pycharm.jar!/com/jetbrains/python/run/PythonRunner.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -619,10 +661,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/settings/SettingsProvider.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="73" selection-start-line="27" selection-start-column="73" selection-end-line="27" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/AppData/Local/JetBrains/Toolbox/apps/PyCharm-P/ch-0/182.4505.26/lib/openapi.jar!/com/intellij/execution/configurations/RunProfileState.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="36" column="103" selection-start-line="36" selection-start-column="103" selection-end-line="36" selection-end-column="103" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunner.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmConfigType.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/RunConfigEditor.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="50" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ca/rightsomegoodgames/mayacharm/run/MayaCharmRunConfiguration.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="75" selection-start-line="59" selection-start-column="75" selection-end-line="59" selection-end-column="75" />
+        <state relative-caret-position="1142">
+          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
     </entry>

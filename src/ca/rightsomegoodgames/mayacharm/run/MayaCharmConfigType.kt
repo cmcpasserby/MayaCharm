@@ -9,7 +9,7 @@ import javax.swing.Icon
 
 class MayaCharmConfigType : ConfigurationType {
     override fun getDisplayName(): String {
-        return "MayaCharm"
+        return "MayaCharm Runner"
     }
 
     override fun getConfigurationTypeDescription(): String {
