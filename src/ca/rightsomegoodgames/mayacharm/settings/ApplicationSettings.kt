@@ -5,7 +5,7 @@ import com.intellij.openapi.project.Project
 
 @State(
         name = "MCAppSettings",
-        storages = [Storage(value = StoragePathMacros.WORKSPACE_FILE)]
+        storages = [Storage(value = "MayaCharmSettings.xml", roamingType = RoamingType.DISABLED)]
 )
 class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> {
     data class State(var mayaPath: String = "", var mayaPyPath: String = "")

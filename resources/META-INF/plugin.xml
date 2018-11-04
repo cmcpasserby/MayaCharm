@@ -36,7 +36,9 @@
         <toolWindow id="MayaLog" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.LogWindow" icon="/icons/MayaCharm_ToolWindow.png"/>
 
         <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmConfigType"/>
+
         <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmRunner" order="first"/>
+        <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmDebugRunner"/>
     </extensions>
 
     <extensions defaultExtensionNs="Pythonid">
