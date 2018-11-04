@@ -4,7 +4,7 @@ import com.intellij.openapi.components.*
 import com.intellij.openapi.project.Project
 
 @State(
-        name = "MCSettingsProvider",
+        name = "MCProjectSettings",
         storages = [Storage(value = StoragePathMacros.WORKSPACE_FILE)]
 )
 class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
