@@ -25,13 +25,13 @@ class MayaCharmConfigType : ConfigurationType {
     }
 
     override fun getConfigurationFactories(): Array<ConfigurationFactory> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return arrayOf(MayaCharmConfigFactory(this))
     }
 }
 
 class MayaCharmConfigFactory(type: MayaCharmConfigType) : ConfigurationFactory(type) {
-    override fun createTemplateConfiguration(p0: Project): RunConfiguration {
-        TODO("not implemented")
+    override fun createTemplateConfiguration(project: Project): RunConfiguration {
+        return MayaCharmRunConfiguration(project, this, "MayaCharm")
     }
 
     override fun getName(): String {

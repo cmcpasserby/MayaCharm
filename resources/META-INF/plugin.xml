@@ -32,6 +32,7 @@
         <projectConfigurable instance="ca.rightsomegoodgames.mayacharm.settings.ProjectConfig"/>
         <toolWindow id="MayaLog" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.LogWindow"
                     icon="/icons/MayaCharm_ToolWindow.png"/>
+        <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmConfigType"/>
     </extensions>
 
     <extensions defaultExtensionNs="Pythonid">
