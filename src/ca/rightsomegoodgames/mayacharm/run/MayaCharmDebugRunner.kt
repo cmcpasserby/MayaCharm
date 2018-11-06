@@ -11,6 +11,7 @@ import com.intellij.xdebugger.XDebugSession
 import com.intellij.xdebugger.XDebuggerManager
 import com.jetbrains.python.debugger.PyDebugRunner
 import com.jetbrains.python.debugger.PyLocalPositionConverter
+import com.jetbrains.python.debugger.attach.PyAttachToProcessCommandLineState
 import com.jetbrains.python.sdk.PythonSdkType
 import java.net.ServerSocket
 
@@ -28,7 +29,9 @@ class MayaCharmDebugRunner : PyDebugRunner() {
         val process = ProcessListUtil.getProcessList().first { it.executableName == "maya.exe" }
 
         val serverSocket = ServerSocket(0)
-        val executionResult = state.execute(environment.executor, this)
+        val cliState = PyAttachToProcessCommandLineState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
+
+        val executionResult = cliState.execute(environment.executor, this)
 
         val session = XDebuggerManager.getInstance(environment.project)
             .startSession(
@@ -38,25 +41,18 @@ class MayaCharmDebugRunner : PyDebugRunner() {
                         val debugProcess = MayaCharmDebugProcess(
                                 session,
                                 serverSocket,
-                                executionResult!!.executionConsole,
+                                executionResult.executionConsole,
                                 executionResult.processHandler,
                                 false,
                                 sdk,
                                 process
                         )
-
                         debugProcess.positionConverter = PyLocalPositionConverter()
                         createConsoleCommunicationAndSetupActions(environment.project, executionResult, debugProcess, session)
-
                         return debugProcess
                     }
                 }
             )
-
-        // TODO: good class to look at for a code example
-//        val attachRunner = PyAttachToProcessDebugRunner(environment.project, process.pid, result.homePath)
-//        attachRunner.launch()
-
         return session.runContentDescriptor
     }
 }

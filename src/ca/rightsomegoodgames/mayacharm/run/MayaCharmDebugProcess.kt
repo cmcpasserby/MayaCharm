@@ -40,5 +40,6 @@ class MayaCharmDebugProcess(session: XDebugSession,
 
     override fun afterConnect() {
         super.afterConnect() // TODO: once the debugger is knowen to be attached we can execute our maya code
+        println("MayaCharmDebugProcess::afterConnect()")
     }
 }
