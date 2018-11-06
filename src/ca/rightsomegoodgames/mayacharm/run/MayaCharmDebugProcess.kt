@@ -34,11 +34,11 @@ class MayaCharmDebugProcess(session: XDebugSession,
     }
 
     override fun getConnectionMessage(): String {
-        return "Attaching to a process with a PID=${process.pid}"
+        return "Attaching to Maya process with a PID=${process.pid}"
     }
 
     override fun getConnectionTitle(): String {
-        return "Attaching Debugger"
+        return "Attaching Debugger to Maya"
     }
 
     override fun afterConnect() {
