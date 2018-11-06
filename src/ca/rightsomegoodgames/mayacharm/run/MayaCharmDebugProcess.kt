@@ -1,10 +1,12 @@
 package ca.rightsomegoodgames.mayacharm.run
 
+import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommandInterface
+import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
 import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.process.ProcessInfo
 import com.intellij.execution.ui.ConsoleViewContentType
 import com.intellij.execution.ui.ExecutionConsole
-import com.intellij.openapi.projectRoots.Sdk
+import com.intellij.openapi.project.Project
 import com.intellij.xdebugger.XDebugSession
 import com.jetbrains.python.debugger.PyDebugProcess
 import java.net.ServerSocket
@@ -14,7 +16,8 @@ class MayaCharmDebugProcess(session: XDebugSession,
                             executionConsole: ExecutionConsole,
                             processHandler: ProcessHandler?,
                             multiProcess: Boolean,
-                            private val sdk: Sdk,
+                            private val proj: Project,
+                            private val runConfig: MayaCharmRunConfiguration,
                             private val process: ProcessInfo
                             )
                             : PyDebugProcess(session,
@@ -31,7 +34,7 @@ class MayaCharmDebugProcess(session: XDebugSession,
     }
 
     override fun getConnectionMessage(): String {
-        return "Attaching to a process with a PID=${process.pid}" // TODO: pass in from runner in constructor
+        return "Attaching to a process with a PID=${process.pid}"
     }
 
     override fun getConnectionTitle(): String {
@@ -39,7 +42,14 @@ class MayaCharmDebugProcess(session: XDebugSession,
     }
 
     override fun afterConnect() {
-        super.afterConnect() // TODO: once the debugger is knowen to be attached we can execute our maya code
-        println("MayaCharmDebugProcess::afterConnect()")
+        super.afterConnect()
+
+        val projectSettings = ProjectSettings.getInstance(proj)
+        val maya = MayaCommandInterface(projectSettings.host, projectSettings.port)
+
+        when (runConfig.executionType) {
+            ExecutionType.FILE -> maya.sendFileToMaya(runConfig.scriptFilePath)
+            ExecutionType.CODE -> maya.sendCodeToMaya(runConfig.scriptCodeText)
+        }
     }
 }
