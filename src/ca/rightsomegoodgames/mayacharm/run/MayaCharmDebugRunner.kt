@@ -25,9 +25,14 @@ class MayaCharmDebugRunner : PyDebugRunner() {
     }
 
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
-        val sdk = PythonSdkType.getAllLocalCPythons().first { it.homePath!!.contains("mayapy.exe") }
-        val process = ProcessListUtil.getProcessList().first { it.executableName == "maya.exe" }
+        val sdk = PythonSdkType.getAllLocalCPythons().firstOrNull{ it.homePath!!.contains("mayapy.exe") }
+        val process = ProcessListUtil.getProcessList().firstOrNull{ it.executableName == "maya.exe" }
         val runConfig = environment.runProfile as MayaCharmRunConfiguration
+
+        // return early if no mayapy or maya is found
+        if (sdk == null || process == null || sdk.homePath == null) {
+            return null
+        }
 
         val serverSocket = ServerSocket(0)
         val cliState = PyAttachToProcessCommandLineState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
