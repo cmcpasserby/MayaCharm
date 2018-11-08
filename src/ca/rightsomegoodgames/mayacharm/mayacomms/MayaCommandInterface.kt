@@ -73,6 +73,10 @@ class MayaCommandInterface(private val host: String, private val port: Int) {
         sendCodeToMaya(message)
     }
 
+    public fun pyDevSetup() {
+        sendCodeToMaya(PythonStrings.INSTANCE.pyDevdSetupScript)
+    }
+
     private fun createMayaLog(path: String): File {
         val mayaLog = File(path)
         if (!mayaLog.exists()) {

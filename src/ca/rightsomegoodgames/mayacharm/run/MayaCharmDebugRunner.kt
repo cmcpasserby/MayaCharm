@@ -34,12 +34,17 @@ class MayaCharmDebugRunner : PyDebugRunner() {
     }
 
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
-        val sdk = PythonSdkType.getAllLocalCPythons().first { it.homePath!!.contains("mayapy.exe") } // TODO: get from user defined list
-        val process = ProcessListUtil.getProcessList().first { it.executableName == "maya.exe" } // TODO: get from user defined list
+        val sdk = PythonSdkType.getAllLocalCPythons().firstOrNull { it.homePath!!.contains("mayapy.exe") } // TODO: get from user defined list
+        val process = ProcessListUtil.getProcessList().firstOrNull { it.executableName == "maya.exe" } // TODO: get from user defined list
 
         val runConfig = environment.runProfile as MayaCharmRunConfiguration
 
         val serverSocket = ServerSocket(0)
+
+        if (sdk == null || process == null || sdk.homePath == null) {
+            return null
+        }
+
         val cliState = PyAttachToProcessCommandLineState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
 
         val executionResult = cliState.execute(environment.executor, this)
@@ -72,10 +77,17 @@ class MayaCharmDebugRunner : PyDebugRunner() {
                        executionConsole: ExecutionConsole,
                        processHandler: ProcessHandler?,
                        multiProcess: Boolean,
-                       private val proj: Project,
+                       proj: Project,
                        private val runConfig: MayaCharmRunConfiguration,
                        private val process: ProcessInfo)
         : PyDebugProcess(session, serverSocket, executionConsole, processHandler, multiProcess) {
+
+        private val maya: MayaCommandInterface
+
+        init {
+            val settings = ProjectSettings.getInstance(proj)
+            maya = MayaCommandInterface(settings.host, settings.port)
+        }
 
         override fun printToConsole(text: String?, contentType: ConsoleViewContentType?) {
         }
@@ -92,12 +104,18 @@ class MayaCharmDebugRunner : PyDebugRunner() {
             return "Attaching Debugger to Maya"
         }
 
+        override fun init() {
+//            maya.pyDevSetup()
+            super.init()
+        }
+
+        override fun beforeConnect() {
+            super.beforeConnect()
+        }
+
         override fun afterConnect() {
             super.afterConnect()
             FileDocumentManager.getInstance().saveAllDocuments()
-
-            val projectSettings = ProjectSettings.getInstance(proj)
-            val maya = MayaCommandInterface(projectSettings.host, projectSettings.port)
 
             when (runConfig.executionType) {
                 ExecutionType.FILE -> maya.sendFileToMaya(runConfig.scriptFilePath)
