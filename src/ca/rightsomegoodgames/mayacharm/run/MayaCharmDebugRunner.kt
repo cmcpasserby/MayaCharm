@@ -31,7 +31,7 @@ class MayaCharmDebugRunner : PyDebugRunner() {
 
         // return early if no mayapy or maya is found
         if (sdk == null || process == null || sdk.homePath == null) {
-            return null
+            return null // TODO show user error via notification popup here
         }
 
         val serverSocket = ServerSocket(0)

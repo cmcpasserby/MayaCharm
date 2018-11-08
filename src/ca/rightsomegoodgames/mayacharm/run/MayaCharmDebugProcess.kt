@@ -26,12 +26,7 @@ class MayaCharmDebugProcess(session: XDebugSession,
                                 processHandler,
                                 multiProcess) {
 
-    override fun printToConsole(text: String?, contentType: ConsoleViewContentType?) {
-    }
-
-    override fun detachDebuggedProcess() {
-        handleStop()
-    }
+    override fun printToConsole(text: String?, contentType: ConsoleViewContentType?) { }
 
     override fun getConnectionMessage(): String {
         return "Attaching to Maya process with a PID=${process.pid}"
