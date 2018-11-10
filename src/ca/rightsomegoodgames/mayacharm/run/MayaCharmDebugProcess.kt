@@ -42,6 +42,8 @@ class MayaCharmDebugProcess(session: XDebugSession,
         val projectSettings = ProjectSettings.getInstance(proj)
         val maya = MayaCommandInterface(projectSettings.host, projectSettings.port)
 
+        Thread.sleep(500) // Maya does not seem to always be ready on time
+
         when (runConfig.executionType) {
             ExecutionType.FILE -> maya.sendFileToMaya(runConfig.scriptFilePath)
             ExecutionType.CODE -> maya.sendCodeToMaya(runConfig.scriptCodeText)
