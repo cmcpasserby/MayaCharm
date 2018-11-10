@@ -27,6 +27,7 @@ class MayaCharmDebugRunner : PyDebugRunner() {
     }
 
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
+        // todo figure out windows vs mac pathing here
         val process = ProcessListUtil.getProcessList().firstOrNull{it.executableName == "maya.exe"} ?: return null
 
         val sdk = PythonSdkType.getAllLocalCPythons().firstOrNull(fun(x: Sdk): Boolean {

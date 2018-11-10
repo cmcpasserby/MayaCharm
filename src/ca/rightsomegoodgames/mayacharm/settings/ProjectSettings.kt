@@ -43,6 +43,7 @@ class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
                 return null
             }
 
+            // todo figure out windows vs mac pathing here
             val newPath = p.parent.resolve("mayapy.exe")
             return if (newPath.exists()) newPath.toString() else null
         }
@@ -55,6 +56,7 @@ class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
                 return null
             }
 
+            // todo figure out windows vs mac pathing here
             val newPath = p.parent.resolve("maya.exe")
             return if (newPath.exists()) newPath.toString() else null
         }
