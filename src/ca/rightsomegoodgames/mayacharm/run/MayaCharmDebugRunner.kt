@@ -43,27 +43,25 @@ class MayaCharmDebugRunner : PyDebugRunner() {
 
         val executionResult = cliState.execute(environment.executor, this)
 
-        val session = XDebuggerManager.getInstance(environment.project)
-            .startSession(
-                environment,
-                object : XDebugProcessStarter() {
-                    override fun start(session: XDebugSession): XDebugProcess {
-                        val debugProcess = MayaCharmDebugProcess(
-                                session,
-                                serverSocket,
-                                executionResult.executionConsole,
-                                executionResult.processHandler,
-                                false,
-                                environment.project,
-                                runConfig,
-                                process
-                        )
-                        debugProcess.positionConverter = PyLocalPositionConverter()
-                        createConsoleCommunicationAndSetupActions(environment.project, executionResult, debugProcess, session)
-                        return debugProcess
-                    }
+        val session = XDebuggerManager.getInstance(environment.project).startSession(
+            environment, object : XDebugProcessStarter() {
+                override fun start(session: XDebugSession): XDebugProcess {
+                    val debugProcess = MayaCharmDebugProcess(
+                            session,
+                            serverSocket,
+                            executionResult.executionConsole,
+                            executionResult.processHandler,
+                            false,
+                            environment.project,
+                            runConfig,
+                            process
+                    )
+                    debugProcess.positionConverter = PyLocalPositionConverter()
+                    createConsoleCommunicationAndSetupActions(environment.project, executionResult, debugProcess, session)
+                    return debugProcess
                 }
-            )
+            }
+        )
         return session.runContentDescriptor
     }
 }

@@ -57,7 +57,7 @@ public class RunConfigForm {
     }
 
     public void setExecutionType(ExecutionType type) {
-        Boolean isCode = type == ExecutionType.CODE;
+        boolean isCode = type == ExecutionType.CODE;
         codeRadioButton.setSelected(isCode);
         fileRadioButton.setSelected(!isCode);
     }
