@@ -63,7 +63,7 @@ class MayaSdkConfigurable : SearchableConfigurable, Configurable.NoScroll {
 
         private class MayaPySdkTablePanel : AddEditRemovePanel<SdkPortPair>(ourModel, arrayListOf()) {
             override fun addItem(): Pair<String, Int> {
-                return "Maya 2016" to 4096
+                return "" to -1
             }
 
             override fun removeItem(o: SdkPortPair): Boolean {

@@ -24,6 +24,7 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
     }
 
     init {
+        // todo figure out windows vs mac pathing here
         val mayaSdk = PythonSdkType.getAllLocalCPythons().filter { it.homePath?.endsWith("mayapy.exe") ?: false }
         val homePaths = mayaSdk.map { it.homePath!! }
 
@@ -31,11 +32,7 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
             myState.mayaSdkMapping[path] = -1
         }
 
-        val freePorts = getFreePorts(myState.mayaSdkMapping)
-
-        for (key in myState.mayaSdkMapping.keys) {
-            myState.mayaSdkMapping[key] = freePorts.remove()
-        }
+        assignEmptyPorts()
     }
 
     override fun getState(): State {
@@ -45,7 +42,7 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
     override fun loadState(state: State) {
         // todo figure out windows vs mac pathing here
         val mayaPySdks = PythonSdkType.getAllLocalCPythons().filter { x -> x.homePath?.endsWith("mayapy.exe") ?: false }
-        val homePaths = mayaPySdks.map { x -> x.homePath!! }
+        val homePaths = mayaPySdks.map { it.homePath!! }
 
         myState.mayaSdkMapping.clear()
 
@@ -54,18 +51,22 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
                 myState.mayaSdkMapping[path] = state.mayaSdkMapping[path]!!
                 continue
             }
-
             myState.mayaSdkMapping[path] = -1
         }
+
+        assignEmptyPorts()
     }
 
     var mayaSdkMapping: MutableMap<String, Int>
         get() = myState.mayaSdkMapping
         set(value) {myState.mayaSdkMapping = value}
 
-    private fun getFreePorts(data: SdkPortMap): Queue<Int> {
-        val usedPorts = data.map { it.value }.filter { it > 0 }.toSet()
-        val freePorts = portRange - usedPorts
-        return PriorityQueue<Int>(freePorts.sorted())
+    private fun assignEmptyPorts() {
+        val usedPorts = myState.mayaSdkMapping.map { it.value }.filter { it > 0 }.toSet()
+        val freePorts = PriorityQueue((portRange - usedPorts).sorted())
+
+        for (key in myState.mayaSdkMapping.filter { it.value < 0 }.keys) {
+            myState.mayaSdkMapping[key] = freePorts.remove()
+        }
     }
 }
