@@ -40,7 +40,7 @@ public fun mayaPyFromMaya(path: String): String? {
 public fun mayaFromMayaPy(path: String): String? {
     val p = Paths.get(path)
 
-    if (p.fileName.toString() != mayaPyExcutableName) {
+    if (p.fileName.toString() != mayaPyExecutableName) {
         return null
     }
 
@@ -70,7 +70,7 @@ public val mayaExecutableName: String
         return ""
     }
 
-public val mayaPyExcutableName: String
+public val mayaPyExecutableName: String
     get() {
         if (SystemInfo.isWindows) return mayaPyExecutableNameWin
         if (SystemInfo.isMac) return mayaPyExecutableNameMac
