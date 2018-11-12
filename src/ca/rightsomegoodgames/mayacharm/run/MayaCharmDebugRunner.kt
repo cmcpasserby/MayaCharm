@@ -1,6 +1,7 @@
 package ca.rightsomegoodgames.mayacharm.run
 
-import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
+import ca.rightsomegoodgames.mayacharm.mayacomms.mayaExecutableName
+import ca.rightsomegoodgames.mayacharm.mayacomms.mayaPyFromMaya
 import com.intellij.execution.configurations.RunProfile
 import com.intellij.execution.configurations.RunProfileState
 import com.intellij.execution.process.impl.ProcessListUtil
@@ -26,9 +27,8 @@ class MayaCharmDebugRunner : PyDebugRunner() {
     }
 
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
-        // todo figure out windows vs mac pathing here
-        val process = ProcessListUtil.getProcessList().firstOrNull{proc -> proc.executableName == "maya.exe"} ?: return null
-        val sdk = PythonSdkType.findSdkByPath(ProjectSettings.MayaPyFromMaya(process.commandLine.removeSurrounding("\""))) ?: return null
+        val process = ProcessListUtil.getProcessList().firstOrNull{proc -> proc.executableName == mayaExecutableName} ?: return null
+        val sdk = PythonSdkType.findSdkByPath(mayaPyFromMaya(process.commandLine.removeSurrounding("\""))) ?: return null
 
         val runConfig = environment.runProfile as MayaCharmRunConfiguration
 

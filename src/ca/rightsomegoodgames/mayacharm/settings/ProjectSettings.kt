@@ -2,8 +2,6 @@ package ca.rightsomegoodgames.mayacharm.settings
 
 import com.intellij.openapi.components.*
 import com.intellij.openapi.project.Project
-import com.intellij.util.io.exists
-import java.nio.file.Paths
 
 @State(
         name = "MCProjectSettings",
@@ -33,32 +31,6 @@ class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
     companion object {
         public fun getInstance(project: Project):ProjectSettings {
             return ServiceManager.getService(project, ProjectSettings::class.java)
-        }
-
-        public fun MayaPyFromMaya(path: String): String? {
-            val p = Paths.get(path)
-
-            // todo figure out windows vs mac pathing here
-            if (p.fileName.toString() != "maya.exe") {
-                return null
-            }
-
-            // todo figure out windows vs mac pathing here
-            val newPath = p.parent.resolve("mayapy.exe")
-            return if (newPath.exists()) newPath.toString() else null
-        }
-
-        public fun MayaFromMayaPy(path: String): String? {
-            val p = Paths.get(path)
-
-            // todo figure out windows vs mac pathing here
-            if (p.fileName.toString() != "mayapy.exe") {
-                return null
-            }
-
-            // todo figure out windows vs mac pathing here
-            val newPath = p.parent.resolve("maya.exe")
-            return if (newPath.exists()) newPath.toString() else null
         }
     }
 }

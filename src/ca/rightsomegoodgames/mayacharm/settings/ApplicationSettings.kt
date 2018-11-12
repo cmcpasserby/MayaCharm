@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.settings
 
+import ca.rightsomegoodgames.mayacharm.mayacomms.mayaPyExcutableName
 import com.intellij.openapi.components.*
 import com.jetbrains.python.sdk.PythonSdkType
 import java.util.*
@@ -24,8 +25,7 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
     }
 
     init {
-        // todo figure out windows vs mac pathing here
-        val mayaSdk = PythonSdkType.getAllLocalCPythons().filter { it.homePath?.endsWith("mayapy.exe") ?: false }
+        val mayaSdk = PythonSdkType.getAllLocalCPythons().filter { it.homePath?.endsWith(mayaPyExcutableName) ?: false }
         val homePaths = mayaSdk.map { it.homePath!! }
 
         for (path in homePaths) {
@@ -40,8 +40,7 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
     }
 
     override fun loadState(state: State) {
-        // todo figure out windows vs mac pathing here
-        val mayaPySdks = PythonSdkType.getAllLocalCPythons().filter { x -> x.homePath?.endsWith("mayapy.exe") ?: false }
+        val mayaPySdks = PythonSdkType.getAllLocalCPythons().filter { x -> x.homePath?.endsWith(mayaPyExcutableName) ?: false }
         val homePaths = mayaPySdks.map { it.homePath!! }
 
         myState.mayaSdkMapping.clear()
