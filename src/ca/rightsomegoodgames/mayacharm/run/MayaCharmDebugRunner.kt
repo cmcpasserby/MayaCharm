@@ -6,7 +6,6 @@ import com.intellij.execution.configurations.RunProfileState
 import com.intellij.execution.process.impl.ProcessListUtil
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.execution.ui.RunContentDescriptor
-import com.intellij.openapi.projectRoots.Sdk
 import com.intellij.xdebugger.XDebugProcess
 import com.intellij.xdebugger.XDebugProcessStarter
 import com.intellij.xdebugger.XDebugSession
@@ -28,13 +27,8 @@ class MayaCharmDebugRunner : PyDebugRunner() {
 
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
         // todo figure out windows vs mac pathing here
-        val process = ProcessListUtil.getProcessList().firstOrNull{it.executableName == "maya.exe"} ?: return null
-
-        val sdk = PythonSdkType.getAllLocalCPythons().firstOrNull(fun(x: Sdk): Boolean {
-            val homePath = x.homePath ?: return false
-            val newPath = ProjectSettings.MayaFromMayaPy(homePath)
-            return newPath == process.commandLine.removeSurrounding("\"")
-        }) ?: return null
+        val process = ProcessListUtil.getProcessList().firstOrNull{proc -> proc.executableName == "maya.exe"} ?: return null
+        val sdk = PythonSdkType.findSdkByPath(ProjectSettings.MayaPyFromMaya(process.commandLine.removeSurrounding("\""))) ?: return null
 
         val runConfig = environment.runProfile as MayaCharmRunConfiguration
 

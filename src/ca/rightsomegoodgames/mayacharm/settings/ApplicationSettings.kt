@@ -1,19 +1,19 @@
 package ca.rightsomegoodgames.mayacharm.settings
 
 import com.intellij.openapi.components.*
-import com.intellij.openapi.project.Project
 
 @State(
         name = "MCAppSettings",
-        storages = [Storage(value = "MayaCharmSettings.xml", roamingType = RoamingType.DISABLED)]
+        storages = [Storage(value = "mayacharm.settings.xml", roamingType = RoamingType.DISABLED)]
 )
 class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> {
-    data class State(var mayaPath: String = "", var mayaPyPath: String = "")
+    data class State(var mayaSdkMapping: Map<String, Int> = mapOf("Maya 2016" to 9000, "Maya 2017" to 9001))
+
     private var myState = State()
 
     companion object {
-        fun getInstance(project: Project): ApplicationSettings {
-            return ServiceManager.getService(project, ApplicationSettings::class.java)
+        fun getInstance(): ApplicationSettings {
+            return ServiceManager.getService(ApplicationSettings::class.java)
         }
     }
 
@@ -22,15 +22,10 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
     }
 
     override fun loadState(state: State) {
-        myState.mayaPath = state.mayaPath
-        myState.mayaPyPath = state.mayaPyPath
+        myState.mayaSdkMapping = state.mayaSdkMapping
     }
 
-    public var mayaPath: String
-        get() = myState.mayaPath
-        set(value) {myState.mayaPath = value}
-
-    public var mayaPyPath: String
-        get() = myState.mayaPyPath
-        set(value) {myState.mayaPyPath = value}
+    var mayaSdkMapping: Map<String, Int>
+        get() = myState.mayaSdkMapping
+        set(value) {myState.mayaSdkMapping = value}
 }

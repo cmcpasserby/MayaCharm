@@ -36,6 +36,11 @@ class MayaCharmDebugProcess(session: XDebugSession,
         return "Attaching Debugger to Maya"
     }
 
+    override fun disconnect() {
+        super.disconnect()
+        Thread.sleep(500)
+    }
+
     override fun afterConnect() {
         super.afterConnect()
 
