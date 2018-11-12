@@ -16,7 +16,7 @@ class MayaSdkConfigurable : SearchableConfigurable, Configurable.NoScroll {
     }
 
     override fun getDisplayName(): String {
-        return "MayaCharm MayaSdk"
+        return "MayaCharm"
     }
 
     override fun getHelpTopic(): String? {
