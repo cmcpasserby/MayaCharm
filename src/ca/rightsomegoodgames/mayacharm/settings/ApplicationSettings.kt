@@ -57,7 +57,7 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
         assignEmptyPorts()
     }
 
-    var mayaSdkMapping: MutableMap<String, Int>
+    var mayaSdkMapping: SdkPortMap
         get() = myState.mayaSdkMapping
         set(value) {myState.mayaSdkMapping = value}
 
