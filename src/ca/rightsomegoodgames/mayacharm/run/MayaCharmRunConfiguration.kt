@@ -63,6 +63,6 @@ class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?
     }
 
     override fun getState(executor: Executor, executionEnv: ExecutionEnvironment): RunProfileState? {
-        return RunProfileState { p0, p1 -> null }
+        return RunProfileState { _, _ -> null }
     }
 }
