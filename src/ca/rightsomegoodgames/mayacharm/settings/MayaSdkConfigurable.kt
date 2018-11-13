@@ -2,14 +2,49 @@ package ca.rightsomegoodgames.mayacharm.settings
 
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.SearchableConfigurable
+import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.*
+import com.intellij.ui.components.JBLabel
 import com.intellij.util.ui.UIUtil
-import java.awt.BorderLayout
+import java.awt.*
 import javax.swing.JComponent
+import javax.swing.JPanel
 
 class MayaSdkConfigurable : SearchableConfigurable, Configurable.NoScroll {
     private val settings = ApplicationSettings.getInstance()
-    private val myPanel: MayaPySdkTablePanel = MayaPySdkTablePanel()
+
+    private val myPanel = JPanel(GridBagLayout())
+    private val mySdkSelector = ComboBox<String>()
+    private val mySdkPanel = MayaPySdkTablePanel()
+
+    init {
+        layout()
+    }
+
+    private fun layout() {
+        val c = GridBagConstraints()
+
+        val sdkLabel = JBLabel("Active Maya SDK: ")
+        c.insets = Insets(2, 2, 2, 2)
+        c.gridx = 0
+        c.gridy = 0
+        c.fill = GridBagConstraints.HORIZONTAL
+        myPanel.add(sdkLabel, c)
+
+        c.gridx = 1
+        c.gridy = 0
+        c.weightx = 0.1
+        myPanel.add(mySdkSelector, c)
+
+        c.insets = Insets(2, 2, 0, 2)
+        c.gridx = 0
+        c.gridy++
+        c.weighty = 1.0
+        c.gridwidth = 3
+        c.gridheight = GridBagConstraints.RELATIVE
+        c.fill = GridBagConstraints.BOTH
+        myPanel.add(mySdkPanel, c)
+    }
 
     override fun getId(): String {
         return ID
@@ -29,17 +64,17 @@ class MayaSdkConfigurable : SearchableConfigurable, Configurable.NoScroll {
 
     override fun isModified(): Boolean {
         val orgEntries = settings.mayaSdkMapping.toMap()
-        val newEntries = myPanel.data.map{ it.first to it.second }.toMap()
+        val newEntries = mySdkPanel.data.map{ it.first to it.second }.toMap()
         return newEntries != orgEntries
     }
 
     override fun reset() {
-        myPanel.data.clear()
-        myPanel.data.addAll(settings.mayaSdkMapping.entries.map { it.key to it.value })
+        mySdkPanel.data.clear()
+        mySdkPanel.data.addAll(settings.mayaSdkMapping.entries.map { it.key to it.value })
     }
 
     override fun apply() {
-        settings.mayaSdkMapping = myPanel.data.toMap().toMutableMap()
+        settings.mayaSdkMapping = mySdkPanel.data.toMap().toMutableMap()
     }
 
     companion object {
