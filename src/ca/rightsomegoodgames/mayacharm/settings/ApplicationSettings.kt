@@ -15,7 +15,7 @@ private val portRange = (4434..4534).toSet()
         storages = [Storage(value = "mayacharm.settings.xml", roamingType = RoamingType.DISABLED)]
 )
 class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> {
-    data class State(var mayaSdkMapping: SdkPortMap = mutableMapOf())
+    data class State(var mayaSdkMapping: SdkPortMap = mutableMapOf(), var selectedKey: String? = null)
     private var myState = State()
 
     companion object {
@@ -31,9 +31,15 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
         for (path in homePaths) {
             myState.mayaSdkMapping[path] = -1
         }
-
         assignEmptyPorts()
     }
+
+    var mayaSdkMapping: SdkPortMap
+        get() = myState.mayaSdkMapping
+        set(value) {myState.mayaSdkMapping = value}
+
+    val selectedSdkPort: Int?
+        get() = myState.mayaSdkMapping[myState.selectedKey]
 
     override fun getState(): State {
         return myState
@@ -52,13 +58,8 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
             }
             myState.mayaSdkMapping[path] = -1
         }
-
         assignEmptyPorts()
     }
-
-    var mayaSdkMapping: SdkPortMap
-        get() = myState.mayaSdkMapping
-        set(value) {myState.mayaSdkMapping = value}
 
     private fun assignEmptyPorts() {
         val usedPorts = myState.mayaSdkMapping.map { it.value }.filter { it > 0 }.toSet()
