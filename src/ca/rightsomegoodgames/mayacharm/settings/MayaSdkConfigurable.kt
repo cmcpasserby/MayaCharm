@@ -71,6 +71,10 @@ class MayaSdkConfigurable : SearchableConfigurable, Configurable.NoScroll {
     override fun reset() {
         mySdkPanel.data.clear()
         mySdkPanel.data.addAll(settings.mayaSdkMapping.entries.map { it.key to it.value })
+
+        for (entry in settings.mayaSdkMapping) {
+            mySdkSelector.addItem(entry.key)
+        }
     }
 
     override fun apply() {
@@ -79,6 +83,7 @@ class MayaSdkConfigurable : SearchableConfigurable, Configurable.NoScroll {
 
     companion object {
         public const val ID = "ca.rightsomegoodgames.mayacharm.settings.MayaSdkConfigurable"
+        private val ourModel = MayaPySdkTableModel()
 
         private class MayaPySdkTableModel : AddEditRemovePanel.TableModel<SdkPortPair>() {
             override fun getColumnCount(): Int {
@@ -93,8 +98,6 @@ class MayaSdkConfigurable : SearchableConfigurable, Configurable.NoScroll {
                 return if (cIndex == 0) o.first else o.second
             }
         }
-
-        private val ourModel = MayaPySdkTableModel()
 
         private class MayaPySdkTablePanel : AddEditRemovePanel<SdkPortPair>(ourModel, arrayListOf()) {
             override fun addItem(): Pair<String, Int> {

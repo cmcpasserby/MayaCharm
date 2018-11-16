@@ -41,6 +41,9 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
     val selectedSdkPort: Int?
         get() = myState.mayaSdkMapping[myState.selectedKey]
 
+    val selectedSdkMayaPy: String?
+        get() = myState.selectedKey
+
     override fun getState(): State {
         return myState
     }
