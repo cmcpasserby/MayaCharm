@@ -11,7 +11,7 @@ class ConnectToMayaLogAction : BaseSendAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val settings = ProjectSettings.getInstance(e.project!!)
-        val maya = MayaCommandInterface(settings.host, settings.port)
+        val maya = MayaCommandInterface(settings.host, settings.port!!) // TODO how to handle these case, maybe a error message about no selected sdk
         maya.connectMayaLog()
     }
 }

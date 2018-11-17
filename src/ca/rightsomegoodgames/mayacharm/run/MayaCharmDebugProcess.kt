@@ -45,7 +45,7 @@ class MayaCharmDebugProcess(session: XDebugSession,
         super.afterConnect()
 
         val projectSettings = ProjectSettings.getInstance(proj)
-        val maya = MayaCommandInterface(projectSettings.host, projectSettings.port)
+        val maya = MayaCommandInterface(projectSettings.host, projectSettings.port!!)
 
         Thread.sleep(500) // Maya does not seem to always be ready on time
 

@@ -16,7 +16,7 @@ class SendBufferAction : BaseSendAction() {
         doc?.let {docManager.saveDocument(doc)}
 
         if (data != null) {
-            val maya = MayaCommandInterface(settings.host, settings.port)
+            val maya = MayaCommandInterface(settings.host, settings.port!!)
             maya.sendFileToMaya(data.path)
         }
     }

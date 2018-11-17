@@ -2,6 +2,7 @@ package ca.rightsomegoodgames.mayacharm.settings
 
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.SearchableConfigurable
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.ComboBox
 import com.intellij.ui.*
 import com.intellij.ui.components.JBLabel
@@ -10,8 +11,9 @@ import java.awt.*
 import javax.swing.JComponent
 import javax.swing.JPanel
 
-class MayaSdkConfigurable : SearchableConfigurable, Configurable.NoScroll {
+class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurable.NoScroll {
     private val settings = ApplicationSettings.getInstance()
+    private val projectSettings = ProjectSettings.getInstance(project)
 
     private val myPanel = JPanel(GridBagLayout())
     private val mySdkSelector = ComboBox<String>()
@@ -63,9 +65,9 @@ class MayaSdkConfigurable : SearchableConfigurable, Configurable.NoScroll {
     }
 
     override fun isModified(): Boolean {
-        val orgEntries = settings.mayaSdkMapping.toMap()
-        val newEntries = mySdkPanel.data.map{ it.first to it.second }.toMap()
-        return newEntries != orgEntries
+        val entries = settings.mayaSdkMapping.toMap() != mySdkPanel.data.map { it.first to it.second }.toMap()
+        val selected = mySdkSelector.selectedItem as String? != projectSettings.selectedSdk
+        return entries || selected
     }
 
     override fun reset() {
@@ -75,10 +77,13 @@ class MayaSdkConfigurable : SearchableConfigurable, Configurable.NoScroll {
         for (entry in settings.mayaSdkMapping) {
             mySdkSelector.addItem(entry.key)
         }
+
+        mySdkSelector.selectedItem = projectSettings.selectedSdk
     }
 
     override fun apply() {
         settings.mayaSdkMapping = mySdkPanel.data.toMap().toMutableMap()
+        projectSettings.selectedSdk = mySdkSelector.selectedItem as String?
     }
 
     companion object {

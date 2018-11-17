@@ -8,7 +8,9 @@ import com.intellij.openapi.project.Project
         storages = [Storage(value = StoragePathMacros.WORKSPACE_FILE)]
 )
 class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
-    data class State(var Port: Int = 0, var Host: String = "")
+    private val appSettings = ApplicationSettings.getInstance()
+
+    data class State(var selectedSdk: String? = null)
     private var myState = State()
 
     override fun getState(): State {
@@ -16,17 +18,18 @@ class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
     }
 
     override fun loadState(state: State) {
-        myState.Host = state.Host
-        myState.Port = state.Port
+        myState.selectedSdk = state.selectedSdk
     }
 
-    var port: Int
-        get() = if (myState.Port < 1) 4434 else myState.Port
-        set(value) {myState.Port = value}
+    public var selectedSdk: String?
+        get() = myState.selectedSdk
+        set(value) {myState.selectedSdk = value}
 
-    var host: String
-        get() = if  (myState.Host.isBlank()) "localhost" else myState.Host
-        set(value) {myState.Host = value}
+    public val host: String
+        get() = "localhost"
+
+    public val port: Int? // TODO find a way to deal with null in the case of a SDK not being selected
+        get() = appSettings.mayaSdkMapping[selectedSdk]
 
     companion object {
         public fun getInstance(project: Project):ProjectSettings {

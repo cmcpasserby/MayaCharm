@@ -26,7 +26,7 @@ class MayaCharmRunner : GenericProgramRunner<RunnerSettings>() {
 
         val config = environment.runProfile as MayaCharmRunConfiguration
         val settings = ProjectSettings.getInstance(environment.project)
-        val maya = MayaCommandInterface(settings.host, settings.port)
+        val maya = MayaCommandInterface(settings.host, settings.port!!)
 
         when (config.executionType) {
             ExecutionType.FILE -> maya.sendFileToMaya(config.scriptFilePath)

@@ -11,7 +11,7 @@ class SendSelectionAction : BaseSendAction() {
         val editor = e.getData(LangDataKeys.EDITOR) ?: return
 
         val selectionModel = editor.selectionModel
-        var selectedText: String?
+        val selectedText: String?
 
         if (selectionModel.hasSelection()) {
             selectedText = selectionModel.selectedText
@@ -27,7 +27,7 @@ class SendSelectionAction : BaseSendAction() {
             }
         }
 
-        val maya = MayaCommandInterface(settings.host, settings.port)
+        val maya = MayaCommandInterface(settings.host, settings.port!!)
         if (selectedText != null) {
             maya.sendCodeToMaya(selectedText)
         }
