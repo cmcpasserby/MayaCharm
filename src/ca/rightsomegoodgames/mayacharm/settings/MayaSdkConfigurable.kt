@@ -1,48 +1,39 @@
 package ca.rightsomegoodgames.mayacharm.settings
 
+import ca.rightsomegoodgames.mayacharm.ui.SdkSelector
+import ca.rightsomegoodgames.mayacharm.ui.SdkTablePanel
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.ui.ComboBox
-import com.intellij.ui.*
-import com.intellij.ui.components.JBLabel
-import com.intellij.util.ui.UIUtil
 import java.awt.*
 import javax.swing.JComponent
 import javax.swing.JPanel
 
 class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurable.NoScroll {
+    companion object {
+        public const val ID = "ca.rightsomegoodgames.mayacharm.settings.MayaSdkConfigurable"
+    }
+
     private val settings = ApplicationSettings.getInstance()
     private val projectSettings = ProjectSettings.getInstance(project)
 
     private val myPanel = JPanel(GridBagLayout())
-    private val mySdkSelector = ComboBox<String>()
-    private val mySdkPanel = MayaPySdkTablePanel()
+    private val mySdkSelector = SdkSelector()
+    private val mySdkPanel = SdkTablePanel()
 
     init {
-        layout()
-    }
-
-    private fun layout() {
         val c = GridBagConstraints()
-
-        val sdkLabel = JBLabel("Active Maya SDK: ")
         c.insets = Insets(2, 2, 2, 2)
+        c.weightx = 1.0
         c.gridx = 0
         c.gridy = 0
-        c.fill = GridBagConstraints.HORIZONTAL
-        myPanel.add(sdkLabel, c)
 
-        c.gridx = 1
-        c.gridy = 0
-        c.weightx = 0.1
+        c.fill = GridBagConstraints.HORIZONTAL
         myPanel.add(mySdkSelector, c)
 
         c.insets = Insets(2, 2, 0, 2)
-        c.gridx = 0
-        c.gridy++
+        c.gridy = 1
         c.weighty = 1.0
-        c.gridwidth = 3
         c.gridheight = GridBagConstraints.RELATIVE
         c.fill = GridBagConstraints.BOTH
         myPanel.add(mySdkPanel, c)
@@ -66,7 +57,7 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
 
     override fun isModified(): Boolean {
         val entries = settings.mayaSdkMapping.toMap() != mySdkPanel.data.map { it.first to it.second }.toMap()
-        val selected = mySdkSelector.selectedItem as String? != projectSettings.selectedSdk
+        val selected = mySdkSelector.selectedItem != projectSettings.selectedSdk
         return entries || selected
     }
 
@@ -74,63 +65,12 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
         mySdkPanel.data.clear()
         mySdkPanel.data.addAll(settings.mayaSdkMapping.entries.map { it.key to it.value })
 
-        for (entry in settings.mayaSdkMapping) {
-            mySdkSelector.addItem(entry.key)
-        }
-
+        mySdkSelector.items = settings.mayaSdkMapping.keys.toList()
         mySdkSelector.selectedItem = projectSettings.selectedSdk
     }
 
     override fun apply() {
         settings.mayaSdkMapping = mySdkPanel.data.toMap().toMutableMap()
-        projectSettings.selectedSdk = mySdkSelector.selectedItem as String?
-    }
-
-    companion object {
-        public const val ID = "ca.rightsomegoodgames.mayacharm.settings.MayaSdkConfigurable"
-        private val ourModel = MayaPySdkTableModel()
-
-        private class MayaPySdkTableModel : AddEditRemovePanel.TableModel<SdkPortPair>() {
-            override fun getColumnCount(): Int {
-                return 2
-            }
-
-            override fun getColumnName(cIndex: Int): String? {
-                return if (cIndex == 0) "Maya Version" else "Command Port"
-            }
-
-            override fun getField(o: SdkPortPair, cIndex: Int): Any {
-                return if (cIndex == 0) o.first else o.second
-            }
-        }
-
-        private class MayaPySdkTablePanel : AddEditRemovePanel<SdkPortPair>(ourModel, arrayListOf()) {
-            override fun addItem(): Pair<String, Int> {
-                return "" to -1
-            }
-
-            override fun removeItem(o: SdkPortPair): Boolean {
-                return false
-            }
-
-            override fun editItem(o: SdkPortPair): SdkPortPair {
-                return o.first to o.second + 1
-            }
-
-            override fun initPanel() {
-                layout = BorderLayout()
-
-                val decorator = ToolbarDecorator.createDecorator(table)
-
-                decorator.setEditAction { doEdit() }
-
-                val panel = decorator.createPanel()
-                add(panel, BorderLayout.CENTER)
-                val label = labelText
-                if (label != null) {
-                    UIUtil.addBorder(panel, IdeBorderFactory.createTitledBorder(label, false))
-                }
-            }
-        }
+        projectSettings.selectedSdk = mySdkSelector.selectedItem
     }
 }

@@ -1,7 +1,9 @@
 package ca.rightsomegoodgames.mayacharm.run
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.mayaExecutableName
+import ca.rightsomegoodgames.mayacharm.mayacomms.mayaFromMayaPy
 import ca.rightsomegoodgames.mayacharm.mayacomms.mayaPyFromMaya
+import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.execution.configurations.RunProfile
 import com.intellij.execution.configurations.RunProfileState
 import com.intellij.execution.process.impl.ProcessListUtil
@@ -18,6 +20,8 @@ import com.jetbrains.python.sdk.PythonSdkType
 import java.net.ServerSocket
 
 class MayaCharmDebugRunner : PyDebugRunner() {
+    private val appSettings = ApplicationSettings.getInstance()
+
     override fun getRunnerId(): String {
         return "MayaCharmDebugRunner"
     }
@@ -27,7 +31,9 @@ class MayaCharmDebugRunner : PyDebugRunner() {
     }
 
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
-        val process = ProcessListUtil.getProcessList().firstOrNull{proc -> proc.executableName == mayaExecutableName} ?: return null
+        val mayaPaths = appSettings.mayaSdkMapping.map { mayaFromMayaPy(it.key) }
+
+        val process = ProcessListUtil.getProcessList().firstOrNull {  mayaPaths.contains(it.commandLine.removeSurrounding("\"")) } ?: return null
         val sdk = PythonSdkType.findSdkByPath(mayaPyFromMaya(process.commandLine.removeSurrounding("\""))) ?: return null
 
         val runConfig = environment.runProfile as MayaCharmRunConfiguration

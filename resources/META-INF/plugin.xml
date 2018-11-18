@@ -30,9 +30,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="ca.rightsomegoodgames.mayacharm.settings.ProjectSettings"/>
         <applicationService serviceImplementation="ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings"/>
-
         <projectConfigurable instance="ca.rightsomegoodgames.mayacharm.settings.MayaSdkConfigurable"/>
-        <!--<projectConfigurable groupId="project" groupWeight="-1" instance="ca.rightsomegoodgames.mayacharm.settings.ProjectConfig"/>-->
 
         <toolWindow id="MayaLog" anchor="bottom" factoryClass="ca.rightsomegoodgames.mayacharm.logconsole.LogWindow" icon="/icons/MayaCharm_ToolWindow.png"/>
 
