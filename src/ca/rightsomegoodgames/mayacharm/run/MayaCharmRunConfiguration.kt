@@ -14,14 +14,14 @@ enum class ExecutionType {FILE, CODE}
 
 private val SERIALIZATION_FILTERS = SkipDefaultValuesSerializationFilters()
 
-class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?, name: String?)
-    : RunConfigurationBase(project, factory, name) {
-
+class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?, name: String?) : RunConfigurationBase(project, factory, name) {
+    public var mayaSdkPath: String = ""
     public var scriptFilePath: String = ""
     public var scriptCodeText: String = ""
     public var executionType: ExecutionType = ExecutionType.FILE
 
     data class ConfigurationState(
+        var mayaSdkPath: String = "",
         var scriptFilePath: String = "",
         var scriptCodeText: String = "",
         var executionType: ExecutionType = ExecutionType.FILE
@@ -34,6 +34,7 @@ class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?
     override fun readExternal(element: Element) {
         super.readExternal(element)
         val state = XmlSerializer.deserialize(element, ConfigurationState::class.java)
+        mayaSdkPath = state.mayaSdkPath
         scriptFilePath = state.scriptFilePath
         scriptCodeText = state.scriptCodeText
         executionType = state.executionType
@@ -41,6 +42,7 @@ class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?
 
     override fun writeExternal(element: Element) {
         val state = ConfigurationState()
+        state.mayaSdkPath = mayaSdkPath
         state.scriptFilePath = scriptFilePath
         state.scriptCodeText = scriptCodeText
         state.executionType = executionType
@@ -50,6 +52,9 @@ class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?
     }
 
     override fun checkConfiguration() {
+        if (mayaSdkPath.isBlank())
+            throw RuntimeConfigurationException("Maya Sdk not selected")
+
         when (executionType) {
             ExecutionType.CODE -> {
                 if (scriptCodeText.isBlank())

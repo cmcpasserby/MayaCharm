@@ -11,16 +11,17 @@ class SdkSelector : JPanel(GridBagLayout()) {
     private val comboBox = ComboBox<String>()
 
     init {
-        val c = GridBagConstraints()
-        c.insets = Insets(2, 2, 2, 2)
-        c.gridx = 0
-        c.gridy = 0
-        c.fill = GridBagConstraints.HORIZONTAL
-        add(JLabel("Active Maya SDK: "), c)
+        with(GridBagConstraints()) {
+            insets = Insets(2, 2, 2, 2)
+            gridx = 0
+            gridy = 0
+            fill = GridBagConstraints.HORIZONTAL
+            add(JLabel("Active Maya SDK: "), this)
 
-        c.gridx = 1
-        c.weightx = 0.1
-        add(comboBox, c)
+            gridx = 1
+            weightx = 0.1
+            add(comboBox, this)
+        }
     }
 
     var selectedItem: String?

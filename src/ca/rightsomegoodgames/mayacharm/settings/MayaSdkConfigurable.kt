@@ -22,21 +22,22 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
     private val mySdkPanel = SdkTablePanel()
 
     init {
-        val c = GridBagConstraints()
-        c.insets = Insets(2, 2, 2, 2)
-        c.weightx = 1.0
-        c.gridx = 0
-        c.gridy = 0
+        with(GridBagConstraints()) {
+            insets = Insets(2, 2, 2, 2)
+            weightx = 1.0
+            gridx = 0
+            gridy = 0
 
-        c.fill = GridBagConstraints.HORIZONTAL
-        myPanel.add(mySdkSelector, c)
+            fill = GridBagConstraints.HORIZONTAL
+            myPanel.add(mySdkSelector, this)
 
-        c.insets = Insets(2, 2, 0, 2)
-        c.gridy = 1
-        c.weighty = 1.0
-        c.gridheight = GridBagConstraints.RELATIVE
-        c.fill = GridBagConstraints.BOTH
-        myPanel.add(mySdkPanel, c)
+            insets = Insets(2, 2, 0, 2)
+            gridy = 1
+            weighty = 1.0
+            gridheight = GridBagConstraints.RELATIVE
+            fill = GridBagConstraints.BOTH
+            myPanel.add(mySdkPanel, this)
+        }
     }
 
     override fun getId(): String {

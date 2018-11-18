@@ -13,7 +13,7 @@ class SendBufferAction : BaseSendAction() {
         val data = e.getData(LangDataKeys.VIRTUAL_FILE)
 
         val doc = data?.let { docManager.getDocument(it) }
-        doc?.let {docManager.saveDocument(doc)}
+        doc?.let {docManager.saveDocument(it)}
 
         if (data != null) {
             val maya = MayaCommandInterface(settings.host, settings.port!!)

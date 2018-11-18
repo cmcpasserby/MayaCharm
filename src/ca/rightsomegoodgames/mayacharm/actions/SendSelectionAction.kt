@@ -21,10 +21,7 @@ class SendSelectionAction : BaseSendAction() {
             if (selectionModel.hasSelection()) {
                 selectedText = selectionModel.selectedText
                 selectionModel.removeSelection()
-            }
-            else {
-                return
-            }
+            } else return
         }
 
         val maya = MayaCommandInterface(settings.host, settings.port!!)
