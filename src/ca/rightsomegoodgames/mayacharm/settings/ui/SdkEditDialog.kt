@@ -84,6 +84,10 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
             gridx = 0
             weightx = 1.0
             gridwidth = 2
+            myPanel.add(JLabel("""Add the following to Maya's "userSetup.py" or run in Maya's python console""",
+                    JLabel.LEFT), this)
+
+            gridy++
             myPanel.add(setupText, this)
         }
     }
