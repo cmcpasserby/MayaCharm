@@ -1,13 +1,13 @@
 package ca.rightsomegoodgames.mayacharm.ui
 
-import ca.rightsomegoodgames.mayacharm.settings.SdkPortPair
+import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.ui.AddEditRemovePanel
 import com.intellij.ui.IdeBorderFactory
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.util.ui.UIUtil
 import java.awt.BorderLayout
 
-private class SdkTableModel : AddEditRemovePanel.TableModel<SdkPortPair>() {
+private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.SdkInfo>() {
     override fun getColumnCount(): Int {
         return 2
     }
@@ -16,25 +16,24 @@ private class SdkTableModel : AddEditRemovePanel.TableModel<SdkPortPair>() {
         return if (cIndex == 0) "Maya Version" else "Command Port"
     }
 
-    override fun getField(o: SdkPortPair, cIndex: Int): Any {
-        return if (cIndex == 0) o.first else o.second
+    override fun getField(o: ApplicationSettings.SdkInfo, cIndex: Int): Any {
+        return if (cIndex == 0) o.mayaPyPath else o.port
     }
 }
 
 private val model = SdkTableModel()
 
-class SdkTablePanel : AddEditRemovePanel<SdkPortPair>(model, arrayListOf()) {
-    override fun addItem(): SdkPortPair? {
-        return "" to -1
+class SdkTablePanel : AddEditRemovePanel<ApplicationSettings.SdkInfo>(model, arrayListOf()) {
+    override fun addItem(): ApplicationSettings.SdkInfo? {
+        return ApplicationSettings.SdkInfo("", -1)
     }
 
-    override fun removeItem(o: SdkPortPair): Boolean {
+    override fun removeItem(o: ApplicationSettings.SdkInfo): Boolean {
         return false
     }
 
-    override fun editItem(o: SdkPortPair): SdkPortPair? {
-        // TODO: add a popup dialog here
-        return o.first to o.second + 1
+    override fun editItem(o: ApplicationSettings.SdkInfo): ApplicationSettings.SdkInfo? {
+        return ApplicationSettings.SdkInfo(o.mayaPyPath, o.port + 1)
     }
 
     override fun initPanel() {

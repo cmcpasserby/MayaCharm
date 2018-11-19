@@ -1,12 +1,11 @@
 package ca.rightsomegoodgames.mayacharm.run
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommandInterface
-import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
+import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.process.ProcessInfo
 import com.intellij.execution.ui.ConsoleViewContentType
 import com.intellij.execution.ui.ExecutionConsole
-import com.intellij.openapi.project.Project
 import com.intellij.xdebugger.XDebugSession
 import com.jetbrains.python.debugger.PyDebugProcess
 import java.net.ServerSocket
@@ -16,7 +15,6 @@ class MayaCharmDebugProcess(session: XDebugSession,
                             executionConsole: ExecutionConsole,
                             processHandler: ProcessHandler?,
                             multiProcess: Boolean,
-                            private val proj: Project,
                             private val runConfig: MayaCharmRunConfiguration,
                             private val process: ProcessInfo
                             )
@@ -44,8 +42,8 @@ class MayaCharmDebugProcess(session: XDebugSession,
     override fun afterConnect() {
         super.afterConnect()
 
-        val projectSettings = ProjectSettings.getInstance(proj)
-        val maya = MayaCommandInterface(projectSettings.host, projectSettings.port!!)
+        val sdkSettings = ApplicationSettings.getInstance().mayaSdkMapping[runConfig.mayaSdkPath] ?: return
+        val maya = MayaCommandInterface("localhost", sdkSettings.port)
 
         Thread.sleep(500) // Maya does not seem to always be ready on time
 

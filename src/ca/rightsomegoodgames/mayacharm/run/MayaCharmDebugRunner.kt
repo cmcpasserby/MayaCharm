@@ -1,8 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.run
 
-import ca.rightsomegoodgames.mayacharm.mayacomms.mayaExecutableName
 import ca.rightsomegoodgames.mayacharm.mayacomms.mayaFromMayaPy
-import ca.rightsomegoodgames.mayacharm.mayacomms.mayaPyFromMaya
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.execution.configurations.RunProfile
 import com.intellij.execution.configurations.RunProfileState
@@ -20,8 +18,6 @@ import com.jetbrains.python.sdk.PythonSdkType
 import java.net.ServerSocket
 
 class MayaCharmDebugRunner : PyDebugRunner() {
-    private val appSettings = ApplicationSettings.getInstance()
-
     override fun getRunnerId(): String {
         return "MayaCharmDebugRunner"
     }
@@ -31,12 +27,12 @@ class MayaCharmDebugRunner : PyDebugRunner() {
     }
 
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
-        val mayaPaths = appSettings.mayaSdkMapping.map { mayaFromMayaPy(it.key) }
-
-        val process = ProcessListUtil.getProcessList().firstOrNull {  mayaPaths.contains(it.commandLine.removeSurrounding("\"")) } ?: return null
-        val sdk = PythonSdkType.findSdkByPath(mayaPyFromMaya(process.commandLine.removeSurrounding("\""))) ?: return null
-
+        val sdks = ApplicationSettings.getInstance().mayaSdkMapping
         val runConfig = environment.runProfile as MayaCharmRunConfiguration
+        val sdkInfo = sdks[runConfig.mayaSdkPath] ?: return null
+
+        val process = ProcessListUtil.getProcessList().firstOrNull { it.commandLine.removeSurrounding("\"") == sdkInfo.mayaPath } ?: return null
+        val sdk = PythonSdkType.findSdkByPath(sdkInfo.mayaPyPath) ?: return null
 
         val serverSocket = ServerSocket(0)
         val cliState = PyAttachToProcessCommandLineState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
@@ -52,7 +48,6 @@ class MayaCharmDebugRunner : PyDebugRunner() {
                             executionResult.executionConsole,
                             executionResult.processHandler,
                             false,
-                            environment.project,
                             runConfig,
                             process
                     )

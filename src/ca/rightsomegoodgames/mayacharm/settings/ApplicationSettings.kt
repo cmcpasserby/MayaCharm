@@ -1,12 +1,12 @@
 package ca.rightsomegoodgames.mayacharm.settings
 
+import ca.rightsomegoodgames.mayacharm.mayacomms.mayaFromMayaPy
 import ca.rightsomegoodgames.mayacharm.mayacomms.mayaPyExecutableName
 import com.intellij.openapi.components.*
 import com.jetbrains.python.sdk.PythonSdkType
 import java.util.*
 
-typealias SdkPortMap = MutableMap<String, Int>
-typealias SdkPortPair = Pair<String, Int>
+typealias SdkPortMap = MutableMap<String, ApplicationSettings.SdkInfo>
 
 private val portRange = (4434..4534).toSet()
 
@@ -15,6 +15,11 @@ private val portRange = (4434..4534).toSet()
         storages = [Storage(value = "mayacharm.settings.xml", roamingType = RoamingType.DISABLED)]
 )
 class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> {
+    data class SdkInfo(var mayaPyPath: String = "", var port: Int = -1) {
+        val mayaPath: String
+            get() = mayaFromMayaPy(mayaPyPath) ?: ""
+    }
+
     data class State(var mayaSdkMapping: SdkPortMap = mutableMapOf())
     private var myState = State()
 
@@ -29,7 +34,7 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
         val homePaths = mayaSdk.map { it.homePath!! }
 
         for (path in homePaths) {
-            myState.mayaSdkMapping[path] = -1
+            myState.mayaSdkMapping[path] = SdkInfo(path, -1)
         }
         assignEmptyPorts()
     }
@@ -53,17 +58,17 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
                 myState.mayaSdkMapping[path] = state.mayaSdkMapping[path]!!
                 continue
             }
-            myState.mayaSdkMapping[path] = -1
+            myState.mayaSdkMapping[path] = SdkInfo(path, -1)
         }
         assignEmptyPorts()
     }
 
     private fun assignEmptyPorts() {
-        val usedPorts = myState.mayaSdkMapping.map { it.value }.filter { it > 0 }.toSet()
+        val usedPorts = myState.mayaSdkMapping.map { it.value.port }.filter { it > 0 }.toSet()
         val freePorts = PriorityQueue((portRange - usedPorts).sorted())
 
-        for (key in myState.mayaSdkMapping.filter { it.value < 0 }.keys) {
-            myState.mayaSdkMapping[key] = freePorts.remove()
+        for (key in myState.mayaSdkMapping.filter { it.value.port < 0 }.keys) {
+            myState.mayaSdkMapping[key]!!.port = freePorts.remove()
         }
     }
 }

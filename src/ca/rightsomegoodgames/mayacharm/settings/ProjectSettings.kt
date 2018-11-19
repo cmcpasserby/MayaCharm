@@ -28,8 +28,8 @@ class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
     public val host: String
         get() = "localhost"
 
-    public val port: Int? // TODO find a way to deal with null in the case of a SDK not being selected
-        get() = appSettings.mayaSdkMapping[selectedSdk]
+    public val port: Int?
+        get() = appSettings.mayaSdkMapping[selectedSdk]?.port
 
     companion object {
         public fun getInstance(project: Project):ProjectSettings {
