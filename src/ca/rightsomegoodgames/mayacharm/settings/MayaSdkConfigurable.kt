@@ -1,7 +1,7 @@
 package ca.rightsomegoodgames.mayacharm.settings
 
-import ca.rightsomegoodgames.mayacharm.ui.SdkSelector
-import ca.rightsomegoodgames.mayacharm.ui.SdkTablePanel
+import ca.rightsomegoodgames.mayacharm.settings.ui.SdkSelector
+import ca.rightsomegoodgames.mayacharm.settings.ui.SdkTablePanel
 import com.intellij.openapi.options.Configurable
 import com.intellij.openapi.options.SearchableConfigurable
 import com.intellij.openapi.project.Project
@@ -19,7 +19,7 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
 
     private val myPanel = JPanel(GridBagLayout())
     private val mySdkSelector = SdkSelector()
-    private val mySdkPanel = SdkTablePanel()
+    private val mySdkPanel = SdkTablePanel(project)
 
     init {
         with(GridBagConstraints()) {

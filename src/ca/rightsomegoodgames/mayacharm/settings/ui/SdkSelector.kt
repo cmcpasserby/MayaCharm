@@ -1,4 +1,4 @@
-package ca.rightsomegoodgames.mayacharm.ui
+package ca.rightsomegoodgames.mayacharm.settings.ui
 
 import com.intellij.openapi.ui.ComboBox
 import java.awt.GridBagConstraints

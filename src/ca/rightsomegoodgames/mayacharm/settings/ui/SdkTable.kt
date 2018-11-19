@@ -1,13 +1,14 @@
-package ca.rightsomegoodgames.mayacharm.ui
+package ca.rightsomegoodgames.mayacharm.settings.ui
 
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
+import com.intellij.openapi.project.Project
 import com.intellij.ui.AddEditRemovePanel
 import com.intellij.ui.IdeBorderFactory
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.util.ui.UIUtil
 import java.awt.BorderLayout
 
-private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.SdkInfo>() {
+private class SdkTableModel() : AddEditRemovePanel.TableModel<ApplicationSettings.SdkInfo>() {
     override fun getColumnCount(): Int {
         return 2
     }
@@ -23,7 +24,7 @@ private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.
 
 private val model = SdkTableModel()
 
-class SdkTablePanel : AddEditRemovePanel<ApplicationSettings.SdkInfo>(model, arrayListOf()) {
+class SdkTablePanel(private val project: Project) : AddEditRemovePanel<ApplicationSettings.SdkInfo>(model, arrayListOf()) {
     override fun addItem(): ApplicationSettings.SdkInfo? {
         return ApplicationSettings.SdkInfo("", -1)
     }
@@ -33,7 +34,9 @@ class SdkTablePanel : AddEditRemovePanel<ApplicationSettings.SdkInfo>(model, arr
     }
 
     override fun editItem(o: ApplicationSettings.SdkInfo): ApplicationSettings.SdkInfo? {
-        return ApplicationSettings.SdkInfo(o.mayaPyPath, o.port + 1)
+        val dialog = SdkEditDialog(project, o)
+        dialog.show()
+        return dialog.result
     }
 
     override fun initPanel() {
