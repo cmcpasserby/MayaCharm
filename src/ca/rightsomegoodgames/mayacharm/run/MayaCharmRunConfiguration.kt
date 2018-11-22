@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.run
 
+import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
 import com.intellij.execution.Executor
 import com.intellij.execution.configurations.*
 import com.intellij.execution.runners.ExecutionEnvironment
@@ -16,7 +17,7 @@ private val SERIALIZATION_FILTERS = SkipDefaultValuesSerializationFilters()
 
 class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?, name: String?)
     : RunConfigurationBase<MayaCharmRunConfiguration.ConfigurationState>(project, factory, name) {
-    public var mayaSdkPath: String = ""
+    public var mayaSdkPath: String = ProjectSettings.getInstance(project).selectedSdk ?: ""
     public var scriptFilePath: String = ""
     public var scriptCodeText: String = ""
     public var executionType: ExecutionType = ExecutionType.FILE
