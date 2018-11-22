@@ -27,7 +27,6 @@ class MayaCharmRunner : GenericProgramRunner<RunnerSettings>() {
 
         val config = environment.runProfile as MayaCharmRunConfiguration
 
-        // TODO fixme here, enforce that the sdkMapping cant return null
         val maya = MayaCommandInterface(appSettings.mayaSdkMapping[config.mayaSdkPath]!!.port)
 
         when (config.executionType) {

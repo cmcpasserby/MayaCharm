@@ -41,9 +41,7 @@ class MayaCharmDebugProcess(session: XDebugSession,
 
     override fun afterConnect() {
         super.afterConnect()
-        // TODO enforce that this can never be null
         val sdkSettings = ApplicationSettings.getInstance().mayaSdkMapping[runConfig.mayaSdkPath]
-
         val maya = MayaCommandInterface(sdkSettings!!.port)
 
         Thread.sleep(500) // Maya does not seem to always be ready on time

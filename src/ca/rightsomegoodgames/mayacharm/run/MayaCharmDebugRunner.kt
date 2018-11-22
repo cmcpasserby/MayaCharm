@@ -1,6 +1,5 @@
 package ca.rightsomegoodgames.mayacharm.run
 
-import ca.rightsomegoodgames.mayacharm.mayacomms.mayaFromMayaPy
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.execution.configurations.RunProfile
 import com.intellij.execution.configurations.RunProfileState
