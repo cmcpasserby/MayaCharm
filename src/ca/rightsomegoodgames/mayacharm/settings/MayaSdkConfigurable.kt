@@ -64,7 +64,7 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
 
     override fun reset() {
         mySdkPanel.data.clear()
-        mySdkPanel.data.addAll(settings.mayaSdkMapping.values)
+        mySdkPanel.data.addAll(settings.mayaSdkMapping.values.sortedBy { it.mayaPyPath })
 
         mySdkSelector.items = settings.mayaSdkMapping.keys.sorted()
         mySdkSelector.selectedItem = projectSettings.selectedSdk

@@ -22,14 +22,14 @@ class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
     }
 
     public var selectedSdk: String?
-        get() = myState.selectedSdk
+        get() = myState.selectedSdk ?: appSettings.mayaSdkMapping.keys.sortedDescending().firstOrNull()
         set(value) {myState.selectedSdk = value}
 
     public val host: String
         get() = "localhost"
 
     public val port: Int?
-        get() = appSettings.mayaSdkMapping[selectedSdk]?.port
+        get() = appSettings.mayaSdkMapping[selectedSdk]?.port // TODO: will need to handle this null case, or remove this and only return the sdk
 
     companion object {
         public fun getInstance(project: Project):ProjectSettings {
