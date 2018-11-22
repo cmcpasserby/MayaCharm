@@ -10,7 +10,7 @@ import java.text.MessageFormat
 
 const val LOG_FILENAME_STRING: String = "/mayalog%s.txt"
 
-class MayaCommandInterface(private val host: String, private val port: Int) {
+class MayaCommandInterface(private val port: Int) {
     private val logFileName: String = String.format(LOG_FILENAME_STRING, port)
 
     private fun writeFile (text: String): File? {
@@ -40,7 +40,7 @@ class MayaCommandInterface(private val host: String, private val port: Int) {
         var out: PrintWriter? = null
 
         try {
-            client = Socket(host, port)
+            client = Socket("localhost", port)
             out = PrintWriter(client.getOutputStream(), true)
             val outString = MessageFormat.format(PythonStrings.INSTANCE.EXECFILE, message.toString().replace("\\", "/"))
             out.println(outString)

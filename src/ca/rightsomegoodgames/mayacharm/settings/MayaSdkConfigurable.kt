@@ -58,7 +58,7 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
 
     override fun isModified(): Boolean {
         val entries = settings.mayaSdkMapping.values.toSet() != mySdkPanel.data.toSet()
-        val selected = mySdkSelector.selectedItem != projectSettings.selectedSdk
+        val selected = mySdkSelector.selectedItem != projectSettings.selectedSdkName
         return entries || selected
     }
 
@@ -67,11 +67,11 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
         mySdkPanel.data.addAll(settings.mayaSdkMapping.values.sortedBy { it.mayaPyPath })
 
         mySdkSelector.items = settings.mayaSdkMapping.keys.sorted()
-        mySdkSelector.selectedItem = projectSettings.selectedSdk
+        mySdkSelector.selectedItem = projectSettings.selectedSdkName
     }
 
     override fun apply() {
         settings.mayaSdkMapping = mySdkPanel.data.map { it.mayaPyPath to it }.toMap().toMutableMap()
-        projectSettings.selectedSdk = mySdkSelector.selectedItem
+        projectSettings.selectedSdkName = mySdkSelector.selectedItem
     }
 }

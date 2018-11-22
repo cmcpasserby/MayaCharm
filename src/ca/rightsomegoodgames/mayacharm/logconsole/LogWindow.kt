@@ -13,11 +13,11 @@ import java.nio.charset.Charset
 
 class LogWindow : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        val settings = ProjectSettings.getInstance(project)
+        val port = ProjectSettings.getInstance(project).selectedSdk?.port ?: 4434
 
         val contentManager = toolWindow.contentManager
         val contentFactory = ContentFactory.SERVICE.getInstance()
-        val mayaLogPath = PathManager.getPluginTempPath() + String.format(LOG_FILENAME_STRING, settings.port)
+        val mayaLogPath = PathManager.getPluginTempPath() + String.format(LOG_FILENAME_STRING, port)
 
         val console = LogConsole(
                 project,

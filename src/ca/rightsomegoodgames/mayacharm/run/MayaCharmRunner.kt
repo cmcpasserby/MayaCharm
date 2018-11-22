@@ -1,7 +1,7 @@
 package ca.rightsomegoodgames.mayacharm.run
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommandInterface
-import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
+import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.RunProfile
 import com.intellij.execution.configurations.RunProfileState
@@ -22,11 +22,13 @@ class MayaCharmRunner : GenericProgramRunner<RunnerSettings>() {
 
     @Throws(ExecutionException::class)
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
+        val appSettings = ApplicationSettings.getInstance()
         FileDocumentManager.getInstance().saveAllDocuments()
 
         val config = environment.runProfile as MayaCharmRunConfiguration
-        val settings = ProjectSettings.getInstance(environment.project)
-        val maya = MayaCommandInterface(settings.host, settings.port!!)
+
+        // TODO fixme here, enforce that the sdkMapping cant return null
+        val maya = MayaCommandInterface(appSettings.mayaSdkMapping[config.mayaSdkPath]!!.port)
 
         when (config.executionType) {
             ExecutionType.FILE -> maya.sendFileToMaya(config.scriptFilePath)

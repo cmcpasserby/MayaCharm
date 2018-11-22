@@ -13,10 +13,8 @@ import java.io.File
 import java.io.PrintWriter
 import java.nio.charset.Charset
 
-class LogConsole(project: Project, file: File, charset: Charset, skippedContents: Long, title: String, buildInActions: Boolean, searchScope: GlobalSearchScope?)
+class LogConsole(private val project: Project, file: File, charset: Charset, skippedContents: Long, title: String, buildInActions: Boolean, searchScope: GlobalSearchScope?)
     : LogConsoleImpl(project, file, charset, skippedContents, title, buildInActions, searchScope) {
-
-    private val settings = ProjectSettings.getInstance(project)
 
     init {
         super.setContentPreprocessor(fun(it: String): MutableList<LogFragment> {
@@ -34,7 +32,9 @@ class LogConsole(project: Project, file: File, charset: Charset, skippedContents
 
     override fun clear() {
         super.clear()
-        val mayaLogPath = PathManager.getPluginTempPath() + String.format(LOG_FILENAME_STRING, settings.port)
+        val sdk = ProjectSettings.getInstance(project).selectedSdk ?: return
+
+        val mayaLogPath = PathManager.getPluginTempPath() + String.format(LOG_FILENAME_STRING, sdk.port)
 
         var writer: PrintWriter? = null
 

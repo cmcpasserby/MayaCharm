@@ -17,7 +17,7 @@ private val SERIALIZATION_FILTERS = SkipDefaultValuesSerializationFilters()
 
 class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?, name: String?)
     : RunConfigurationBase<MayaCharmRunConfiguration.ConfigurationState>(project, factory, name) {
-    public var mayaSdkPath: String = ProjectSettings.getInstance(project).selectedSdk ?: ""
+    public var mayaSdkPath: String = ProjectSettings.getInstance(project).selectedSdkName ?: ""
     public var scriptFilePath: String = ""
     public var scriptCodeText: String = ""
     public var executionType: ExecutionType = ExecutionType.FILE

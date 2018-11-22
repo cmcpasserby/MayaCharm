@@ -1,14 +1,21 @@
 package ca.rightsomegoodgames.mayacharm.actions
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommandInterface
+import ca.rightsomegoodgames.mayacharm.resources.MayaNotifications
 import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
+import com.intellij.notification.Notifications
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.LangDataKeys
 
 class SendSelectionAction : BaseSendAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        val settings = ProjectSettings.getInstance(e.project!!)
-        val editor = e.getData(LangDataKeys.EDITOR) ?: return
+        val sdk = ProjectSettings.getInstance(e.project!!).selectedSdk
+        if (sdk == null) {
+            Notifications.Bus.notify(MayaNotifications.NO_SDK_SELECTED)
+            return
+        }
+
+        val editor = e.getData(LangDataKeys.EDITOR)!!
 
         val selectionModel = editor.selectionModel
         val selectedText: String?
@@ -24,7 +31,7 @@ class SendSelectionAction : BaseSendAction() {
             } else return
         }
 
-        val maya = MayaCommandInterface(settings.host, settings.port!!)
+        val maya = MayaCommandInterface(sdk.port)
         if (selectedText != null) {
             maya.sendCodeToMaya(selectedText)
         }

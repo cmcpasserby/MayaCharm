@@ -1,7 +1,9 @@
 package ca.rightsomegoodgames.mayacharm.actions
 
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommandInterface
+import ca.rightsomegoodgames.mayacharm.resources.MayaNotifications
 import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
+import com.intellij.notification.Notifications
 import com.intellij.openapi.actionSystem.AnActionEvent
 
 class ConnectToMayaLogAction : BaseSendAction() {
@@ -10,8 +12,14 @@ class ConnectToMayaLogAction : BaseSendAction() {
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        val settings = ProjectSettings.getInstance(e.project!!)
-        val maya = MayaCommandInterface(settings.host, settings.port!!) // TODO how to handle these case, maybe a error message about no selected sdk
+        val sdk = ProjectSettings.getInstance(e.project!!).selectedSdk
+
+        if (sdk == null) {
+            Notifications.Bus.notify(MayaNotifications.NO_SDK_SELECTED)
+            return
+        }
+
+        val maya = MayaCommandInterface(sdk.port) // TODO how to handle these case, maybe a error message about no selected sdk
         maya.connectMayaLog()
     }
 }
