@@ -14,7 +14,8 @@ enum class ExecutionType {FILE, CODE}
 
 private val SERIALIZATION_FILTERS = SkipDefaultValuesSerializationFilters()
 
-class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?, name: String?) : RunConfigurationBase(project, factory, name) {
+class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?, name: String?)
+    : RunConfigurationBase<MayaCharmRunConfiguration.ConfigurationState>(project, factory, name) {
     public var mayaSdkPath: String = ""
     public var scriptFilePath: String = ""
     public var scriptCodeText: String = ""
