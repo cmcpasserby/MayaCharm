@@ -3,6 +3,7 @@ package ca.rightsomegoodgames.mayacharm.run
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.execution.configurations.RunProfile
 import com.intellij.execution.configurations.RunProfileState
+import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.process.impl.ProcessListUtil
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.execution.ui.RunContentDescriptor
@@ -22,7 +23,15 @@ class MayaCharmDebugRunner : PyDebugRunner() {
     }
 
     override fun canRun(s: String, runProfile: RunProfile): Boolean {
-        return runProfile is MayaCharmRunConfiguration && s == "Debug"
+        val runConfig = runProfile as? MayaCharmRunConfiguration ?: return false
+
+        try {
+            runConfig.checkConfiguration()
+        } catch (e: RuntimeConfigurationException) {
+            return false
+        }
+
+        return s == "Debug"
     }
 
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
@@ -33,7 +42,7 @@ class MayaCharmDebugRunner : PyDebugRunner() {
         val process = ProcessListUtil.getProcessList().firstOrNull { it.commandLine.removeSurrounding("\"") == sdkInfo.mayaPath } ?: return null
         val sdk = PythonSdkType.findSdkByPath(sdkInfo.mayaPyPath) ?: return null
 
-        val serverSocket = ServerSocket(0)
+        val serverSocket = ServerSocket(0) // port 0 forces the ServerSocket to choose its own free port
         val cliState = PyAttachToProcessCommandLineState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
 
         val executionResult = cliState.execute(environment.executor, this)

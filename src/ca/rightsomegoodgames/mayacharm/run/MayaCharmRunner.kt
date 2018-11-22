@@ -6,6 +6,7 @@ import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.RunProfile
 import com.intellij.execution.configurations.RunProfileState
 import com.intellij.execution.configurations.RunnerSettings
+import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.execution.runners.GenericProgramRunner
 import com.intellij.execution.ui.RunContentDescriptor
@@ -17,7 +18,15 @@ class MayaCharmRunner : GenericProgramRunner<RunnerSettings>() {
     }
 
     override fun canRun(s: String, runProfile: RunProfile): Boolean {
-        return runProfile is MayaCharmRunConfiguration && s == "Run"
+        val runConfig = runProfile as? MayaCharmRunConfiguration ?: return false
+
+        try {
+            runConfig.checkConfiguration()
+        } catch (e: RuntimeConfigurationException) {
+            return false
+        }
+
+        return s == "Run"
     }
 
     @Throws(ExecutionException::class)

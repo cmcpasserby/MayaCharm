@@ -19,7 +19,7 @@ class ConnectToMayaLogAction : BaseSendAction() {
             return
         }
 
-        val maya = MayaCommandInterface(sdk.port) // TODO how to handle these case, maybe a error message about no selected sdk
+        val maya = MayaCommandInterface(sdk.port)
         maya.connectMayaLog()
     }
 }
