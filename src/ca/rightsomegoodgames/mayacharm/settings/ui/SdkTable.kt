@@ -8,7 +8,7 @@ import com.intellij.ui.ToolbarDecorator
 import com.intellij.util.ui.UIUtil
 import java.awt.BorderLayout
 
-private class SdkTableModel() : AddEditRemovePanel.TableModel<ApplicationSettings.SdkInfo>() {
+private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.SdkInfo>() {
     override fun getColumnCount(): Int {
         return 2
     }

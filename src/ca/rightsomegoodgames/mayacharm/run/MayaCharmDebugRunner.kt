@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.run
 
+import ca.rightsomegoodgames.mayacharm.resources.MayaNotifications
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.execution.configurations.RunProfile
 import com.intellij.execution.configurations.RunProfileState
@@ -39,8 +40,17 @@ class MayaCharmDebugRunner : PyDebugRunner() {
         val runConfig = environment.runProfile as MayaCharmRunConfiguration
         val sdkInfo = sdks[runConfig.mayaSdkPath] ?: return null
 
-        val process = ProcessListUtil.getProcessList().firstOrNull { it.commandLine.removeSurrounding("\"") == sdkInfo.mayaPath } ?: return null
-        val sdk = PythonSdkType.findSdkByPath(sdkInfo.mayaPyPath) ?: return null
+        val process = ProcessListUtil.getProcessList().firstOrNull { it.commandLine.removeSurrounding("\"") == sdkInfo.mayaPath }
+        if (process == null) {
+            MayaNotifications.mayaInstanceNotFound(sdkInfo.mayaPath, environment.project)
+            return null
+        }
+
+        val sdk = PythonSdkType.findSdkByPath(sdkInfo.mayaPyPath)
+        if (sdk == null) {
+            MayaNotifications.mayaInstanceNotFound(sdkInfo.mayaPath, environment.project)
+            return null
+        }
 
         val serverSocket = ServerSocket(0) // port 0 forces the ServerSocket to choose its own free port
         val cliState = PyAttachToProcessCommandLineState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)

@@ -2,6 +2,7 @@ package ca.rightsomegoodgames.mayacharm.resources
 
 import com.intellij.notification.Notification
 import com.intellij.notification.NotificationType
+import com.intellij.openapi.project.Project
 
 private const val displayGroup = "MayaCharm"
 private const val titleText = "MayaCharm"
@@ -15,4 +16,12 @@ object MayaNotifications {
 
     val NO_SDK_SELECTED = Notification(displayGroup, titleText,
             "No Maya SDK is selected", NotificationType.ERROR)
+
+    fun mayaInstanceNotFound(instancePath: String, project: Project) {
+        Notification(
+            displayGroup,
+            titleText,
+            "no running Maya Instance for \"$instancePath\" found",
+            NotificationType.ERROR).notify(project)
+    }
 }
