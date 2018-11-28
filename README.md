@@ -10,7 +10,7 @@ https://plugins.jetbrains.com/plugin/8218?pr=pycharm
 It requires some minimal setup. The settings panel is in “Settings > Other Settings > MayaCharm” just define your port number
 or leave the default and be sure to copy and paste the code it generates into Maya’s userSetup.py
 
-![MayaCharm Settings Panel](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/MCSettingsPanel.PNG)
+![MayaCharm Settings Panel](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/MayaCharm3_Settings.png)
 
 
 ## Usage
@@ -18,4 +18,4 @@ If using Community Edition just setup the MayaCharm Runner run Configuration tha
 If using Professional  Edition you can use the MayaCharm debugger instead which can be used as a runner or debugger.
 There is also a Execute Selection and a Execute Documeant actions in the run menu, that can also be accessed via alt+s and alt+a
 
-![MayaCharm Debugger Panel](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/MCDebuggerConfig.PNG)
+![MayaCharm Debugger Panel](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/MayaCharm3_RunConfig.png)
