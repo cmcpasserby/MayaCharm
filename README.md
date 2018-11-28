@@ -10,9 +10,12 @@ https://plugins.jetbrains.com/plugin/8218?pr=pycharm
 It requires some minimal setup. The settings panel is in `Settings > Other Settings > MayaCharm` here you can define what port numbers
 MayaCharm will talk to your Maya installs on. This is where you also define the default Maya install that the `Execute Documeant In Maya` and `Execute Selection in Maya` actions will be performed on. Currently MayaCharm looks for any `mayapy` interpters you have setup, and uses those to define where your Maya installs are. 
 These can be added and removed from the `Project Interpreter` section of the settings panel.
+
 ![MayaCharm Settings Panel](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/MayaCharm3_Settings.png)
+
 When you edit a port number MayaCharm will also display what code you either need to execute in maya 
 or add to your usersetup.py to open maya up to connections from MayaCharm.
+
 ![MayaCharm Settings Panel](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/MayaCharm3_EditPort.png)
 
 
