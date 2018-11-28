@@ -7,15 +7,18 @@ For those simply just wanting the compiled version, you are best to just search 
 https://plugins.jetbrains.com/plugin/8218?pr=pycharm
 
 ## Installation 
-It requires some minimal setup. The settings panel is in “Settings > Other Settings > MayaCharm” just define your port number
-or leave the default and be sure to copy and paste the code it generates into Maya’s userSetup.py
-
+It requires some minimal setup. The settings panel is in `Settings > Other Settings > MayaCharm` here you can define what port numbers
+MayaCharm will talk to your Maya installs on. This is where you also define the default Maya install that the `Execute Documeant In Maya` and `Execute Selection in Maya` actions will be performed on. Currently MayaCharm looks for any `mayapy` interpters you have setup, and uses those to define where your Maya installs are. 
+These can be added and removed from the `Project Interpreter` section of the settings panel.
 ![MayaCharm Settings Panel](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/MayaCharm3_Settings.png)
+When you edit a port number MayaCharm will also display what code you either need to execute in maya 
+or add to your usersetup.py to open maya up to connections from MayaCharm.
+![MayaCharm Settings Panel](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/MayaCharm3_EditPort.png)
 
 
 ## Usage
-If using Community Edition just setup the MayaCharm Runner run Configuration than it will work just like a normal python run configuration.
-If using Professional  Edition you can use the MayaCharm debugger instead which can be used as a runner or debugger.
+Once the plugin is installed and setup MayaCharm will be displayed as a type of run configuration. You just need to tell it what Maya instance to connect to, and provide either a python file or some code to be excuted on run. Both running and debugging is supported this way.
+
 There is also a Execute Selection and a Execute Documeant actions in the run menu, that can also be accessed via alt+s and alt+a
 
 ![MayaCharm Debugger Panel](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/MayaCharm3_RunConfig.png)
