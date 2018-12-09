@@ -11,8 +11,6 @@ abstract class BaseSendAction : AnAction() {
     abstract override fun actionPerformed(e: AnActionEvent)
 
     override fun update(e: AnActionEvent) {
-        super.update(e)
-
         val currentFile = e.getData(LangDataKeys.VIRTUAL_FILE)
         if (currentFile == null) {
             e.presentation.isEnabled = false

@@ -4,13 +4,14 @@ import com.intellij.openapi.util.SystemInfo
 import com.intellij.util.io.exists
 import java.nio.file.Paths
 
-private const val mayaExecutableNameMac = "Maya"
-private const val mayaExecutableNameLinux = "maya"
 private const val mayaExecutableNameWin = "maya.exe"
-
-private const val mayaPyExecutableNameMac = "mayapy"
-private const val mayaPyExecutableNameLinux = "mayapy"
 private const val mayaPyExecutableNameWin = "mayapy.exe"
+
+private const val mayaExecutableNameMac = "Maya"
+private const val mayaPyExecutableNameMac = "mayapy"
+
+private const val mayaExecutableNameLinux = "maya"
+private const val mayaPyExecutableNameLinux = "mayapy"
 
 public fun mayaPyFromMaya(path: String): String? {
     val p = Paths.get(path)

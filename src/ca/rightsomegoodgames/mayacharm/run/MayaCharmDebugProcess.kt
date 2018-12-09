@@ -16,8 +16,7 @@ class MayaCharmDebugProcess(session: XDebugSession,
                             processHandler: ProcessHandler?,
                             multiProcess: Boolean,
                             private val runConfig: MayaCharmRunConfiguration,
-                            private val process: ProcessInfo
-                            )
+                            private val process: ProcessInfo)
                             : PyDebugProcess(session,
                                 serverSocket,
                                 executionConsole,
