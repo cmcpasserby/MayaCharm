@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>ca.rightsomegoodgames.mayacharm</id>
     <name>MayaCharm</name>
-    <version>3.0.0</version>
+    <version>3.1.0</version>
     <vendor email="chris@rightsomegoodgames.ca" url="https://github.com/cmcpasserby">Chris Cunningham</vendor>
 
     <description><![CDATA[
@@ -19,7 +19,7 @@
 
     <change-notes><![CDATA[
     <ul>
-        <li>Rewrite that allows MayaCharm to work with the Local Interpreter</li>
+        <li>Attach to Process now shows maya instances you can attach to</li>
     </ul>
     ]]>
     </change-notes>
@@ -37,6 +37,8 @@
         <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmConfigType"/>
         <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmRunner" order="first"/>
         <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmDebugRunner"/>
+
+        <xdebugger.attachDebuggerProvider implementation="ca.rightsomegoodgames.mayacharm.debug.MayaAttachDebuggerProvider"/>
     </extensions>
 
     <extensions defaultExtensionNs="Pythonid">
@@ -67,13 +69,7 @@
                 icon="/icons/MayaCharm_Action.png">
             <add-to-group group-id="RunMenu" anchor="last"/>
         </action>
-        <action id="ca.rightsomegoodgames.mayacharm.actions.AttachToMayaAction"
-                class="ca.rightsomegoodgames.mayacharm.actions.AttachToMayaAction"
-                text="Attach To Maya"
-                description="Attach the Python debugger to Maya."
-                icon="/icons/MayaCharm_Action.png">
-            <add-to-group group-id="RunMenu" anchor="last"/>
-        </action>
+
     </actions>
 
 </idea-plugin>
