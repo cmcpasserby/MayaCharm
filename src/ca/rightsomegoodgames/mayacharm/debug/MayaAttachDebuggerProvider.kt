@@ -22,7 +22,7 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
             return mutableListOf()
         }
 
-        val currentSdk = sdks.firstOrNull { it.mayaPath == commandLine } ?: return mutableListOf()
+        val currentSdk = sdks.firstOrNull { commandLine.startsWith(it.mayaPath) } ?: return mutableListOf()
         return mutableListOf(MayaAttachDebugger(PythonSdkType.findSdkByPath(currentSdk.mayaPyPath)!!))
     }
 
