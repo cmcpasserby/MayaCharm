@@ -32,22 +32,23 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
         return true
     }
 
-    private class MayaAttachDebugger(sdk: Sdk) : XAttachDebugger {
-        private val mySdkHome: String? = sdk.homePath
-        private val myName: String = "${PythonSdkType.getInstance().getVersionString(sdk)} ($mySdkHome)"
+}
 
-        override fun getDebuggerDisplayName(): String {
-            return myName
-        }
+private class MayaAttachDebugger(sdk: Sdk) : XAttachDebugger {
+    private val mySdkHome: String? = sdk.homePath
+    private val myName: String = "${PythonSdkType.getInstance().getVersionString(sdk)} ($mySdkHome)"
 
-        override fun attachDebugSession(project: Project, attachHost: XAttachHost, processInfo: ProcessInfo) {
-            val runner = PyAttachToProcessDebugRunner(project, processInfo.pid, mySdkHome)
-            runner.launch()
-        }
+    override fun getDebuggerDisplayName(): String {
+        return myName
+    }
+
+    override fun attachDebugSession(project: Project, attachHost: XAttachHost, processInfo: ProcessInfo) {
+        val runner = PyAttachToProcessDebugRunner(project, processInfo.pid, mySdkHome)
+        runner.launch()
     }
 }
 
-class MayaAttachGroup : XAttachProcessPresentationGroup {
+private class MayaAttachGroup : XAttachProcessPresentationGroup {
     companion object {
         val INSTANCE = MayaAttachGroup()
     }
@@ -56,7 +57,7 @@ class MayaAttachGroup : XAttachProcessPresentationGroup {
         return info.commandLine
     }
 
-    override fun getProcessIcon(p0: Project, p1: ProcessInfo, p2: UserDataHolder): Icon {
+    override fun getProcessIcon(project: Project, info: ProcessInfo, userData: UserDataHolder): Icon {
         return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png")
     }
 
