@@ -40,7 +40,7 @@ class MayaCharmDebugRunner : PyDebugRunner() {
         val runConfig = environment.runProfile as MayaCharmRunConfiguration
         val sdkInfo = sdks[runConfig.mayaSdkPath] ?: return null
 
-        val process = ProcessListUtil.getProcessList().firstOrNull { it.commandLine.removeSurrounding("\"").startsWith(sdkInfo.mayaPath) }
+        val process = ProcessListUtil.getProcessList().firstOrNull { it.commandLine.contains(sdkInfo.mayaPath) }
         if (process == null) {
             MayaNotifications.mayaInstanceNotFound(sdkInfo.mayaPath, environment.project)
             return null
