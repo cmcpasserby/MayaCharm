@@ -30,7 +30,7 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
     }
 
     override fun removeItem(o: ApplicationSettings.SdkInfo): Boolean {
-        return false
+        return true
     }
 
     override fun editItem(o: ApplicationSettings.SdkInfo): ApplicationSettings.SdkInfo? {
@@ -42,7 +42,9 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
     override fun initPanel() {
         layout = BorderLayout()
         val decorator = ToolbarDecorator.createDecorator(table)
+        decorator.setAddAction{doAdd()}
         decorator.setEditAction {doEdit()}
+        decorator.setRemoveAction {doRemove()}
 
         val panel = decorator.createPanel()
         add(panel, BorderLayout.CENTER)
