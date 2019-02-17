@@ -22,6 +22,9 @@ or add to your usersetup.py to open maya up to connections from MayaCharm.
 ## Usage
 Once the plugin is installed and setup MayaCharm will be displayed as a type of run configuration. You just need to tell it what Maya instance to connect to, and provide either a python file or some code to be excuted on run. Both running and debugging is supported this way.
 
-There is also a Execute Selection and a Execute Document actions in the run menu, that can also be accessed via alt+s and alt+a
-
 ![MayaCharm Debugger Panel](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/MayaCharm3_RunConfig.png)
+
+There is also a Execute Selection and a Execute Document actions in the run menu, that can also be accessed via alt+s and alt+a.
+If you just want to attach to a existing Maya process you can use the `Attach to Process` option in the `Run` menu and Maya instances will now show up in these menu as well as regular python instances.
+
+![MayaCharm Attach Dialog](https://rsggassets.nyc3.digitaloceanspaces.com/assets/images/MayaCharm/mc_attach_to_proc.png)
