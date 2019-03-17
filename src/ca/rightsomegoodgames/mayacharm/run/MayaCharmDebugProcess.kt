@@ -23,8 +23,6 @@ class MayaCharmDebugProcess(session: XDebugSession,
                                 processHandler,
                                 multiProcess) {
 
-    override fun printToConsole(text: String?, contentType: ConsoleViewContentType?) { }
-
     override fun getConnectionMessage(): String {
         return "Attaching to Maya process with a PID=${process.pid}"
     }
@@ -33,17 +31,11 @@ class MayaCharmDebugProcess(session: XDebugSession,
         return "Attaching Debugger to Maya"
     }
 
-    override fun disconnect() {
-        super.disconnect()
-        Thread.sleep(500)
-    }
-
     override fun afterConnect() {
-        super.afterConnect()
+        printToConsole("AfterConnect\n", ConsoleViewContentType.NORMAL_OUTPUT)
+
         val sdkSettings = ApplicationSettings.getInstance().mayaSdkMapping[runConfig.mayaSdkPath]
         val maya = MayaCommandInterface(sdkSettings!!.port)
-
-        Thread.sleep(500) // Maya does not seem to always be ready on time, so lets wait half a sec
 
         when (runConfig.executionType) {
             ExecutionType.FILE -> maya.sendFileToMaya(runConfig.scriptFilePath)

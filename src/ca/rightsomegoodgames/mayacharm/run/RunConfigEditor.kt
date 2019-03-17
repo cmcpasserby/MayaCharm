@@ -18,15 +18,15 @@ class RunConfigEditor(config: MayaCharmRunConfiguration) : SettingsEditor<MayaCh
     private val buttonGroup = ButtonGroup()
     private val sdkSelector = SdkSelector()
 
-    private val fileRadioButton = JRadioButton("Execute File", true).also { update(it) }
-    private val fileField = TextFieldWithBrowseButton().also {
+    private val fileRadioButton = JRadioButton("Execute File", true).apply { update(this) }
+    private val fileField = TextFieldWithBrowseButton().apply {
         val fileTypeFilter = FileChooserDescriptor(true, false, false, false, false, false)
-        it.addBrowseFolderListener("Select File", "Select python file to execute in maya", config.project, fileTypeFilter)
+        addBrowseFolderListener("Select File", "Select python file to execute in maya", config.project, fileTypeFilter)
     }
 
-    private val codeRadioButton = JRadioButton("Execute Code").also { update(it) }
-    private val codeField = EditorTextField("", config.project, FileTypeManager.getInstance().getFileTypeByExtension(".py")).also {
-        it.setOneLineMode(false)
+    private val codeRadioButton = JRadioButton("Execute Code").apply { update(this) }
+    private val codeField = EditorTextField("", config.project, FileTypeManager.getInstance().getFileTypeByExtension(".py")).apply {
+        setOneLineMode(false)
     }
 
     init {

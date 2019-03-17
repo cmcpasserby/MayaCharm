@@ -35,22 +35,19 @@ class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?
 
     override fun readExternal(element: Element) {
         super.readExternal(element)
-        val state = XmlSerializer.deserialize(element, ConfigurationState::class.java)
-        mayaSdkPath = state.mayaSdkPath
-        scriptFilePath = state.scriptFilePath
-        scriptCodeText = state.scriptCodeText
-        executionType = state.executionType
+        XmlSerializer.deserialize(element, ConfigurationState::class.java).also {
+            mayaSdkPath = it.mayaSdkPath
+            scriptFilePath = it.scriptFilePath
+            scriptCodeText = it.scriptCodeText
+            executionType = it.executionType
+        }
     }
 
     override fun writeExternal(element: Element) {
-        val state = ConfigurationState()
-        state.mayaSdkPath = mayaSdkPath
-        state.scriptFilePath = scriptFilePath
-        state.scriptCodeText = scriptCodeText
-        state.executionType = executionType
-
-        XmlSerializer.serializeInto(state, element, SERIALIZATION_FILTERS)
-        super.writeExternal(element)
+        ConfigurationState(mayaSdkPath, scriptFilePath, scriptCodeText, executionType).apply {
+            XmlSerializer.serializeInto(this, element, SERIALIZATION_FILTERS)
+            super.writeExternal(element)
+        }
     }
 
     override fun checkConfiguration() {

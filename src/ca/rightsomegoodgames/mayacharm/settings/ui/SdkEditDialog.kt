@@ -20,14 +20,14 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
     private var okPressed = false
 
     private val myPanel = JPanel(GridBagLayout())
-    private val nameField = JTextField().also {
-        it.text = sdkInfo.mayaPyPath
-        it.isEnabled = false
+    private val nameField = JTextField().apply {
+        text = sdkInfo.mayaPyPath
+        isEnabled = false
     }
 
-    private val portField = JTextField().also {
-        it.text = sdkInfo.port.toString()
-        it.document.addDocumentListener(object : DocumentListener {
+    private val portField = JTextField().apply {
+        text = sdkInfo.port.toString()
+        document.addDocumentListener(object : DocumentListener {
             override fun changedUpdate(e: DocumentEvent?) {
                 updateSetupText()
                 updateOkButton()
@@ -46,9 +46,9 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
     }
 
     private val setupText = EditorTextField(String.format(PythonStrings.INSTANCE.cmdportSetupScript, ""),
-            project, FileTypeManager.getInstance().getFileTypeByExtension(".py")).also {
-        it.setOneLineMode(false)
-        it.isEnabled = false
+            project, FileTypeManager.getInstance().getFileTypeByExtension(".py")).apply {
+        setOneLineMode(false)
+        isEnabled = false
     }
 
     init {
