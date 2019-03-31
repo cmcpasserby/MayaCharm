@@ -3,10 +3,12 @@ package ca.rightsomegoodgames.mayacharm.actions
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.LangDataKeys
+import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.fileTypes.FileTypeManager
 
 abstract class BaseSendAction : AnAction() {
     private val fileTypeManager: FileTypeManager = FileTypeManager.getInstance()
+    private val pyFileType: FileType = fileTypeManager.findFileTypeByName("Python").let { it!! }
 
     abstract override fun actionPerformed(e: AnActionEvent)
 
@@ -17,6 +19,6 @@ abstract class BaseSendAction : AnAction() {
             return
         }
 
-        e.presentation.isEnabled = fileTypeManager.isFileOfType(currentFile, fileTypeManager.getFileTypeByExtension(".py"))
+        e.presentation.isEnabled = fileTypeManager.isFileOfType(currentFile, pyFileType)
     }
 }
