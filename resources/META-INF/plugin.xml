@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>ca.rightsomegoodgames.mayacharm</id>
     <name>MayaCharm</name>
-    <version>3.0.1</version>
+    <version>3.0.2</version>
     <vendor email="chris@rightsomegoodgames.ca" url="https://github.com/cmcpasserby">Chris Cunningham</vendor>
 
     <description><![CDATA[
@@ -19,8 +19,7 @@
 
     <change-notes><![CDATA[
     <ul>
-        <li>Attach to Process now shows maya instances you can attach to</li>
-        <li>Fixed bug that prevented MayaCharm from finding Maya Instances when launched with arguments</li>
+        <li>Fixes issue with execute commands being greyed out in Pycharm 2019.1</li>
     </ul>
     ]]>
     </change-notes>
