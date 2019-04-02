@@ -7,8 +7,10 @@ import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.fileTypes.FileTypeManager
 
 abstract class BaseSendAction : AnAction() {
-    private val fileTypeManager: FileTypeManager = FileTypeManager.getInstance()
-    private val pyFileType: FileType = fileTypeManager.findFileTypeByName("Python").let { it!! }
+    companion object {
+        private val fileTypeManager: FileTypeManager = FileTypeManager.getInstance()
+        private val pyFileType: FileType = fileTypeManager.findFileTypeByName("Python")!!
+    }
 
     abstract override fun actionPerformed(e: AnActionEvent)
 
