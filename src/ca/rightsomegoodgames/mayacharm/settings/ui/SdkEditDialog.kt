@@ -17,8 +17,6 @@ import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
 
 class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.SdkInfo) : DialogWrapper(project, false) {
-    private var okPressed = false
-
     private val myPanel = JPanel(GridBagLayout())
     private val nameField = JTextField().apply {
         text = sdkInfo.mayaPyPath
@@ -96,13 +94,8 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
         return myPanel
     }
 
-    override fun doOKAction() {
-        okPressed = true
-        super.doOKAction()
-    }
-
     public val result: ApplicationSettings.SdkInfo
-        get() = if (okPressed) ApplicationSettings.SdkInfo(sdkInfo.mayaPyPath, portField.text.toInt()) else sdkInfo
+        get() = if (isOK) ApplicationSettings.SdkInfo(sdkInfo.mayaPyPath, portField.text.toInt()) else sdkInfo
 
     private fun updateSetupText() {
         setupText.text = String.format(PythonStrings.INSTANCE.cmdportSetupScript, portField.text)
