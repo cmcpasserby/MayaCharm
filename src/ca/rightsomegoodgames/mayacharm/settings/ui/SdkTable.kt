@@ -8,7 +8,6 @@ import com.intellij.ui.AddEditRemovePanel
 import com.intellij.ui.IdeBorderFactory
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.util.ui.UIUtil
-import com.jetbrains.python.configuration.PyConfigurableInterpreterList
 import com.jetbrains.python.sdk.PythonSdkType
 import java.awt.BorderLayout
 
@@ -30,10 +29,9 @@ private val model = SdkTableModel()
 
 class SdkTablePanel(private val project: Project) : AddEditRemovePanel<ApplicationSettings.SdkInfo>(model, arrayListOf()) {
     override fun addItem(): ApplicationSettings.SdkInfo? {
-//        PythonSdkType.isInvalid()
-
-        val sdkModel = PyConfigurableInterpreterList.getInstance(project).model
-
+        val existingSdks = PythonSdkType.getAllLocalCPythons() // TODO filter out to only sdks of the MayaSdkFlavour
+        val dialog = SdkAddDialog(project, existingSdks)
+        dialog.show()
         return ApplicationSettings.SdkInfo("", -1)
     }
 
