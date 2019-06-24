@@ -78,7 +78,7 @@ class RunConfigEditor(config: MayaCharmRunConfiguration) : SettingsEditor<MayaCh
     }
 
     override fun resetEditorFrom(config: MayaCharmRunConfiguration) {
-        sdkSelector.items = ApplicationSettings.getInstance().mayaSdkMapping.keys.toList().sorted()
+        sdkSelector.items = ApplicationSettings.INSTANCE.mayaSdkMapping.keys.toList().sorted()
         sdkSelector.selectedItem = config.mayaSdkPath
 
         fileField.text = config.scriptFilePath

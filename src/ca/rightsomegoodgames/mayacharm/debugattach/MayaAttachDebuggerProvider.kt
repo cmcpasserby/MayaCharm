@@ -18,7 +18,7 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
     }
 
     override fun getAvailableDebuggers(project: Project, attachHost: XAttachHost, processInfo: ProcessInfo, userData: UserDataHolder): MutableList<XAttachDebugger> {
-        val sdks = ApplicationSettings.getInstance().mayaSdkMapping.values
+        val sdks = ApplicationSettings.INSTANCE.mayaSdkMapping.values
 
         if (!sdks.any { processInfo.commandLine.contains(it.mayaPath) }) {
             return mutableListOf()

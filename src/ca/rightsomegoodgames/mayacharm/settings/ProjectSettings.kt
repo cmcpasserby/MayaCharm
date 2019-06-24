@@ -8,7 +8,7 @@ import com.intellij.openapi.project.Project
         storages = [Storage(value = StoragePathMacros.WORKSPACE_FILE)]
 )
 class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
-    private val appSettings = ApplicationSettings.getInstance()
+    private val appSettings = ApplicationSettings.INSTANCE
 
     data class State(var selectedSdk: String? = null)
     private var myState = State()

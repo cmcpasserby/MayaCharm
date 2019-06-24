@@ -31,7 +31,7 @@ class MayaCharmRunner : GenericProgramRunner<RunnerSettings>() {
 
     @Throws(ExecutionException::class)
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
-        val appSettings = ApplicationSettings.getInstance()
+        val appSettings = ApplicationSettings.INSTANCE
         FileDocumentManager.getInstance().saveAllDocuments()
 
         val config = environment.runProfile as MayaCharmRunConfiguration

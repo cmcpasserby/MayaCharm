@@ -34,7 +34,7 @@ class MayaCharmDebugProcess(session: XDebugSession,
     override fun afterConnect() {
         printToConsole("AfterConnect\n", ConsoleViewContentType.NORMAL_OUTPUT)
 
-        val sdkSettings = ApplicationSettings.getInstance().mayaSdkMapping[runConfig.mayaSdkPath]
+        val sdkSettings = ApplicationSettings.INSTANCE.mayaSdkMapping[runConfig.mayaSdkPath]
         val maya = MayaCommandInterface(sdkSettings!!.port)
 
         when (runConfig.executionType) {

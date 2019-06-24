@@ -9,7 +9,10 @@ import com.intellij.ui.IdeBorderFactory
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.util.ui.UIUtil
 import com.jetbrains.python.sdk.PythonSdkType
+import com.jetbrains.python.sdk.flavors.MayaSdkFlavor
+import com.jetbrains.python.sdk.getOrCreateAdditionalData
 import java.awt.BorderLayout
+import ca.rightsomegoodgames.mayacharm.flavors.MayaSdkFlavor as MyMayaSdkFlavor
 
 private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.SdkInfo>() {
     override fun getColumnCount(): Int {
@@ -29,10 +32,20 @@ private val model = SdkTableModel()
 
 class SdkTablePanel(private val project: Project) : AddEditRemovePanel<ApplicationSettings.SdkInfo>(model, arrayListOf()) {
     override fun addItem(): ApplicationSettings.SdkInfo? {
-        val existingSdks = PythonSdkType.getAllLocalCPythons() // TODO filter out to only sdks of the MayaSdkFlavour
+        val existingSdks = PythonSdkType.getAllLocalCPythons().filter {
+            !data.map { sdkInfo -> sdkInfo.mayaPyPath }.contains(it.homePath) && it.getOrCreateAdditionalData().run {
+                flavor == MayaSdkFlavor.INSTANCE || flavor == MyMayaSdkFlavor.INSTANCE
+            }
+        }
+
+        val unusedPort = ApplicationSettings.INSTANCE.getUnusedPort()
         val dialog = SdkAddDialog(project, existingSdks)
         dialog.show()
-        return ApplicationSettings.SdkInfo("", -1)
+
+        val selectedSdk = dialog.selectedSdk ?: return null
+        selectedSdk.homePath?.let { return ApplicationSettings.SdkInfo(it, unusedPort) }
+
+        return null
     }
 
     override fun removeItem(o: ApplicationSettings.SdkInfo): Boolean {

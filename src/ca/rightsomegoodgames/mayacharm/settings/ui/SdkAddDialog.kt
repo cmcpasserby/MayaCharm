@@ -38,4 +38,7 @@ class SdkAddDialog(project: Project, existingSdks: List<Sdk>) : DialogWrapper(pr
     override fun createCenterPanel(): JComponent? {
         return myPanel
     }
+
+    public val selectedSdk: Sdk?
+        get() = sdkChooser.selectedSdk
 }

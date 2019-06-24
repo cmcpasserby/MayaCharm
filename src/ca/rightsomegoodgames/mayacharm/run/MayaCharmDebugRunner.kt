@@ -36,7 +36,7 @@ class MayaCharmDebugRunner : PyDebugRunner() {
     }
 
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
-        val sdks = ApplicationSettings.getInstance().mayaSdkMapping
+        val sdks = ApplicationSettings.INSTANCE.mayaSdkMapping
         val runConfig = environment.runProfile as MayaCharmRunConfiguration
         val sdkInfo = sdks[runConfig.mayaSdkPath] ?: return null
 

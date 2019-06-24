@@ -14,7 +14,7 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
         public const val ID = "ca.rightsomegoodgames.mayacharm.settings.MayaSdkConfigurable"
     }
 
-    private val settings = ApplicationSettings.getInstance()
+    private val settings = ApplicationSettings.INSTANCE
     private val projectSettings = ProjectSettings.getInstance(project)
 
     private val myPanel = JPanel(GridBagLayout())
