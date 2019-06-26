@@ -3,6 +3,7 @@ package ca.rightsomegoodgames.mayacharm.logconsole
 import ca.rightsomegoodgames.mayacharm.mayacomms.LOG_FILENAME_STRING
 import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
 import com.intellij.openapi.application.PathManager
+import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
@@ -11,7 +12,7 @@ import com.intellij.ui.content.ContentFactory
 import java.io.File
 import java.nio.charset.Charset
 
-class LogWindow : ToolWindowFactory {
+class LogWindow : ToolWindowFactory, DumbAware {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val port = ProjectSettings.getInstance(project).selectedSdk?.port ?: 4434
 

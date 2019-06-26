@@ -1,12 +1,12 @@
 package ca.rightsomegoodgames.mayacharm.actions
 
-import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.fileTypes.FileTypeManager
+import com.intellij.openapi.project.DumbAwareAction
 
-abstract class BaseSendAction : AnAction() {
+abstract class BaseSendAction : DumbAwareAction() {
     companion object {
         private val fileTypeManager: FileTypeManager = FileTypeManager.getInstance()
         private val pyFileType: FileType = fileTypeManager.findFileTypeByName("Python")!!
