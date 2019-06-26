@@ -8,6 +8,8 @@ import com.intellij.openapi.project.Project
 import java.awt.*
 import javax.swing.JComponent
 import javax.swing.JPanel
+import javax.swing.event.AncestorEvent
+import javax.swing.event.AncestorListener
 
 class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurable.NoScroll {
     companion object {
@@ -17,7 +19,18 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
     private val settings = ApplicationSettings.INSTANCE
     private val projectSettings = ProjectSettings.getInstance(project)
 
-    private val myPanel = JPanel(GridBagLayout())
+    private val myPanel = JPanel(GridBagLayout()).also {
+        it.addAncestorListener(object : AncestorListener {
+            override fun ancestorAdded(event: AncestorEvent?) {
+                println("Panel Focused") // TODO check if python interpreters are different and refresh contents if true
+            }
+
+            override fun ancestorMoved(event: AncestorEvent?) { }
+
+            override fun ancestorRemoved(event: AncestorEvent?) { }
+        })
+    }
+
     private val mySdkSelector = SdkSelector()
     private val mySdkPanel = SdkTablePanel(project)
 
@@ -63,8 +76,6 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
     }
 
     override fun reset() {
-        println("MayaSdkConfigurable::reset")
-
         mySdkPanel.data.clear()
         mySdkPanel.data.addAll(settings.mayaSdkMapping.values.sortedBy { it.mayaPyPath })
 
