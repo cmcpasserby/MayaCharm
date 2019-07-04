@@ -22,7 +22,8 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
     private val myPanel = JPanel(GridBagLayout()).also {
         it.addAncestorListener(object : AncestorListener {
             override fun ancestorAdded(event: AncestorEvent?) {
-                println("Panel Focused") // TODO check if python interpreters are different and refresh contents if true
+                ApplicationSettings.INSTANCE.refreshPythonSdks()
+                reset()
             }
 
             override fun ancestorMoved(event: AncestorEvent?) { }

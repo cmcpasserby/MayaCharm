@@ -62,6 +62,25 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
         assignEmptyPorts()
     }
 
+    public fun refreshPythonSdks() {
+        val mayaSdk = PythonSdkType.getAllLocalCPythons().filter { it.homePath?.endsWith(mayaPyExecutableName) ?: false }
+
+        val homePathsSet = mayaSdk.map { it.homePath!! }.toSet()
+        val sdkMappingKeySet = mayaSdkMapping.keys.toSet()
+
+        val toAdd = homePathsSet - sdkMappingKeySet
+        val toRemove = sdkMappingKeySet - homePathsSet
+
+        for (path in toRemove) {
+            mayaSdkMapping.remove(path)
+        }
+
+        for (path in toAdd) {
+            mayaSdkMapping[path] = SdkInfo(path, -1)
+        }
+        assignEmptyPorts()
+    }
+
     private fun assignEmptyPorts() {
         val usedPorts = mayaSdkMapping.map { it.value.port }.filter { it > 0 }.toSet()
         val freePorts = PriorityQueue((portRange - usedPorts).sorted())
