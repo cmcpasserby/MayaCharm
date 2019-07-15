@@ -2,6 +2,7 @@ package ca.rightsomegoodgames.mayacharm.settings.ui
 
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.util.IconLoader
 import com.intellij.ui.AddEditRemovePanel
@@ -38,20 +39,29 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
             }
         }
 
-        val unusedPort = ApplicationSettings.INSTANCE.getUnusedPort()
         val dialog = SdkAddDialog(project, existingSdks)
         dialog.show()
 
-        val selectedSdk = dialog.selectedSdk ?: return null
-        selectedSdk.homePath?.let { return ApplicationSettings.SdkInfo(it, unusedPort) }
+        val selectedSdk = dialog.getOrCreateSdk() ?: return null
+        SdkConfigurationUtil.addSdk(selectedSdk)
 
+        selectedSdk.homePath?.let {
+            val unusedPort = ApplicationSettings.INSTANCE.getUnusedPort()
+            return ApplicationSettings.SdkInfo(it, unusedPort)
+        }
         return null
     }
 
-    override fun removeItem(o: ApplicationSettings.SdkInfo): Boolean {
-        return Messages.showDialog("Remove Maya SDK?", "Remove Maya SDK",
+    override fun removeItem(sdkInfo: ApplicationSettings.SdkInfo): Boolean {
+        val result = Messages.showDialog("Remove Maya SDK?", "Remove Maya SDK",
                 arrayOf("Yes", "No"), 0,
                 IconLoader.getIcon("/icons/MayaCharm_Action@2x.png")) == 0
+
+        if (result) {
+            val sdk = PythonSdkType.findSdkByPath(sdkInfo.mayaPyPath) ?: return false
+            SdkConfigurationUtil.removeSdk(sdk)
+        }
+        return result
     }
 
     override fun editItem(o: ApplicationSettings.SdkInfo): ApplicationSettings.SdkInfo? {
@@ -70,6 +80,8 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
 
         val panel = decorator.createPanel()
         add(panel, BorderLayout.CENTER)
+
+
 
         labelText?.apply {
             UIUtil.addBorder(panel, IdeBorderFactory.createTitledBorder(this, false))

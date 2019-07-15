@@ -3,7 +3,9 @@ package ca.rightsomegoodgames.mayacharm.settings.ui
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots.Sdk
 import com.intellij.openapi.ui.DialogWrapper
+import com.jetbrains.python.sdk.PyDetectedSdk
 import com.jetbrains.python.sdk.add.PySdkPathChoosingComboBox
+import com.jetbrains.python.sdk.setup
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import java.awt.Insets
@@ -11,7 +13,7 @@ import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JPanel
 
-class SdkAddDialog(project: Project, existingSdks: List<Sdk>) : DialogWrapper(project, false) {
+class SdkAddDialog(project: Project, private val existingSdks: List<Sdk>) : DialogWrapper(project, false) {
     private val myPanel = JPanel(GridBagLayout())
     private val sdkChooser = PySdkPathChoosingComboBox(existingSdks, null)
 
@@ -39,6 +41,10 @@ class SdkAddDialog(project: Project, existingSdks: List<Sdk>) : DialogWrapper(pr
         return myPanel
     }
 
-    public val selectedSdk: Sdk?
-        get() = sdkChooser.selectedSdk
+    public fun getOrCreateSdk(): Sdk? {
+        return when(val sdk = sdkChooser.selectedSdk) {
+            is PyDetectedSdk -> sdk.setup(existingSdks)
+            else -> sdk
+        }
+    }
 }
