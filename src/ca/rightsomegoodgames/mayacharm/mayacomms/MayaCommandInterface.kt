@@ -24,6 +24,8 @@ class MayaCommandInterface(private val port: Int) {
             }
 
             bw = BufferedWriter(FileWriter(tempFile))
+            bw.write(PythonStrings.INSTANCE.UTF8_ENCODING_STR)
+            bw.newLine()
             bw.write(text)
             bw.close()
             tempFile.deleteOnExit()
