@@ -36,7 +36,7 @@
 
         <configurationType implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmConfigType"/>
         <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmRunner" order="first"/>
-        <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmDebugRunner"/>
+<!--        <programRunner implementation="ca.rightsomegoodgames.mayacharm.run.MayaCharmDebugRunner"/>-->
 
         <xdebugger.attachDebuggerProvider implementation="ca.rightsomegoodgames.mayacharm.debugattach.MayaAttachDebuggerProvider"/>
     </extensions>
