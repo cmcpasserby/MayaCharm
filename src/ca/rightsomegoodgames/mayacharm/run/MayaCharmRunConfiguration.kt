@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.run
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
 import com.intellij.execution.Executor
 import com.intellij.execution.configurations.*
@@ -52,16 +53,16 @@ class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?
 
     override fun checkConfiguration() {
         if (mayaSdkPath.isBlank())
-            throw RuntimeConfigurationException("Maya Sdk not selected")
+            throw RuntimeConfigurationException(Loc.message("mayacharm.runconfig.SdkNotSelected"))
 
         when (executionType) {
             ExecutionType.CODE -> {
                 if (scriptCodeText.isBlank())
-                    throw RuntimeConfigurationException("Code field is empty")
+                    throw RuntimeConfigurationException(Loc.message("mayacharm.runconfig.CodeFieldIsEmpty"))
             }
             ExecutionType.FILE -> {
                 if (scriptFilePath.isBlank() || !File(scriptFilePath).isFile)
-                    throw RuntimeConfigurationException("File does not exist")
+                    throw RuntimeConfigurationException(Loc.message("mayacharm.runconfig.FilesNotExist"))
             }
         }
     }

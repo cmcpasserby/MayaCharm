@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.settings.ui
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import com.intellij.openapi.ui.ComboBox
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -16,7 +17,7 @@ class SdkSelector : JPanel(GridBagLayout()) {
             gridx = 0
             gridy = 0
             fill = GridBagConstraints.HORIZONTAL
-            add(JLabel("Active Maya SDK: "), this)
+            add(JLabel(Loc.message("mayacharm.ActiveMayaSdk")), this)
 
             gridx = 1
             weightx = 0.1

@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.debugattach
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import ca.rightsomegoodgames.mayacharm.run.MayaCharmDebugProcess
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.project.Project
@@ -34,8 +35,8 @@ class MayaAttachToProcessDebugRunner(
         } catch (e: IOException) {
             e.printStackTrace()
             Messages.showErrorDialog(
-                    "Fatal Error: Failed to find free socket port. \nSocket returned is null",
-                    "No Free Ports"
+                    Loc.message("mayacharm.debugattachproc.FailedFindPort"),
+                    Loc.message("mayacharm.debugattachproc.FailedFindPortTitle")
             )
         }
         return portSocket

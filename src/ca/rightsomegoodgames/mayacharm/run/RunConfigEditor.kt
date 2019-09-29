@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.run
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import ca.rightsomegoodgames.mayacharm.settings.ui.SdkSelector
 import com.intellij.openapi.fileChooser.FileChooserDescriptor
@@ -18,13 +19,18 @@ class RunConfigEditor(config: MayaCharmRunConfiguration) : SettingsEditor<MayaCh
     private val buttonGroup = ButtonGroup()
     private val sdkSelector = SdkSelector()
 
-    private val fileRadioButton = JRadioButton("Execute File", true).apply { update(this) }
+    private val fileRadioButton = JRadioButton(Loc.message("mayacharm.configedit.ExecuteFile"), true).apply { update(this) }
     private val fileField = TextFieldWithBrowseButton().apply {
         val fileTypeFilter = FileChooserDescriptor(true, false, false, false, false, false)
-        addBrowseFolderListener("Select File", "Select python file to execute in maya", config.project, fileTypeFilter)
+        addBrowseFolderListener(
+                Loc.message("mayacharm.configedit.SelectFile"),
+                Loc.message("mayacharm.configedit.SelectFileLong"),
+                config.project,
+                fileTypeFilter
+        )
     }
 
-    private val codeRadioButton = JRadioButton("Execute Code").apply { update(this) }
+    private val codeRadioButton = JRadioButton(Loc.message("mayacharm.configedit.ExecuteCode")).apply { update(this) }
     private val codeField = EditorTextField("", config.project, FileTypeManager.getInstance().getFileTypeByExtension(".py")).apply {
         setOneLineMode(false)
     }
@@ -45,7 +51,7 @@ class RunConfigEditor(config: MayaCharmRunConfiguration) : SettingsEditor<MayaCh
             gridy++
             gridwidth = 1
             weightx = 0.0
-            myPanel.add(JLabel("File: ", JLabel.RIGHT), this)
+            myPanel.add(JLabel(Loc.message("mayacharm.configedit.File"), JLabel.RIGHT), this)
             gridx = 1
             weightx = 1.0
             myPanel.add(fileField, this)
@@ -59,7 +65,7 @@ class RunConfigEditor(config: MayaCharmRunConfiguration) : SettingsEditor<MayaCh
             gridy++
             gridwidth = 1
             weightx = 0.0
-            myPanel.add(JLabel("Code: ", JLabel.RIGHT), this)
+            myPanel.add(JLabel(Loc.message("mayacharm.configedit.Code"), JLabel.RIGHT), this)
             gridx = 1
             weightx = 1.0
             myPanel.add(codeField, this)

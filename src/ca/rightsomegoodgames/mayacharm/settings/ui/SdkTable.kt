@@ -1,6 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.settings.ui
 
-import ca.rightsomegoodgames.mayacharm.MayaBundle
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import ca.rightsomegoodgames.mayacharm.utils.Delegate
 import ca.rightsomegoodgames.mayacharm.utils.Event
@@ -24,7 +24,7 @@ private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.
     }
 
     override fun getColumnName(cIndex: Int): String? {
-        return if (cIndex == 0) MayaBundle.message("mayacharm.MayaVersion") else MayaBundle.message("mayacharm.CommandPort")
+        return if (cIndex == 0) Loc.message("mayacharm.sdktable.MayaVersion") else Loc.message("mayacharm.sdktable.CommandPort")
     }
 
     override fun getField(o: ApplicationSettings.SdkInfo, cIndex: Int): Any {
@@ -60,8 +60,8 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
     }
 
     override fun removeItem(sdkInfo: ApplicationSettings.SdkInfo): Boolean {
-        val result = Messages.showDialog(MayaBundle.message("mayacharm.sdkremove.RemoveWarning"), MayaBundle.message("mayacharm.sdkremove.Title"),
-                arrayOf(MayaBundle.message("mayacharm.Yes"), MayaBundle.message("mayacharm.No")), 0,
+        val result = Messages.showDialog(Loc.message("mayacharm.sdkremove.RemoveWarning"), Loc.message("mayacharm.sdkremove.Title"),
+                arrayOf(Loc.message("mayacharm.Yes"), Loc.message("mayacharm.No")), 0,
                 IconLoader.getIcon("/icons/MayaCharm_Action@2x.png")) == 0
 
         if (result) {

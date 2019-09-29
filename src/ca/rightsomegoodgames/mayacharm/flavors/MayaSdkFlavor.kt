@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.flavors
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import com.intellij.openapi.fileChooser.FileChooserDescriptor
 import com.intellij.openapi.util.SystemInfo
 import com.intellij.openapi.util.io.FileUtil
@@ -9,10 +10,11 @@ import com.jetbrains.python.sdk.flavors.PythonFlavorProvider
 import com.jetbrains.python.sdk.flavors.PythonSdkFlavor
 import icons.PythonIcons
 import java.io.File
+import java.lang.Exception
 import javax.swing.Icon
 
 class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
-    override fun isValidSdkHome(path: String?): Boolean {
+    override fun isValidSdkHome(path: String): Boolean {
         val file = File(path)
         return file.isFile && isValidSdkPath(file) || isMayaFolder(file)
     }
@@ -48,7 +50,7 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
             override fun validateSelectedFiles(files: Array<out VirtualFile>) {
                 if (files.count() != 0) {
                     if (!isValidSdkHome(files[0].path)) {
-                        throw Exception("Invalid MayaPy Interpreter: ${files[0].name}")
+                        throw Exception(Loc.message("mayacharm.exceptions.InvalidMayaPy", files[0].name))
                     }
                 }
             }

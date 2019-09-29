@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.run
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import com.intellij.execution.configurations.ConfigurationFactory
 import com.intellij.execution.configurations.ConfigurationType
 import com.intellij.execution.configurations.RunConfiguration
@@ -13,7 +14,7 @@ class MayaCharmConfigType : ConfigurationType {
     }
 
     override fun getConfigurationTypeDescription(): String {
-        return "MayaCharm Run Configuration Type"
+        return Loc.message("mayacharm.runconfig.ConfigType")
     }
 
     override fun getIcon(): Icon {
@@ -35,6 +36,6 @@ class MayaCharmConfigFactory(type: MayaCharmConfigType) : ConfigurationFactory(t
     }
 
     override fun getName(): String {
-        return "MayaCharm Configuration Factory"
+        return Loc.message("mayacharm.runconfig.ConfigFactory")
     }
 }

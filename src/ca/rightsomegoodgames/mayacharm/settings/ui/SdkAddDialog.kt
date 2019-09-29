@@ -1,6 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.settings.ui
 
-import ca.rightsomegoodgames.mayacharm.MayaBundle
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots.Sdk
 import com.intellij.openapi.ui.DialogWrapper
@@ -19,7 +19,7 @@ class SdkAddDialog(project: Project, private val existingSdks: List<Sdk>) : Dial
     private val sdkChooser = PySdkPathChoosingComboBox(existingSdks, null)
 
     init {
-        title = MayaBundle.message("mayacharm.sdkadd.AddMayaSdk")
+        title = Loc.message("mayacharm.sdkadd.AddMayaSdk")
         init()
 
         with(GridBagConstraints()) {
@@ -30,7 +30,7 @@ class SdkAddDialog(project: Project, private val existingSdks: List<Sdk>) : Dial
             gridwidth = 1
 
             weightx = 0.0
-            myPanel.add(JLabel(MayaBundle.message("mayacharm.sdkadd.Interpreter"), JLabel.RIGHT), this)
+            myPanel.add(JLabel(Loc.message("mayacharm.sdkadd.Interpreter"), JLabel.RIGHT), this)
 
             gridx = 1
             weightx = 1.0
