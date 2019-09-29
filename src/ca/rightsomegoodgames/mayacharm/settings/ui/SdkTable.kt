@@ -1,6 +1,8 @@
 package ca.rightsomegoodgames.mayacharm.settings.ui
 
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
+import ca.rightsomegoodgames.mayacharm.utils.Delegate
+import ca.rightsomegoodgames.mayacharm.utils.Event
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil
 import com.intellij.openapi.ui.Messages
@@ -32,6 +34,9 @@ private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.
 private val model = SdkTableModel()
 
 class SdkTablePanel(private val project: Project) : AddEditRemovePanel<ApplicationSettings.SdkInfo>(model, arrayListOf()) {
+    private val onChanged = Delegate<SdkTablePanel>()
+    val changed: Event<SdkTablePanel> get() = onChanged
+
     override fun addItem(): ApplicationSettings.SdkInfo? {
         val existingSdks = PythonSdkType.getAllLocalCPythons().filter {
             !data.map { sdkInfo -> sdkInfo.mayaPyPath }.contains(it.homePath) && it.getOrCreateAdditionalData().run {
@@ -47,13 +52,14 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
 
         selectedSdk.homePath?.let {
             val unusedPort = ApplicationSettings.INSTANCE.getUnusedPort()
+            onChanged(this)
             return ApplicationSettings.SdkInfo(it, unusedPort)
         }
         return null
     }
 
     override fun removeItem(sdkInfo: ApplicationSettings.SdkInfo): Boolean {
-        val result = Messages.showDialog("Remove Maya SDK?", "Remove Maya SDK",
+        val result = Messages.showDialog("Remove Maya SDK?\nThis also removes the interpreter.", "Remove Maya SDK",
                 arrayOf("Yes", "No"), 0,
                 IconLoader.getIcon("/icons/MayaCharm_Action@2x.png")) == 0
 
@@ -61,12 +67,14 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
             val sdk = PythonSdkType.findSdkByPath(sdkInfo.mayaPyPath) ?: return false
             SdkConfigurationUtil.removeSdk(sdk)
         }
+        onChanged(this)
         return result
     }
 
     override fun editItem(o: ApplicationSettings.SdkInfo): ApplicationSettings.SdkInfo? {
         val dialog = SdkEditDialog(project, o)
         dialog.show()
+        onChanged(this)
         return dialog.result
     }
 
@@ -80,8 +88,6 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
 
         val panel = decorator.createPanel()
         add(panel, BorderLayout.CENTER)
-
-
 
         labelText?.apply {
             UIUtil.addBorder(panel, IdeBorderFactory.createTitledBorder(this, false))

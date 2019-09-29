@@ -36,5 +36,4 @@ class SdkSelector : JPanel(GridBagLayout()) {
                 comboBox.addItem(s)
             }
         }
-
 }

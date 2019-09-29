@@ -33,7 +33,13 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
     }
 
     private val mySdkSelector = SdkSelector()
-    private val mySdkPanel = SdkTablePanel(project)
+    private val mySdkPanel = SdkTablePanel(project).also {
+        it.changed += {
+            ApplicationSettings.INSTANCE.refreshPythonSdks()
+            mySdkSelector.items = settings.mayaSdkMapping.keys.sorted()
+            mySdkSelector.selectedItem = projectSettings.selectedSdkName
+        }
+    }
 
     init {
         with(GridBagConstraints()) {

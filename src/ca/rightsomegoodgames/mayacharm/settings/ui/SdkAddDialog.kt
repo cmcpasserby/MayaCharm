@@ -37,7 +37,7 @@ class SdkAddDialog(project: Project, private val existingSdks: List<Sdk>) : Dial
         }
     }
 
-    override fun createCenterPanel(): JComponent? {
+    override fun createCenterPanel(): JComponent {
         return myPanel
     }
 
