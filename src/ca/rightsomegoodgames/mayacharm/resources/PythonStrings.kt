@@ -1,13 +1,15 @@
 package ca.rightsomegoodgames.mayacharm.resources
 
 class PythonStrings {
-    val UTF8_ENCODING_STR: String = "# -*- coding: utf-8 -*-"
-    val OPEN_LOG: String = "import maya.cmds as cmds; cmds.cmdFileOutput(o=r\"{0}\")"
-    val CLOSE_LOG: String = "import maya.cmds as cmds; cmds.cmdFileOutput(closeAll=True)"
-    val EXECFILE: String = "python (\"execfile (\\\"{0}\\\")\");"
+    val UTF8_ENCODING_STR = "# -*- coding: utf-8 -*-"
+    val OPEN_LOG = "import maya.cmds as cmds; cmds.cmdFileOutput(o=r\"{0}\")"
+    val CLOSE_LOG = "import maya.cmds as cmds; cmds.cmdFileOutput(closeAll=True)"
+    val EXECFILE = "python (\"execfile (\\\"{0}\\\")\");"
 
-    val PYSTDERR: String = "# Error: "
-    val PYSTDWRN: String = "# Warning: "
+    val PYSTDERR = "# Error: "
+    val PYSTDWRN = "# Warning: "
+
+    val SETTRACE = "import pydevd; pydevd.settrace(\"{0}\", port={1}, suspend={2}, stdoutToServer={3}, stderrToServer={3})"
 
     private val _cmdportSetupScript: String
 
@@ -20,7 +22,7 @@ class PythonStrings {
 
     companion object {
         @JvmField
-        val INSTANCE: PythonStrings = PythonStrings()
+        val INSTANCE = PythonStrings()
         fun readStringFromResource(resource: String): String {
             return PythonStrings::class.java.classLoader.getResource(resource).readText()
         }

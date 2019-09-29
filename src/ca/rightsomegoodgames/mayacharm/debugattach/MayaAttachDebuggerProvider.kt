@@ -7,7 +7,6 @@ import com.intellij.openapi.projectRoots.Sdk
 import com.intellij.openapi.util.IconLoader
 import com.intellij.openapi.util.UserDataHolder
 import com.intellij.xdebugger.attach.*
-import com.jetbrains.python.debugger.attach.PyAttachToProcessDebugRunner
 import com.jetbrains.python.sdk.PythonSdkType
 import javax.swing.Icon
 
@@ -29,6 +28,12 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
     }
 
     override fun isAttachHostApplicable(attachHost: XAttachHost): Boolean {
+        for (info in attachHost.processList) {
+            val path = info.executableCannonicalPath
+            if (path.isPresent) {
+                println(path.get())
+            }
+        }
         return true
     }
 
@@ -43,7 +48,7 @@ private class MayaAttachDebugger(sdk: Sdk) : XAttachDebugger {
     }
 
     override fun attachDebugSession(project: Project, attachHost: XAttachHost, processInfo: ProcessInfo) {
-        val runner = PyAttachToProcessDebugRunner(project, processInfo.pid, mySdkHome)
+        val runner = MayaAttachToProcessDebugRunner(project, processInfo.pid, mySdkHome)
         runner.launch()
     }
 }
@@ -66,6 +71,6 @@ private class MayaAttachGroup : XAttachProcessPresentationGroup {
     }
 
     override fun getOrder(): Int {
-        return 0
+        return -100
     }
 }

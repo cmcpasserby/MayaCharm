@@ -64,7 +64,7 @@
         </action>
 
         <action id="ca.rightsomegoodgames.mayacharm.actions.ConnectToMayaLogAction"
-                class="ca.rightsomegoodgames.mayacharm.actions.ConnectToMayaLogAction" text="Connect To Maya&#39;s log"
+                class="ca.rightsomegoodgames.mayacharm.actions.ConnectToMayaLogAction" text="Connect To Maya&#39;s Log"
                 description="Connects the MayaCharm console to Maya&#39;s script editor log"
                 icon="/icons/MayaCharm_Action.png">
             <add-to-group group-id="RunMenu" anchor="last"/>

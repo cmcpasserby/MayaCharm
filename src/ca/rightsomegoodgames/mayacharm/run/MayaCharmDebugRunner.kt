@@ -54,27 +54,24 @@ class MayaCharmDebugRunner : PyDebugRunner() {
 
         val serverSocket = ServerSocket(0) // port 0 forces the ServerSocket to choose its own free port
         val cliState = PyAttachToProcessCommandLineState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
-
         val executionResult = cliState.execute(environment.executor, this)
 
-        val session = XDebuggerManager.getInstance(environment.project).startSession(
-            environment, object : XDebugProcessStarter() {
-                override fun start(session: XDebugSession): XDebugProcess {
-                    val debugProcess = MayaCharmDebugProcess(
-                            session,
-                            serverSocket,
-                            executionResult.executionConsole,
-                            executionResult.processHandler,
-                            false,
-                            runConfig,
-                            process
-                    )
-                    debugProcess.positionConverter = PyLocalPositionConverter()
-                    createConsoleCommunicationAndSetupActions(environment.project, executionResult, debugProcess, session)
-                    return debugProcess
-                }
+        val session = XDebuggerManager.getInstance(environment.project).startSession(environment, object : XDebugProcessStarter() {
+            override fun start(session: XDebugSession): XDebugProcess {
+                val debugProcess = MayaCharmDebugProcess(
+                        session,
+                        serverSocket,
+                        executionResult.executionConsole,
+                        executionResult.processHandler,
+                        runConfig,
+                        process.pid
+                )
+                debugProcess.positionConverter = PyLocalPositionConverter()
+                createConsoleCommunicationAndSetupActions(environment.project, executionResult, debugProcess, session)
+                return debugProcess
             }
-        )
+        })
+
         return session.runContentDescriptor
     }
 }

@@ -20,18 +20,13 @@ public fun mayaPyFromMaya(path: String): String? {
         return null
     }
 
-    if (SystemInfo.isWindows) {
-        val newPath = p.parent.resolve(mayaPyExecutableNameWin)
-        return if (newPath.exists()) newPath.toString() else null
-    }
-
-    if (SystemInfo.isLinux) {
-        val newPath = p.parent.resolve(mayaPyExecutableNameLinux)
-        return if (newPath.exists()) newPath.toString() else null
-    }
-
     if (SystemInfo.isMac) {
         val newPath = p.parent.parent.resolve("bin/$mayaPyExecutableNameMac")
+        return if (newPath.exists()) newPath.toString() else null
+    }
+
+    if (SystemInfo.isWindows || SystemInfo.isLinux) {
+        val newPath = p.parent.resolve(mayaPyExecutableName)
         return if (newPath.exists()) newPath.toString() else null
     }
 
@@ -45,18 +40,13 @@ public fun mayaFromMayaPy(path: String): String? {
         return null
     }
 
-    if (SystemInfo.isWindows) {
-        val newPath = p.parent.resolve(mayaExecutableNameWin)
-        return if (newPath.exists()) newPath.toString() else null
-    }
-
-    if (SystemInfo.isLinux) {
-        val newPath = p.parent.resolve(mayaExecutableNameLinux)
-        return if (newPath.exists()) newPath.toString() else null
-    }
-
     if (SystemInfo.isMac) {
         val newPath = p.parent.parent.resolve("MacOS/$mayaExecutableNameMac")
+        return if (newPath.exists()) newPath.toString() else null
+    }
+
+    if (SystemInfo.isWindows || SystemInfo.isLinux) {
+        val newPath = p.parent.resolve(mayaExecutableName)
         return if (newPath.exists()) newPath.toString() else null
     }
 
