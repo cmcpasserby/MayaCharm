@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>ca.rightsomegoodgames.mayacharm</id>
     <name>MayaCharm</name>
-    <version>3.0.2</version>
+    <version>3.1.0</version>
     <vendor email="chris@rightsomegoodgames.ca" url="https://github.com/cmcpasserby">Chris Cunningham</vendor>
 
     <description><![CDATA[
@@ -48,24 +48,21 @@
     <actions>
 
         <action id="ca.rightsomegoodgames.mayacharm.actions.SendBufferAction"
-                class="ca.rightsomegoodgames.mayacharm.actions.SendBufferAction" text="Execute Document in Maya"
-                description="Executes the current document in Maya"
+                class="ca.rightsomegoodgames.mayacharm.actions.SendBufferAction"
                 icon="/icons/MayaCharm_Action.png">
             <add-to-group group-id="RunMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt A"/>
         </action>
 
         <action id="ca.rightsomegoodgames.mayacharm.actions.SendSelectionAction"
-                class="ca.rightsomegoodgames.mayacharm.actions.SendSelectionAction" text="Execute Selection in Maya"
-                description="Execute the current selection in Maya"
+                class="ca.rightsomegoodgames.mayacharm.actions.SendSelectionAction"
                 icon="/icons/MayaCharm_Action.png">
             <add-to-group group-id="RunMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt S"/>
         </action>
 
         <action id="ca.rightsomegoodgames.mayacharm.actions.ConnectToMayaLogAction"
-                class="ca.rightsomegoodgames.mayacharm.actions.ConnectToMayaLogAction" text="Connect To Maya&#39;s Log"
-                description="Connects the MayaCharm console to Maya&#39;s script editor log"
+                class="ca.rightsomegoodgames.mayacharm.actions.ConnectToMayaLogAction"
                 icon="/icons/MayaCharm_Action.png">
             <add-to-group group-id="RunMenu" anchor="last"/>
         </action>

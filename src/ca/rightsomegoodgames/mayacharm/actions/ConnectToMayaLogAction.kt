@@ -1,12 +1,15 @@
 package ca.rightsomegoodgames.mayacharm.actions
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommandInterface
 import ca.rightsomegoodgames.mayacharm.resources.MayaNotifications
 import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
 import com.intellij.notification.Notifications
 import com.intellij.openapi.actionSystem.AnActionEvent
 
-class ConnectToMayaLogAction : BaseSendAction() {
+class ConnectToMayaLogAction : BaseSendAction(
+        Loc.message("mayacharm.action.ConnectLogText"),
+        Loc.message("mayacharm.action.ConnectLogDescription"), null) {
     override fun update(e: AnActionEvent) {
         e.presentation.isEnabled = true
     }

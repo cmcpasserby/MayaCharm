@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.actions
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommandInterface
 import ca.rightsomegoodgames.mayacharm.resources.MayaNotifications
 import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
@@ -7,7 +8,9 @@ import com.intellij.notification.Notifications
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.LangDataKeys
 
-class SendSelectionAction : BaseSendAction() {
+class SendSelectionAction: BaseSendAction(
+        Loc.message("mayacharm.action.SendSelectionText"),
+        Loc.message("mayacharm.action.SendSelectionDescription"), null) {
     override fun actionPerformed(e: AnActionEvent) {
         val sdk = ProjectSettings.getInstance(e.project!!).selectedSdk
         if (sdk == null) {

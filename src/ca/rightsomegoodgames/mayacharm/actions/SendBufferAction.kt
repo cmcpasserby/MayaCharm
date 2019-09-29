@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.actions
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
 import ca.rightsomegoodgames.mayacharm.mayacomms.MayaCommandInterface
 import ca.rightsomegoodgames.mayacharm.resources.MayaNotifications
 import ca.rightsomegoodgames.mayacharm.settings.ProjectSettings
@@ -8,7 +9,9 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.fileEditor.FileDocumentManager
 
-class SendBufferAction : BaseSendAction() {
+class SendBufferAction : BaseSendAction(
+        Loc.message("mayacharm.action.SendDocumentText"),
+        Loc.message("mayacharm.action.SendDocumentDescription"), null) {
     override fun actionPerformed(e: AnActionEvent) {
         val sdk = ProjectSettings.getInstance(e.project!!).selectedSdk
         if (sdk == null) {
