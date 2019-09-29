@@ -1,19 +1,19 @@
 package ca.rightsomegoodgames.mayacharm.utils
 
-interface Event<out TS> {
-    operator fun plusAssign(m: (TS) -> Unit)
-    operator fun minusAssign(m: (TS) -> Unit)
+interface Event<out TA> {
+    operator fun plusAssign(m: (TA) -> Unit)
+    operator fun minusAssign(m: (TA) -> Unit)
 }
 
-class Delegate<TS> : Event<TS> {
-    private var invocationList: MutableList<(TS) -> Unit>? = null
+class Delegate<TA> : Event<TA> {
+    private var invocationList: MutableList<(TA) -> Unit>? = null
 
-    override fun plusAssign(m: (TS) -> Unit) {
-        val list = invocationList ?: mutableListOf<(TS) -> Unit>().apply { invocationList = this }
+    override fun plusAssign(m: (TA) -> Unit) {
+        val list = invocationList ?: mutableListOf<(TA) -> Unit>().apply { invocationList = this }
         list.add(m)
     }
 
-    override fun minusAssign(m: (TS) -> Unit) {
+    override fun minusAssign(m: (TA) -> Unit) {
         val list = invocationList
         if (list != null) {
             list.remove(m)
@@ -23,7 +23,7 @@ class Delegate<TS> : Event<TS> {
         }
     }
 
-    operator fun invoke(source:TS) {
+    operator fun invoke(source:TA) {
         val list = invocationList ?: return
         for (m in list) {
             m(source)
