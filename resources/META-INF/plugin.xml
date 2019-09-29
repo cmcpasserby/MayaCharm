@@ -7,7 +7,8 @@
     <description><![CDATA[
         <p>Maya integration with run and debug configurations for Maya.
         MayaCharm lets you execute the current document or arbitrary code as if it was in Maya from PyCharm.
-        For users of the professional version of PyCharm it will also setup and connect the pydev debugger to Maya as well.</p>
+        This plugin also adds Attach to Process debugger support for Maya in PyCharm
+        </p>
         <p>See also:
             <ul>
                 <li><a href="https://github.com/cmcpasserby/MayaCharm">GitGub Repository</a>: documentation and contributing</li>
@@ -19,7 +20,13 @@
 
     <change-notes><![CDATA[
     <ul>
-        <li>Fixes issue with execute commands being greyed out in Pycharm 2019.1</li>
+        <li>All strings have be moved to a resource bundle for localization purposes</li>
+        <li>Settings panel properly updates with Maya sdks now when interpreter settings are changed</li>
+        <li>Settings panel now has proper add and remove buttons for Maya SDKs that will properly add or remove the interpreter
+        as well setup the command port info for the sdk</li>
+        <li>Removed the debug run config, since it was unreliable due to a race condition when it would execute your maya code</li>
+        <li>Now forces utf8 encoding when executing the selection</li>
+        <li>Refactoring and consolidating of duplicate code</li>
     </ul>
     ]]>
     </change-notes>
