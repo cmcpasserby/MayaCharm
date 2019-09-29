@@ -6,7 +6,7 @@ import org.jetbrains.annotations.PropertyKey
 import java.lang.ref.Reference
 import java.util.*
 
-object MayaCharmBundle {
+object MayaBundle {
     private const val BUNDLE = "ca.rightsomegoodgames.mayacharm.MayaCharmBundle"
     private var ourBundle: Reference<ResourceBundle>? = null
 

@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.settings.ui
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import ca.rightsomegoodgames.mayacharm.utils.Delegate
 import ca.rightsomegoodgames.mayacharm.utils.Event
@@ -23,7 +24,7 @@ private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.
     }
 
     override fun getColumnName(cIndex: Int): String? {
-        return if (cIndex == 0) "Maya Version" else "Command Port"
+        return if (cIndex == 0) MayaBundle.message("mayacharm.MayaVersion") else MayaBundle.message("mayacharm.CommandPort")
     }
 
     override fun getField(o: ApplicationSettings.SdkInfo, cIndex: Int): Any {
@@ -59,8 +60,8 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
     }
 
     override fun removeItem(sdkInfo: ApplicationSettings.SdkInfo): Boolean {
-        val result = Messages.showDialog("Remove Maya SDK?\nThis also removes the interpreter.", "Remove Maya SDK",
-                arrayOf("Yes", "No"), 0,
+        val result = Messages.showDialog(MayaBundle.message("mayacharm.sdkremove.RemoveWarning"), MayaBundle.message("mayacharm.sdkremove.Title"),
+                arrayOf(MayaBundle.message("mayacharm.Yes"), MayaBundle.message("mayacharm.No")), 0,
                 IconLoader.getIcon("/icons/MayaCharm_Action@2x.png")) == 0
 
         if (result) {

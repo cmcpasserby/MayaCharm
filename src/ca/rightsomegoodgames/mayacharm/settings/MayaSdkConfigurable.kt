@@ -69,7 +69,7 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
     }
 
     override fun getHelpTopic(): String? {
-        return null
+        return null // TODO
     }
 
     override fun createComponent(): JComponent {

@@ -1,5 +1,6 @@
 package ca.rightsomegoodgames.mayacharm.settings.ui
 
+import ca.rightsomegoodgames.mayacharm.MayaBundle
 import ca.rightsomegoodgames.mayacharm.resources.PythonStrings
 import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.openapi.fileTypes.FileTypeManager
@@ -50,7 +51,7 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
     }
 
     init {
-        title = "Edit Port Number"
+        title = MayaBundle.message("mayacharm.sdkedit.EditPortNumber")
         updateSetupText()
         updateOkButton()
         init()
@@ -63,7 +64,7 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
             gridwidth = 1
 
             weightx = 0.0
-            myPanel.add(JLabel("SDK Name: ", JLabel.RIGHT), this)
+            myPanel.add(JLabel(MayaBundle.message("mayacharm.sdkedit.SdkName"), JLabel.RIGHT), this)
 
             gridx = 1
             weightx = 1.0
@@ -72,7 +73,7 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
             gridy++
             gridx = 0
             weightx = 0.0
-            myPanel.add(JLabel("Port Number: ", JLabel.RIGHT), this)
+            myPanel.add(JLabel(MayaBundle.message("mayacharm.sdkedit.PortNumber"), JLabel.RIGHT), this)
 
             gridx = 1
             weightx = 1.0
@@ -82,7 +83,7 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
             gridx = 0
             weightx = 1.0
             gridwidth = 2
-            myPanel.add(JLabel("""Add the following to Maya's "userSetup.py" or run in Maya's python console""",
+            myPanel.add(JLabel(MayaBundle.message("mayacharm.sdkedit.ExplainUserSetup"),
                     JLabel.LEFT), this)
 
             gridy++
