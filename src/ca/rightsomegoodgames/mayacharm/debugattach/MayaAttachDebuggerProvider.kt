@@ -58,6 +58,14 @@ private class MayaAttachGroup : XAttachProcessPresentationGroup {
         val INSTANCE = MayaAttachGroup()
     }
 
+    override fun getItemDisplayText(project: Project, processInfo: ProcessInfo, userData: UserDataHolder): String {
+        return processInfo.executableDisplayName
+    }
+
+    override fun getItemIcon(project: Project, processInfo: ProcessInfo, userData: UserDataHolder): Icon {
+        return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png")
+    }
+
     override fun getProcessDisplayText(project: Project, info: ProcessInfo, userData: UserDataHolder): String {
         return info.commandLine
     }
