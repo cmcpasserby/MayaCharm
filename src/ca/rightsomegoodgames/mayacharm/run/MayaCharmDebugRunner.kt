@@ -5,6 +5,7 @@ import ca.rightsomegoodgames.mayacharm.settings.ApplicationSettings
 import com.intellij.execution.configurations.RunProfile
 import com.intellij.execution.configurations.RunProfileState
 import com.intellij.execution.configurations.RuntimeConfigurationException
+import com.intellij.execution.executors.DefaultDebugExecutor
 import com.intellij.execution.process.impl.ProcessListUtil
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.execution.ui.RunContentDescriptor
@@ -23,7 +24,7 @@ class MayaCharmDebugRunner : PyDebugRunner() {
         return "MayaCharmDebugRunner"
     }
 
-    override fun canRun(s: String, runProfile: RunProfile): Boolean {
+    override fun canRun(executorId: String, runProfile: RunProfile): Boolean {
         val runConfig = runProfile as? MayaCharmRunConfiguration ?: return false
 
         try {
@@ -32,7 +33,7 @@ class MayaCharmDebugRunner : PyDebugRunner() {
             return false
         }
 
-        return s == "Debug"
+        return DefaultDebugExecutor.EXECUTOR_ID == executorId
     }
 
     override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {

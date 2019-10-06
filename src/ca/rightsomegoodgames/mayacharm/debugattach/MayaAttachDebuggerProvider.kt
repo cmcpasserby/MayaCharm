@@ -34,7 +34,7 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
                 println(path.get())
             }
         }
-        return true
+        return true // TODO properly check this
     }
 
 }
