@@ -16,6 +16,8 @@ dependencies {
     testCompile("junit", "junit", "4.12")
 }
 
+val publishToken: String? = System.getenv("IntellijPublishToken")
+
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     version = "2019.3"
@@ -23,9 +25,11 @@ intellij {
     val plugins = listOf("python")
     setPlugins(*plugins.toTypedArray())
 }
+
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
+
 tasks {
     compileKotlin {
         kotlinOptions.jvmTarget = "1.8"
@@ -33,7 +37,12 @@ tasks {
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
     }
+
+    withType<org.jetbrains.intellij.tasks.PublishTask> {
+        token(publishToken)
+    }
 }
+
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
     changeNotes("""
         <ul>
