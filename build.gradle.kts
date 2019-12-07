@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "ca.rightsomegoodgames.mayacharm"
-version = "3.1.2"
+version = "3.2.0"
 
 repositories {
     mavenCentral()
@@ -36,6 +36,9 @@ tasks {
 }
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
     changeNotes("""
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>""")
+        <ul>
+            <li>Updated plugin project to use Gradle instead of the legacy DevKit</li>
+            <li>Now Supports PyCharm 2019.3</li>
+        </ul>
+      """)
 }
