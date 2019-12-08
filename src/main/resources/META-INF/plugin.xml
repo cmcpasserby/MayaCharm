@@ -46,7 +46,7 @@
     </extensions>
 
     <extensions defaultExtensionNs="Pythonid">
-        <pythonFlavorProvider implementation="flavors.MayaFlavorProvider"/>
+        <pythonFlavorProvider implementation="flavors.MayaFlavorProvider" order="first"/>
     </extensions>
 
     <actions>

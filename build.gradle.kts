@@ -22,8 +22,7 @@ val publishToken: String? = System.getenv("IntellijPublishToken")
 intellij {
     version = "2019.3"
     type = "PY"
-    val plugins = listOf("python")
-    setPlugins(*plugins.toTypedArray())
+    setPlugins("python")
 }
 
 configure<JavaPluginConvention> {
