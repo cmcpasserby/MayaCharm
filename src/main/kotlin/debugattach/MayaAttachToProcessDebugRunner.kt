@@ -44,7 +44,8 @@ class MayaAttachToProcessDebugRunner(
 
     private fun launchRemoteDebugServer(): XDebugSession? {
         val serverSocket = getDebuggerSocket() ?: return null
-        val state = PyAttachToProcessCommandLineState.create(project, sdkPath!!, serverSocket.localPort, pid)
+//        val state = PyAttachToProcessCommandLineState.create(project, sdkPath!!, serverSocket.localPort, pid)
+        val state = MayaAttachToProcessCliState.create(project, sdkPath!!, serverSocket.localPort, pid)
         val result = state.execute(state.environment.executor, this)
 
         val icon = IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png")
