@@ -62,16 +62,16 @@ private class MayaAttachGroup : XAttachProcessPresentationGroup {
         return processInfo.executableDisplayName
     }
 
+    override fun getProcessDisplayText(project: Project, info: ProcessInfo, userData: UserDataHolder): String {
+        return getItemDisplayText(project, info, userData)
+    }
+
     override fun getItemIcon(project: Project, processInfo: ProcessInfo, userData: UserDataHolder): Icon {
         return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png")
     }
 
-    override fun getProcessDisplayText(project: Project, info: ProcessInfo, userData: UserDataHolder): String {
-        return info.commandLine
-    }
-
     override fun getProcessIcon(project: Project, info: ProcessInfo, userData: UserDataHolder): Icon {
-        return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png")
+        return getItemIcon(project, info, userData)
     }
 
     override fun getGroupName(): String {
