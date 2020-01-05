@@ -17,7 +17,7 @@ import com.intellij.xdebugger.XDebuggerManager
 import com.jetbrains.python.debugger.PyDebugRunner
 import com.jetbrains.python.debugger.PyLocalPositionConverter
 import com.jetbrains.python.debugger.attach.PyAttachToProcessCommandLineState
-import com.jetbrains.python.sdk.PythonSdkType
+import com.jetbrains.python.sdk.PythonSdkUtil
 import java.net.ServerSocket
 
 class MayaCharmDebugRunner : PyDebugRunner() {
@@ -48,7 +48,7 @@ class MayaCharmDebugRunner : PyDebugRunner() {
             return null
         }
 
-        val sdk = PythonSdkType.findSdkByPath(sdkInfo.mayaPyPath)
+        val sdk = PythonSdkUtil.findSdkByPath(sdkInfo.mayaPyPath)
         if (sdk == null) {
             MayaNotifications.mayaInstanceNotFound(sdkInfo.mayaPath, environment.project)
             return null
