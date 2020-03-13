@@ -1,7 +1,9 @@
 package flavors
 
+import com.intellij.openapi.projectRoots.Sdk
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.VirtualFile
+import com.jetbrains.python.psi.LanguageLevel
 import com.jetbrains.python.sdk.flavors.PythonFlavorProvider
 import com.jetbrains.python.sdk.flavors.PythonSdkFlavor
 import icons.PythonIcons
@@ -23,6 +25,22 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
         return "--version"
     }
 
+    override fun getLanguageLevelFromVersionString(version: String?): LanguageLevel {
+        if (version != null && version.startsWith(verStringPrefix)) {
+            return LanguageLevel.fromPythonVersion(version.substring(verStringPrefix.length))
+        }
+        return LanguageLevel.getDefault()
+    }
+
+    override fun getLanguageLevel(sdk: Sdk): LanguageLevel {
+        return getLanguageLevelFromVersionString(sdk.versionString)
+    }
+
+    override fun getLanguageLevel(sdkHome: String): LanguageLevel {
+        val version = getVersionString(sdkHome)
+        return getLanguageLevelFromVersionString(version)
+    }
+
     override fun getName(): String {
         return "Maya Python"
     }
@@ -39,6 +57,8 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
     }
 
     companion object {
+        const val verStringPrefix = "Python "
+
         val INSTANCE: MayaSdkFlavor = MayaSdkFlavor()
 
         private fun isMayaFolder(file: File) : Boolean {
