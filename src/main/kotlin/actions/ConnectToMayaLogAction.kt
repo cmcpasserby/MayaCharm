@@ -22,7 +22,6 @@ class ConnectToMayaLogAction : BaseSendAction(
             return
         }
 
-        val maya = MayaCommandInterface(sdk.port)
-        maya.connectMayaLog()
+        MayaCommandInterface(sdk.port).connectMayaLog()
     }
 }

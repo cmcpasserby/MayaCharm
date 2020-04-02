@@ -21,7 +21,6 @@ abstract class BaseSendAction(text:String, description: String, icon: Icon?) : D
             e.presentation.isEnabled = false
             return
         }
-
         e.presentation.isEnabled = fileTypeManager.isFileOfType(currentFile, pyFileType)
     }
 }

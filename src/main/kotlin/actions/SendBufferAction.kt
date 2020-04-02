@@ -20,14 +20,8 @@ class SendBufferAction : BaseSendAction(
         }
 
         val docManager = FileDocumentManager.getInstance()
-        val data = e.getData(LangDataKeys.VIRTUAL_FILE)
-
-        val doc = data?.let { docManager.getDocument(it) }
-        doc?.let {docManager.saveDocument(it)}
-
-        if (data != null) {
-            val maya = MayaCommandInterface(sdk.port)
-            maya.sendFileToMaya(data.path)
-        }
+        val data = e.getData(LangDataKeys.VIRTUAL_FILE) ?: return
+        data.let { docManager.getDocument(it) }?.also { docManager.saveDocument(it) }
+        MayaCommandInterface(sdk.port).sendFileToMaya(data.path)
     }
 }
