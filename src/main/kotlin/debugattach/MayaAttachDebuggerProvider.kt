@@ -21,9 +21,13 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
     override fun getAvailableDebuggers(project: Project, attachHost: XAttachHost, processInfo: ProcessInfo, userData: UserDataHolder): MutableList<XAttachDebugger> {
         if (!processInfo.executableName.toLowerCase().contains("maya")) return mutableListOf()
 
-        val exePath = pathForPid(processInfo.pid)?.toLowerCase() ?: return mutableListOf()
-        val sdks = ApplicationSettings.INSTANCE.mayaSdkMapping.values
-        val currentSdk = sdks.firstOrNull { exePath.contains(it.mayaPath.toLowerCase()) } ?: return mutableListOf()
+        val exePath = processInfo.executableCannonicalPath.let {
+            if (it.isPresent) it.get() else pathForPid(processInfo.pid) ?: return mutableListOf()
+        }.toLowerCase()
+
+        val currentSdk = ApplicationSettings.INSTANCE.mayaSdkMapping.values.firstOrNull {
+            exePath.contains(it.mayaPath.toLowerCase())
+        } ?: return mutableListOf()
 
         return mutableListOf(MayaAttachDebugger(PythonSdkUtil.findSdkByPath(currentSdk.mayaPyPath)!!))
     }

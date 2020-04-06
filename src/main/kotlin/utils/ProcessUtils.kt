@@ -18,11 +18,12 @@ private fun pathForPidWin(pid: Int): String? = try {
 }
 
 private fun pathForPidMac(pid: Int): String? = try {
-    ProcessBuilder("which", "`ps -o comm= -p $pid`")
+    ProcessBuilder("ps -p $pid".split("\\s".toRegex()))
         .redirectOutput(ProcessBuilder.Redirect.PIPE)
         .redirectError(ProcessBuilder.Redirect.PIPE)
         .start().apply { waitFor(timeout.first, timeout.second) }
-        .inputStream.bufferedReader().readText().trim()
+        .inputStream.bufferedReader().readText()
+        .lines()[1].let { it.substring(it.indexOf('/')) }
 } catch (err: IOException) {
     err.printStackTrace()
     null
