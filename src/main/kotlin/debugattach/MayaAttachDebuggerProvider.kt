@@ -1,6 +1,7 @@
 package debugattach
 
 import settings.ApplicationSettings
+import utils.pathForPid
 import com.intellij.execution.process.ProcessInfo
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots.Sdk
@@ -18,26 +19,16 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
     }
 
     override fun getAvailableDebuggers(project: Project, attachHost: XAttachHost, processInfo: ProcessInfo, userData: UserDataHolder): MutableList<XAttachDebugger> {
+        if (!processInfo.executableName.toLowerCase().contains("maya")) return mutableListOf()
+
+        val exePath = pathForPid(processInfo.pid)?.toLowerCase() ?: return mutableListOf()
         val sdks = ApplicationSettings.INSTANCE.mayaSdkMapping.values
+        val currentSdk = sdks.firstOrNull { exePath.contains(it.mayaPath.toLowerCase()) } ?: return mutableListOf()
 
-        if (!sdks.any { processInfo.commandLine.contains(it.mayaPath) }) {
-            return mutableListOf()
-        }
-
-        val currentSdk = sdks.firstOrNull { processInfo.commandLine.contains(it.mayaPath) } ?: return mutableListOf()
         return mutableListOf(MayaAttachDebugger(PythonSdkUtil.findSdkByPath(currentSdk.mayaPyPath)!!))
     }
 
-    override fun isAttachHostApplicable(attachHost: XAttachHost): Boolean {
-        for (info in attachHost.processList) {
-            val path = info.executableCannonicalPath
-            if (path.isPresent) {
-                println(path.get())
-            }
-        }
-        return true // TODO properly check this
-    }
-
+    override fun isAttachHostApplicable(attachHost: XAttachHost): Boolean = true // TODO properly check this
 }
 
 private class MayaAttachDebugger(sdk: Sdk) : XAttachDebugger {
