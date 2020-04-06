@@ -1,16 +1,13 @@
 package ca.rightsomegoodgames.mayacharm.flavors
 
-import ca.rightsomegoodgames.mayacharm.MayaBundle as Loc
-import com.intellij.openapi.fileChooser.FileChooserDescriptor
-import com.intellij.openapi.util.SystemInfo
+import com.intellij.openapi.projectRoots.Sdk
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.VirtualFile
-import com.jetbrains.python.PyBundle
+import com.jetbrains.python.psi.LanguageLevel
 import com.jetbrains.python.sdk.flavors.PythonFlavorProvider
 import com.jetbrains.python.sdk.flavors.PythonSdkFlavor
 import icons.PythonIcons
 import java.io.File
-import java.lang.Exception
 import javax.swing.Icon
 
 class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
@@ -28,8 +25,24 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
         return "--version"
     }
 
+    override fun getLanguageLevelFromVersionString(version: String?): LanguageLevel {
+        if (version != null && version.startsWith(verStringPrefix)) {
+            return LanguageLevel.fromPythonVersion(version.substring(verStringPrefix.length))
+        }
+        return LanguageLevel.getDefault()
+    }
+
+    override fun getLanguageLevel(sdk: Sdk): LanguageLevel {
+        return getLanguageLevelFromVersionString(sdk.versionString)
+    }
+
+    override fun getLanguageLevel(sdkHome: String): LanguageLevel {
+        val version = getVersionString(sdkHome)
+        return getLanguageLevelFromVersionString(version)
+    }
+
     override fun getName(): String {
-        return "MayaPy"
+        return "Maya Python"
     }
 
     override fun getIcon(): Icon {
@@ -43,35 +56,9 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
         return path
     }
 
-    public fun getHomeChooserDescriptor(): FileChooserDescriptor {
-        val isWindows = SystemInfo.isWindows
-
-        return object : FileChooserDescriptor(true, false, false, false, false, false) {
-            override fun validateSelectedFiles(files: Array<out VirtualFile>) {
-                if (files.count() != 0) {
-                    if (!isValidSdkHome(files[0].path)) {
-                        throw Exception(Loc.message("mayacharm.exceptions.InvalidMayaPy", files[0].name))
-                    }
-                }
-            }
-
-            override fun isFileVisible(file: VirtualFile?, showHiddenFiles: Boolean): Boolean {
-                if (file == null) {
-                    return false
-                }
-
-                if (!file.isDirectory) {
-                    if (isWindows) {
-                        val path = file.path
-                        return path.endsWith("exe") && super.isFileVisible(file, showHiddenFiles)
-                    }
-                }
-                return super.isFileVisible(file, showHiddenFiles)
-            }
-        }.withTitle(PyBundle.message("sdk.select.path")).withShowHiddenFiles(SystemInfo.isUnix)
-    }
-
     companion object {
+        const val verStringPrefix = "Python "
+
         val INSTANCE: MayaSdkFlavor = MayaSdkFlavor()
 
         private fun isMayaFolder(file: File) : Boolean {
