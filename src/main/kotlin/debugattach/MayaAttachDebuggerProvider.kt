@@ -28,7 +28,7 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
         return mutableListOf(MayaAttachDebugger(PythonSdkUtil.findSdkByPath(currentSdk.mayaPyPath)!!))
     }
 
-    override fun isAttachHostApplicable(attachHost: XAttachHost): Boolean = true // TODO properly check this
+    override fun isAttachHostApplicable(attachHost: XAttachHost): Boolean = attachHost is LocalAttachHost
 }
 
 private class MayaAttachDebugger(sdk: Sdk) : XAttachDebugger {
