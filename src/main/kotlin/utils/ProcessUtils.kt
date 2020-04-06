@@ -17,8 +17,8 @@ private fun pathForPidWin(pid: Int): String? = try {
     null
 }
 
-private fun pathForPidUnix(pid: Int): String? = try {
-    ProcessBuilder("readlink -f /proc/$pid/exe".split("\\s".toRegex()))
+private fun pathForPidMac(pid: Int): String? = try {
+    ProcessBuilder("which", "`ps -o comm= -p $pid`")
         .redirectOutput(ProcessBuilder.Redirect.PIPE)
         .redirectError(ProcessBuilder.Redirect.PIPE)
         .start().apply { waitFor(timeout.first, timeout.second) }
@@ -28,8 +28,25 @@ private fun pathForPidUnix(pid: Int): String? = try {
     null
 }
 
-fun pathForPid(pid: Int): String? = if (SystemInfo.isWindows) {
-    pathForPidWin(pid)
-} else {
-    pathForPidUnix(pid)
+private fun pathForPidUnix(pid: Int): String? = try {
+    ProcessBuilder("readlink", "/proc/$pid/exe")
+        .redirectOutput(ProcessBuilder.Redirect.PIPE)
+        .redirectError(ProcessBuilder.Redirect.PIPE)
+        .start().apply { waitFor(timeout.first, timeout.second) }
+        .inputStream.bufferedReader().readText().trim()
+} catch (err: IOException) {
+    err.printStackTrace()
+    null
+}
+
+fun pathForPid(pid: Int): String? = when {
+    SystemInfo.isWindows -> {
+        pathForPidWin(pid)
+    }
+    SystemInfo.isMac -> {
+        pathForPidMac(pid)
+    }
+    else -> {
+        pathForPidUnix(pid)
+    }
 }
