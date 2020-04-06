@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>ca.rightsomegoodgames.mayacharm</id>
     <name>MayaCharm</name>
-    <version>3.1.1</version>
+    <version>3.1.2</version>
     <vendor email="chris@rightsomegoodgames.ca" url="https://github.com/cmcpasserby">Chris Cunningham</vendor>
 
     <description><![CDATA[
@@ -20,13 +20,8 @@
 
     <change-notes><![CDATA[
     <ul>
-        <li>All strings have be moved to a resource bundle for localization purposes</li>
-        <li>Settings panel properly updates with Maya sdks now when interpreter settings are changed</li>
-        <li>Settings panel now has proper add and remove buttons for Maya SDKs that will properly add or remove the interpreter
-        as well setup the command port info for the sdk</li>
-        <li>Removed the debug run config, since it was unreliable due to a race condition when it would execute your maya code</li>
-        <li>Now forces utf8 encoding when executing the selection</li>
-        <li>Refactoring and consolidating of duplicate code</li>
+        <li>Fixed issues where MayaCharm could not detect Maya instances that were launched via script and not executed directly</li>
+        <li>Improved handling and detection of MayaPy version when adding new interpreters</li>
     </ul>
     ]]>
     </change-notes>
