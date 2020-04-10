@@ -34,7 +34,6 @@ class LogWindow : ToolWindowFactory, DumbAware {
         contentManager.addContent(content)
 
         toolWindow.setAvailable(true, null)
-        toolWindow.isToHideOnEmptyContent = true
         toolWindow.activate(console::activate)
     }
 }

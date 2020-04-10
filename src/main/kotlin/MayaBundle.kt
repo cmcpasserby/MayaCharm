@@ -13,7 +13,7 @@ object MayaBundle {
     }
 
     fun messageOfNull(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg parms: Any): String? {
-        return CommonBundle.messageOfNull(getBundle(), key, parms)
+        return CommonBundle.messageOrNull(getBundle(), key, parms)
     }
 
     private fun getBundle(): ResourceBundle {
