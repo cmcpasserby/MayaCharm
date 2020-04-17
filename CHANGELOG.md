@@ -21,19 +21,23 @@
 ### Removed
 - Removed debug run config, since it was unreliable due to a race condition when it would execute your maya code
 
-## [3.0.2] - 2019-03-31
+## 3.0.2 - 2019-03-31
 ### Fixed
 - Fixed issue with execute commands being greyed out in Pycharm 2019.1
 
-## [3.0.1] - 2019-01-13
+## 3.0.1 - 2019-01-13
 ### Added
 - Attach to Process now shows maya instances you can attach to
 
 ### Fixed
 - Fixed bug that prevented MayaCharm from finding Maya Instances when launched with arguments
 
-## [3.0.0] - 2018-11-27
+## 3.0.0 - 2018-11-27
 ### Added
 - Ported to Kotlin
 - Better support for multiple Maya installs
 - Removed dependencies on PyCharm Professional's remote debugger as well as PyCharm Professional
+
+[3.1.2]: https:https://github.com/cmcpasserby/MayaCharm/releases/tag/v3.1.2
+[3.1.1]: https://github.com/cmcpasserby/MayaCharm/releases/tag/v3.1.1
+[3.0.0]: https://github.com/cmcpasserby/MayaCharm/releases/tag/v3.0.0
