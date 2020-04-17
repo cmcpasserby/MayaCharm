@@ -12,7 +12,6 @@ import com.intellij.xdebugger.XDebugSession
 import com.intellij.xdebugger.XDebuggerManager
 import com.jetbrains.python.debugger.PyDebugRunner
 import com.jetbrains.python.debugger.PyLocalPositionConverter
-import com.jetbrains.python.debugger.attach.PyAttachToProcessCommandLineState
 import com.jetbrains.python.debugger.attach.PyAttachToProcessDebugRunner
 import java.io.IOException
 import java.net.ServerSocket
@@ -44,7 +43,6 @@ class MayaAttachToProcessDebugRunner(
 
     private fun launchRemoteDebugServer(): XDebugSession? {
         val serverSocket = getDebuggerSocket() ?: return null
-//        val state = PyAttachToProcessCommandLineState.create(project, sdkPath!!, serverSocket.localPort, pid)
         val state = MayaAttachToProcessCliState.create(project, sdkPath!!, serverSocket.localPort, pid)
         val result = state.execute(state.environment.executor, this)
 

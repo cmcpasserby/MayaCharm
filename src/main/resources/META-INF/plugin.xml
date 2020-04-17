@@ -21,12 +21,12 @@
     <change-notes><![CDATA[
     <ul>
         <li>Updated plugin project to use Gradle instead of the legacy DevKit</li>
-        <li>Now Supports PyCharm 2019.3</li>
+        <li>Now Supports PyCharm 2019.3 and above</li>
     </ul>
     ]]>
     </change-notes>
 
-    <idea-version since-build="193.0" until-build="193.*"/>
+    <idea-version since-build="201.0"/>
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.python</depends>
