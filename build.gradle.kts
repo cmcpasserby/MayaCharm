@@ -40,13 +40,13 @@ tasks {
     withType<org.jetbrains.intellij.tasks.PublishTask> {
         token(publishToken)
     }
-}
 
-tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
-    changeNotes("""
+    withType<org.jetbrains.intellij.tasks.PatchPluginXmlTask> {
+        changeNotes("""
         <ul>
             <li>Updated plugin project to use Gradle instead of the legacy DevKit</li>
             <li>Now Supports PyCharm 2019.3</li>
         </ul>
      """)
+    }
 }
