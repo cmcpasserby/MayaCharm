@@ -1,7 +1,6 @@
 # MayaCharm
 Maya integration with run and debug configurations for Maya. MayaCharm lets you execute the current document or
-arbitrary code as if it was in Maya from PyCharm. For users of the professional version of PyCharm it will also setup
-and connect the pydev debugger to Maya as well.
+arbitrary code as if it was in Maya from PyCharm, as well as attaching the local PyDev debugger to a running Maya instance.
 
 For those simply just wanting the compiled version, you are best to just search for it, in the plugin repository of PyCharm.
 https://plugins.jetbrains.com/plugin/8218?pr=pycharm
