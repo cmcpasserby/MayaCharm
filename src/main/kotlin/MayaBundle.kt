@@ -9,11 +9,11 @@ object MayaBundle {
     private var ourBundle: Reference<ResourceBundle>? = null
 
     fun message(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg parms: Any): String {
-        return CommonBundle.message(getBundle(), key, parms)
+        return CommonBundle.message(getBundle(), key, *parms)
     }
 
-    fun messageOfNull(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg parms: Any): String? {
-        return CommonBundle.messageOrNull(getBundle(), key, parms)
+    fun messageOrNull(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg parms: Any): String? {
+        return CommonBundle.messageOrNull(getBundle(), key, *parms)
     }
 
     private fun getBundle(): ResourceBundle {

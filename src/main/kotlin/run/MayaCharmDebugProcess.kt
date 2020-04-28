@@ -19,7 +19,7 @@ class MayaCharmDebugProcess(session: XDebugSession,
                             : PyDebugProcess(session, serverSocket, executionConsole, processHandler, false) {
 
     override fun getConnectionMessage(): String {
-        return Loc.message("mayacharm.debugproc.ConnectionMessage", pid)
+        return Loc.message("mayacharm.debugproc.ConnectionMessage", pid.toString())
     }
 
     override fun getConnectionTitle(): String {
