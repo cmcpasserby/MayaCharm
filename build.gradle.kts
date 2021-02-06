@@ -16,7 +16,7 @@ dependencies {
     testCompile("junit", "junit", "4.12")
 }
 
-val publishToken: String = System.getenv("IntellijPublishToken")
+val publishToken: String? = System.getenv("IntellijPublishToken")
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {

@@ -9,7 +9,8 @@ class PythonStrings {
     val PYSTDERR = "# Error: "
     val PYSTDWRN = "# Warning: "
 
-    val SETTRACE = "import pydevd; pydevd.settrace(\"{0}\", port={1}, suspend={2}, stdoutToServer={3}, stderrToServer={3})"
+    val SETTRACE = "import pydevd; pydevd.settrace(host=\"{0}\", port={1,number,#}, suspend={2}, stdoutToServer={3}, stderrToServer={3})"
+    val STOPTRACE = "import pydevd; pydevd.stoptrace()"
 
     private val _cmdportSetupScript: String
 
