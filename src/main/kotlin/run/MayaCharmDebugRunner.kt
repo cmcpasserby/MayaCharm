@@ -18,6 +18,7 @@ import com.jetbrains.python.debugger.PyDebugRunner
 import com.jetbrains.python.debugger.PyLocalPositionConverter
 import com.jetbrains.python.debugger.attach.PyAttachToProcessCommandLineState
 import com.jetbrains.python.sdk.PythonSdkUtil
+import org.jetbrains.concurrency.Promise
 import java.net.ServerSocket
 
 class MayaCharmDebugRunner : PyDebugRunner() {
@@ -37,21 +38,21 @@ class MayaCharmDebugRunner : PyDebugRunner() {
         return DefaultDebugExecutor.EXECUTOR_ID == executorId
     }
 
-    override fun doExecute(state: RunProfileState, environment: ExecutionEnvironment): RunContentDescriptor? {
+    override fun execute(environment: ExecutionEnvironment, state: RunProfileState): Promise<RunContentDescriptor?> {
         val sdks = ApplicationSettings.INSTANCE.mayaSdkMapping
         val runConfig = environment.runProfile as MayaCharmRunConfiguration
-        val sdkInfo = sdks[runConfig.mayaSdkPath] ?: return null
+        val sdkInfo = sdks[runConfig.mayaSdkPath] ?: return Promise.resolve(null)
 
         val process = ProcessListUtil.getProcessList().firstOrNull { it.commandLine.contains(sdkInfo.mayaPath) }
         if (process == null) {
             MayaNotifications.mayaInstanceNotFound(sdkInfo.mayaPath, environment.project)
-            return null
+            return Promise.resolve(null)
         }
 
         val sdk = PythonSdkUtil.findSdkByPath(sdkInfo.mayaPyPath)
         if (sdk == null) {
             MayaNotifications.mayaInstanceNotFound(sdkInfo.mayaPath, environment.project)
-            return null
+            return Promise.resolve(null)
         }
 
         val serverSocket = ServerSocket(0) // port 0 forces the ServerSocket to choose its own free port
@@ -74,6 +75,6 @@ class MayaCharmDebugRunner : PyDebugRunner() {
             }
         })
 
-        return session.runContentDescriptor
+        return Promise.resolve(session.runContentDescriptor)
     }
 }

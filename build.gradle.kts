@@ -16,11 +16,11 @@ dependencies {
     testCompile("junit", "junit", "4.12")
 }
 
-val publishToken: String? = System.getenv("IntellijPublishToken")
+val publishToken: String = System.getenv("IntellijPublishToken")
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = "2020.1"
+    version = "2020.3"
     type = "PY"
     setPlugins("python")
 }

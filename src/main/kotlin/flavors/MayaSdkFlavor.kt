@@ -27,7 +27,7 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
 
     override fun getLanguageLevelFromVersionString(version: String?): LanguageLevel {
         if (version != null && version.startsWith(verStringPrefix)) {
-            return LanguageLevel.fromPythonVersion(version.substring(verStringPrefix.length))
+            return LanguageLevel.fromPythonVersion(version.substring(verStringPrefix.length)) ?: LanguageLevel.getDefault()
         }
         return LanguageLevel.getDefault()
     }
@@ -68,5 +68,5 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
 }
 
 class MayaFlavorProvider : PythonFlavorProvider {
-    override fun getFlavor(platformIndependent: Boolean): PythonSdkFlavor? = MayaSdkFlavor.INSTANCE
+    override fun getFlavor(platformIndependent: Boolean): PythonSdkFlavor = MayaSdkFlavor.INSTANCE
 }
