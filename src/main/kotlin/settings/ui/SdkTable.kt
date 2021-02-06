@@ -24,7 +24,7 @@ private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.
         return 2
     }
 
-    override fun getColumnName(cIndex: Int): String? {
+    override fun getColumnName(cIndex: Int): String {
         return if (cIndex == 0) Loc.message("mayacharm.sdktable.MayaVersion") else Loc.message("mayacharm.sdktable.CommandPort")
     }
 
@@ -73,7 +73,7 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
         return result
     }
 
-    override fun editItem(o: ApplicationSettings.SdkInfo): ApplicationSettings.SdkInfo? {
+    override fun editItem(o: ApplicationSettings.SdkInfo): ApplicationSettings.SdkInfo {
         val dialog = SdkEditDialog(project, o)
         dialog.show()
         onChanged(this)

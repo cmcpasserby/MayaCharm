@@ -11,7 +11,7 @@ import com.jetbrains.python.debugger.PyDebugProcess
 import java.net.ServerSocket
 
 class MayaCharmDebugProcess(session: XDebugSession,
-                            private val serverSocket: ServerSocket,
+                            serverSocket: ServerSocket,
                             executionConsole: ExecutionConsole,
                             processHandler: ProcessHandler?,
                             private val runConfig: MayaCharmRunConfiguration?,

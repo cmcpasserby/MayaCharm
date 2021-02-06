@@ -32,6 +32,8 @@
     <depends>com.intellij.modules.python</depends>
     <depends>com.intellij.modules.xdebugger</depends>
 
+    <resource-bundle>MayaCharmBundle</resource-bundle>
+
     <extensions defaultExtensionNs="com.intellij">
         <projectService serviceImplementation="settings.ProjectSettings"/>
         <applicationService serviceImplementation="settings.ApplicationSettings"/>

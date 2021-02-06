@@ -18,13 +18,13 @@ class MayaCommandInterface(private val port: Int) {
         val bw: BufferedWriter
 
         try {
-            tempFile = File.createTempFile("MayaCharmTemp", ".py")
+            tempFile = File.createTempFile("MayaCharmTemp", ".py") ?: return null
             if (!tempFile.exists()) {
                 tempFile.createNewFile()
             }
 
             bw = BufferedWriter(FileWriter(tempFile))
-            bw.write(PythonStrings.INSTANCE.UTF8_ENCODING_STR)
+            bw.write(PythonStrings.UTF8_ENCODING_STR.message)
             bw.newLine()
             bw.write(text)
             bw.close()
@@ -44,7 +44,7 @@ class MayaCommandInterface(private val port: Int) {
         try {
             client = Socket("localhost", port)
             out = PrintWriter(client.getOutputStream(), true)
-            val outString = MessageFormat.format(PythonStrings.INSTANCE.EXECFILE, message.toString().replace("\\", "/"))
+            val outString = PythonStrings.EXECFILE.format(message.toString().replace("\\", "/"))
             out.println(outString)
         }
         catch (e: IOException) {
@@ -69,8 +69,8 @@ class MayaCommandInterface(private val port: Int) {
 
     public fun connectMayaLog() {
         val mayaLogPath = PathManager.getPluginTempPath() + logFileName
-        var message = PythonStrings.INSTANCE.CLOSE_LOG
-        message += System.lineSeparator() + MessageFormat.format(PythonStrings.INSTANCE.OPEN_LOG, mayaLogPath)
+        var message = PythonStrings.CLOSE_LOG.message
+        message += System.lineSeparator() + PythonStrings.OPEN_LOG.format(mayaLogPath)
         createMayaLog(mayaLogPath)
         sendCodeToMaya(message)
     }

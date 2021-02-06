@@ -22,7 +22,7 @@ class ProjectSettings : PersistentStateComponent<ProjectSettings.State> {
     }
 
     public var selectedSdkName: String?
-        get() = myState.selectedSdk ?: appSettings.mayaSdkMapping.keys.sortedDescending().firstOrNull()
+        get() = myState.selectedSdk ?: appSettings.mayaSdkMapping.keys.max()
         set(value) {myState.selectedSdk = value}
 
     public val selectedSdk: ApplicationSettings.SdkInfo?

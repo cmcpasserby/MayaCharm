@@ -19,7 +19,7 @@ class LogConsole(private val project: Project, file: File, charset: Charset, ski
     init {
         super.setContentPreprocessor(fun(it: String): MutableList<LogFragment> {
             val lFrag = mutableListOf<LogFragment>()
-            val checks = it.startsWith(PythonStrings.INSTANCE.PYSTDERR) || it.startsWith(PythonStrings.INSTANCE.PYSTDWRN)
+            val checks = it.startsWith(PythonStrings.PYSTDERR.message) || it.startsWith(PythonStrings.PYSTDWRN.message)
             val outType = if (checks) ProcessOutputTypes.STDERR else ProcessOutputTypes.STDOUT
             lFrag.add(LogFragment(it, outType))
             return lFrag

@@ -47,7 +47,7 @@ class MayaAttachToProcessDebugRunner(
         val state = MayaAttachToProcessCliState.create(project, sdkPath!!, serverSocket.localPort, pid)
         val result = state.execute(state.environment.executor, this)
 
-        val icon = IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png")
+        val icon = IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png", this::class.java)
 
         return XDebuggerManager.getInstance(project).startSessionAndShowTab(pid.toString(), icon, null, false, object : XDebugProcessStarter() {
             override fun start(dSession: XDebugSession): XDebugProcess {

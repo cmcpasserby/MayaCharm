@@ -17,7 +17,7 @@ class MayaCharmDebugAttachProcess(
     private val serverSocket: ServerSocket,
     executionConsole: ExecutionConsole,
     processHandler: ProcessHandler?,
-    private val sdkSettings: ApplicationSettings.SdkInfo,
+    sdkSettings: ApplicationSettings.SdkInfo,
     private val pid: Int
     ) : PyDebugProcess(session, serverSocket, executionConsole, processHandler, false) {
 
@@ -38,7 +38,7 @@ class MayaCharmDebugAttachProcess(
         }
 
         val connectionString = MessageFormat.format(
-            PythonStrings.INSTANCE.SETTRACE,
+            PythonStrings.SETTRACE.message,
             "localhost",
             serverSocket.localPort,
             "False",
@@ -49,6 +49,6 @@ class MayaCharmDebugAttachProcess(
 
     override fun disconnect() {
         super.disconnect()
-        mayaCommand.sendCodeToMaya(PythonStrings.INSTANCE.STOPTRACE)
+        mayaCommand.sendCodeToMaya(PythonStrings.STOPTRACE.message)
     }
 }

@@ -45,7 +45,7 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
         })
     }
 
-    private val setupText = EditorTextField(String.format(PythonStrings.INSTANCE.cmdportSetupScript, ""),
+    private val setupText = EditorTextField(PythonStrings.CMDPORTSETUPSCRIPT.format(0),
             project, FileTypeManager.getInstance().getFileTypeByExtension(".py")).apply {
         setOneLineMode(false)
         isEnabled = false
@@ -92,7 +92,7 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
         }
     }
 
-    override fun createCenterPanel(): JComponent? {
+    override fun createCenterPanel(): JComponent {
         return myPanel
     }
 
@@ -100,7 +100,7 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
         get() = if (isOK) ApplicationSettings.SdkInfo(sdkInfo.mayaPyPath, portField.text.toInt()) else sdkInfo
 
     private fun updateSetupText() {
-        setupText.text = String.format(PythonStrings.INSTANCE.cmdportSetupScript, portField.text)
+        setupText.text = PythonStrings.CMDPORTSETUPSCRIPT.format(portField.text.toInt())
     }
 
     private fun isModified(): Boolean {

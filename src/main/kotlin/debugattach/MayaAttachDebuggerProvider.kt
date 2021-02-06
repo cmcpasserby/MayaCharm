@@ -67,7 +67,7 @@ private class MayaAttachGroup : XAttachProcessPresentationGroup {
     }
 
     override fun getItemIcon(project: Project, processInfo: ProcessInfo, userData: UserDataHolder): Icon {
-        return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png")
+        return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png", this::class.java)
     }
 
     override fun getProcessIcon(project: Project, info: ProcessInfo, userData: UserDataHolder): Icon {
