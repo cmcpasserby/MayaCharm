@@ -1,52 +1,60 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    id("org.jetbrains.intellij") version "0.4.14"
-    java
-    kotlin("jvm") version "1.3.61"
+    id("java")
+    id("org.jetbrains.kotlin.jvm") version "1.4.30"
+    id("org.jetbrains.intellij") version "0.6.5"
+    id("org.jetbrains.changelog") version "1.1.1"
 }
 
-group = "ca.rightsomegoodgames.mayacharm"
-version = "3.2.1"
+val pluginGroup: String by project
+val pluginName_: String by project
+val pluginVersion: String by project
+
+val pluginVerifierIdeVersions: String by project
+
+val platformType: String by project
+val platformVersion: String by project
+val platformDownloadSources: String by project
+
+group = pluginGroup
+version = pluginVersion
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-    testCompile("junit", "junit", "4.12")
 }
 
 val publishToken: String? = System.getenv("IntellijPublishToken")
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = "2020.3"
-    type = "PY"
-    setPlugins("python")
+    pluginName = pluginName_
+    version = platformVersion
+    type = platformType
+    downloadSources = platformDownloadSources.toBoolean()
+    updateSinceUntilBuild = true
+    setPlugins("python") // TODO pull from properties file
 }
 
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+changelog {
+    version = pluginVersion
 }
 
 tasks {
-    compileKotlin {
-        kotlinOptions.jvmTarget = "1.8"
+    withType<JavaCompile> {
+        sourceCompatibility = "1.8"
+        targetCompatibility = "1.8"
     }
-    compileTestKotlin {
+
+    withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
     }
 
-//    withType<org.jetbrains.intellij.tasks.PublishTask> {
-//        token(publishToken)
-//    }
-
-    withType<org.jetbrains.intellij.tasks.PatchPluginXmlTask> {
-        changeNotes("""
-        <ul>
-            <li>Updated plugin project to use Gradle instead of the legacy DevKit</li>
-            <li>Now Supports PyCharm 2019.3</li>
-        </ul>
-     """)
+    runPluginVerifier {
+        ideVersions(pluginVerifierIdeVersions)
     }
 }
