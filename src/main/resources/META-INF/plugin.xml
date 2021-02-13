@@ -1,32 +1,8 @@
 <idea-plugin>
     <id>ca.rightsomegoodgames.mayacharm</id>
     <name>MayaCharm</name>
-    <version>3.2.1</version>
     <vendor email="chris@rightsomegoodgames.ca" url="https://github.com/cmcpasserby">Chris Cunningham</vendor>
 
-    <description><![CDATA[
-        <p>Maya integration with run and debug configurations for Maya.
-        MayaCharm lets you execute the current document or arbitrary code as if it was in Maya from PyCharm.
-        This plugin also adds Attach to Process debugger support for Maya in PyCharm
-        </p>
-        <p>See also:
-            <ul>
-                <li><a href="https://github.com/cmcpasserby/MayaCharm">GitHub Repository</a>: documentation and contributing</li>
-                <li><a href="https://github.com/cmcpasserby/MayaCharm/issues">Issue Tracker</a>: feature requests and bug reports</li>
-                <li><a href="https://github.com/cmcpasserby/MayaCharm/blob/master/LICENSE">License</a>: MIT</li>
-            </ul>
-        </p>
-    ]]></description>
-
-    <change-notes><![CDATA[
-    <ul>
-        <li>Updated plugin project to use Gradle instead of the legacy DevKit</li>
-        <li>Now Supports PyCharm 2019.3 and above</li>
-    </ul>
-    ]]>
-    </change-notes>
-
-    <idea-version since-build="203.0"/>
     <depends>com.intellij.modules.lang</depends>
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.python</depends>

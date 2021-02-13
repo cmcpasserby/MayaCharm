@@ -1,3 +1,5 @@
+import org.jetbrains.changelog.closure
+import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -11,6 +13,7 @@ val pluginGroup: String by project
 val pluginName_: String by project
 val pluginVersion: String by project
 
+val pluginSinceVersion: String by project
 val pluginVerifierIdeVersions: String by project
 
 val platformType: String by project
@@ -52,6 +55,31 @@ tasks {
 
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.8"
+    }
+
+    patchPluginXml {
+        version(pluginVersion)
+        sinceBuild(pluginSinceVersion)
+
+        pluginDescription(
+            closure {
+                File("./README.md").readText().lines().run {
+                    val start = "<!-- Plugin description -->"
+                    val end = "<!-- Plugin description end -->"
+
+                    if (!containsAll(listOf(start, end))) {
+                        throw GradleException("Plugin description section not found in README.md\n$start ... $end")
+                    }
+                    subList(indexOf(start) + 1, indexOf(end))
+                }.joinToString("\n").run { markdownToHTML(this) }
+            }
+        )
+
+        changeNotes(
+            closure {
+                changelog.getLatest().toHTML()
+            }
+        )
     }
 
     runPluginVerifier {
