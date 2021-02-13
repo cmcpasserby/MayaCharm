@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "ca.rightsomegoodgames.mayacharm"
-version = "3.2.0"
+version = "3.2.1"
 
 repositories {
     mavenCentral()
@@ -37,9 +37,9 @@ tasks {
         kotlinOptions.jvmTarget = "1.8"
     }
 
-    withType<org.jetbrains.intellij.tasks.PublishTask> {
-        token(publishToken)
-    }
+//    withType<org.jetbrains.intellij.tasks.PublishTask> {
+//        token(publishToken)
+//    }
 
     withType<org.jetbrains.intellij.tasks.PatchPluginXmlTask> {
         changeNotes("""

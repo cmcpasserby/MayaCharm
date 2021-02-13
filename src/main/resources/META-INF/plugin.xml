@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>ca.rightsomegoodgames.mayacharm</id>
     <name>MayaCharm</name>
-    <version>3.2.0</version>
+    <version>3.2.1</version>
     <vendor email="chris@rightsomegoodgames.ca" url="https://github.com/cmcpasserby">Chris Cunningham</vendor>
 
     <description><![CDATA[
