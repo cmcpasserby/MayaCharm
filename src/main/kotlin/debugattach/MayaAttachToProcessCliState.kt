@@ -6,6 +6,7 @@ import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.execution.runners.ExecutionEnvironmentBuilder
 import com.intellij.openapi.project.Project
+import com.jetbrains.python.PythonHelper
 import com.jetbrains.python.debugger.attach.PyAttachToProcessCommandLineState
 import com.jetbrains.python.run.PythonConfigurationType
 import com.jetbrains.python.run.PythonRunConfiguration
@@ -22,6 +23,7 @@ class MayaAttachToProcessCliState(runConfig: PythonRunConfiguration, env: Execut
             val projectSettings = ProjectSettings.getInstance(project)
 
             val mcPort = projectSettings.selectedSdk!!.port // TODO how do we handle null here
+            val debuggerPath = PythonHelper.DEBUGGER.pythonPathEntry
 
             PythonEnvUtil.addToPythonPath(conf.envs, listOf(env.project.basePath))
 
@@ -29,7 +31,7 @@ class MayaAttachToProcessCliState(runConfig: PythonRunConfiguration, env: Execut
             conf.sdkHome = sdkPath
             conf.isUseModuleSdk = false
             conf.scriptName = Paths.get(projectSettings.pythonCachePath.toString(), "attach_pydevd.py").toString()
-            conf.scriptParameters = "--port $port --pid $pid --mcPort $mcPort"
+            conf.scriptParameters = "--port $port --pid $pid --mcPort $mcPort --pydevPath $debuggerPath"
 
             return MayaAttachToProcessCliState(conf, env)
         }

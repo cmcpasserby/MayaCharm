@@ -38,6 +38,11 @@ def process_command_line(argv):
             setup['mcPort'] = int(argv[i])
             del argv[i]
 
+        elif argv[i] == '--pydevPath':
+            del argv[i]
+            setup['pydevPath'] = argv[i]
+            del argv[i]
+
     if not setup['pid']:
         sys.stderr.write('Expected --pid to be passed.\n')
         sys.exit(1)
@@ -55,12 +60,8 @@ def send_command(port, message):
 
 
 def main(setup):
-    pydevd_dirname = os.path.dirname(os.path.dirname(__file__))
-
-    # TODO: fix up hard coded path, and fixup non windows case
     if sys.platform == 'win32':
-        # setup['pythonpath'] = pydevd_dirname.replace('\\', '/')
-        setup['pythonpath'] = "C:\\Users\\chris\\AppData\\Local\\JetBrains\\Toolbox\\apps\\PyCharm-P\\ch-0\\203.7148.72\\plugins\\python\\helpers\\pydev".replace("\\", "/")
+        setup['pythonpath'] = setup['pydevPath'].replace("\\", "/")
         setup['pythonpath2'] = os.path.dirname(__file__).replace('\\', '/')
         python_code = '''import sys;
 sys.path.append("%(pythonpath)s");
@@ -69,14 +70,14 @@ import attach_script;
 attach_script.attach(%(port)s, "%(host)s");
 '''.replace('\r\n', '').replace('\r', '').replace('\n', '')
     else:
-        setup['pythonpath'] = pydevd_dirname
+        setup['pythonpath'] = setup['pydevPath']
         setup['pythonpath2'] = os.path.dirname(__file__)
         # We have to pass it a bit differently for gdb
         python_code = '''import sys;
 sys.path.append(\\\"%(pythonpath)s\\\");
 sys.path.append(\\\"%(pythonpath2)s\\\");
 import attach_script;
-attach_script.attach(port=%(port)s, host=\\\"%(host)s\\\", protocol=\\\"%(protocol)s\\\");
+attach_script.attach(port=%(port)s, host=\\\"%(host)s\\\");
 '''.replace('\r\n', '').replace('\r', '').replace('\n', '')
 
     python_code = python_code % setup
