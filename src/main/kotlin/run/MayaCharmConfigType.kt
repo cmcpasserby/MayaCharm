@@ -38,4 +38,8 @@ class MayaCharmConfigFactory(type: MayaCharmConfigType) : ConfigurationFactory(t
     override fun getName(): String {
         return Loc.message("mayacharm.runconfig.ConfigFactory")
     }
+
+    override fun getId(): String {
+        return "MAYACHARM_RUN_CONFIGURATION"
+    }
 }

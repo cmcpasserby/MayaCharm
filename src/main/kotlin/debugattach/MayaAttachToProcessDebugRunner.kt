@@ -12,6 +12,7 @@ import com.intellij.xdebugger.XDebuggerManager
 import com.jetbrains.python.debugger.PyDebugRunner
 import com.jetbrains.python.debugger.PyLocalPositionConverter
 import com.jetbrains.python.debugger.attach.PyAttachToProcessDebugRunner
+import run.MayaCharmDebugProcess
 import settings.ApplicationSettings
 import java.io.IOException
 import java.net.ServerSocket
@@ -51,7 +52,7 @@ class MayaAttachToProcessDebugRunner(
 
         return XDebuggerManager.getInstance(project).startSessionAndShowTab(pid.toString(), icon, null, false, object : XDebugProcessStarter() {
             override fun start(dSession: XDebugSession): XDebugProcess {
-                val process = MayaCharmDebugAttachProcess(dSession, serverSocket, result.executionConsole, result.processHandler, mayaSdk, pid)
+                val process = MayaCharmDebugProcess(dSession, serverSocket, result.executionConsole, result.processHandler, null, pid)
                 process.positionConverter = PyLocalPositionConverter()
                 PyDebugRunner.createConsoleCommunicationAndSetupActions(project, result, process, dSession)
                 return process

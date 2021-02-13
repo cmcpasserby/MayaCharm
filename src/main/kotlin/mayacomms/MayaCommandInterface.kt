@@ -39,35 +39,32 @@ class MayaCommandInterface(private val port: Int) {
 
     private fun sendToPort(message: File) {
         var client: Socket? = null
-        var out: PrintWriter? = null
 
         try {
             client = Socket("localhost", port)
-            out = PrintWriter(client.getOutputStream(), true)
             val outString = PythonStrings.EXECFILE.format(message.toString().replace("\\", "/"))
-            out.println(outString)
+            client.outputStream.write(outString.toByteArray())
         }
         catch (e: IOException) {
             Notifications.Bus.notify(MayaNotifications.CONNECTION_REFUSED)
             e.printStackTrace()
         }
         finally {
-            out?.close()
             client?.close()
         }
     }
 
-    public fun sendCodeToMaya(message: String) {
+    fun sendCodeToMaya(message: String) {
         val file = writeFile(message)
         sendToPort(file!!)
     }
 
-    public fun sendFileToMaya(path: String) {
+    fun sendFileToMaya(path: String) {
         val file = File(path)
         sendToPort(file)
     }
 
-    public fun connectMayaLog() {
+    fun connectMayaLog() {
         val mayaLogPath = PathManager.getPluginTempPath() + logFileName
         var message = PythonStrings.CLOSE_LOG.message
         message += System.lineSeparator() + PythonStrings.OPEN_LOG.format(mayaLogPath)

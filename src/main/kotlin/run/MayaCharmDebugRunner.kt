@@ -18,6 +18,7 @@ import com.jetbrains.python.debugger.PyDebugRunner
 import com.jetbrains.python.debugger.PyLocalPositionConverter
 import com.jetbrains.python.debugger.attach.PyAttachToProcessCommandLineState
 import com.jetbrains.python.sdk.PythonSdkUtil
+import debugattach.MayaAttachToProcessCliState
 import org.jetbrains.concurrency.Promise
 import java.net.ServerSocket
 
@@ -56,7 +57,8 @@ class MayaCharmDebugRunner : PyDebugRunner() {
         }
 
         val serverSocket = ServerSocket(0) // port 0 forces the ServerSocket to choose its own free port
-        val cliState = PyAttachToProcessCommandLineState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
+//        val cliState = PyAttachToProcessCommandLineState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
+        val cliState = MayaAttachToProcessCliState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
         val executionResult = cliState.execute(environment.executor, this)
 
         val session = XDebuggerManager.getInstance(environment.project).startSession(environment, object : XDebugProcessStarter() {

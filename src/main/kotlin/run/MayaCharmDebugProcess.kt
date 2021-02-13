@@ -8,6 +8,7 @@ import com.intellij.execution.ui.ConsoleViewContentType
 import com.intellij.execution.ui.ExecutionConsole
 import com.intellij.xdebugger.XDebugSession
 import com.jetbrains.python.debugger.PyDebugProcess
+import resources.PythonStrings
 import java.net.ServerSocket
 
 class MayaCharmDebugProcess(session: XDebugSession,
@@ -18,6 +19,11 @@ class MayaCharmDebugProcess(session: XDebugSession,
                             private val pid: Int)
                             : PyDebugProcess(session, serverSocket, executionConsole, processHandler, false) {
 
+    private val mayaCommand = runConfig?.mayaSdkPath?.let {
+        val port = ApplicationSettings.INSTANCE.mayaSdkMapping[it]?.port ?: return@let null
+        MayaCommandInterface(port)
+    }
+
     override fun getConnectionMessage(): String {
         return Loc.message("mayacharm.debugproc.ConnectionMessage", pid.toString())
     }
@@ -27,19 +33,22 @@ class MayaCharmDebugProcess(session: XDebugSession,
     }
 
     override fun afterConnect() {
-        runConfig ?: return
-
-        val sdkSettings = ApplicationSettings.INSTANCE.mayaSdkMapping[runConfig.mayaSdkPath]
-        val maya = MayaCommandInterface(sdkSettings!!.port)
-
-        if (isConnected) {
-            when (runConfig.executionType) {
-                ExecutionType.FILE -> maya.sendFileToMaya(runConfig.scriptFilePath)
-                ExecutionType.CODE -> maya.sendCodeToMaya(runConfig.scriptCodeText)
-            }
-        }
-        else {
+        if (!isConnected){
             printToConsole(Loc.message("mayacharm.debugproc.FailedToConnect"), ConsoleViewContentType.SYSTEM_OUTPUT)
+            return
         }
+
+        runConfig ?: return
+        mayaCommand ?: return
+
+        when (runConfig.executionType) {
+            ExecutionType.FILE -> mayaCommand.sendFileToMaya(runConfig.scriptFilePath)
+            ExecutionType.CODE -> mayaCommand.sendCodeToMaya(runConfig.scriptCodeText)
+        }
+    }
+
+    override fun disconnect() {
+        super.disconnect()
+        mayaCommand?.sendCodeToMaya(PythonStrings.STOPTRACE.message)
     }
 }

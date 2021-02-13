@@ -6,26 +6,30 @@ import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.execution.runners.ExecutionEnvironmentBuilder
 import com.intellij.openapi.project.Project
-import com.jetbrains.python.PythonHelper
 import com.jetbrains.python.debugger.attach.PyAttachToProcessCommandLineState
 import com.jetbrains.python.run.PythonConfigurationType
 import com.jetbrains.python.run.PythonRunConfiguration
 import com.jetbrains.python.run.PythonScriptCommandLineState
 import com.jetbrains.python.sdk.PythonEnvUtil
+import settings.ProjectSettings
+import java.nio.file.Paths
 
 class MayaAttachToProcessCliState(runConfig: PythonRunConfiguration, env: ExecutionEnvironment) : PythonScriptCommandLineState(runConfig, env) {
     companion object {
         fun create(project: Project, sdkPath: String, port: Int, pid: Int) : MayaAttachToProcessCliState {
             val conf = PythonConfigurationType.getInstance().factory.createTemplateConfiguration(project) as PythonRunConfiguration
             val env = ExecutionEnvironmentBuilder.create(project, DefaultDebugExecutor.getDebugExecutorInstance(), conf).build()
+            val projectSettings = ProjectSettings.getInstance(project)
+
+            val mcPort = projectSettings.selectedSdk!!.port // TODO how do we handle null here
 
             PythonEnvUtil.addToPythonPath(conf.envs, listOf(env.project.basePath))
 
             conf.workingDirectory = env.project.basePath
             conf.sdkHome = sdkPath
             conf.isUseModuleSdk = false
-            conf.scriptName = PythonHelper.ATTACH_DEBUGGER.asParamString()
-            conf.scriptParameters = "--port $port --pid $pid"
+            conf.scriptName = Paths.get(projectSettings.pythonCachePath.toString(), "attach_pydevd.py").toString()
+            conf.scriptParameters = "--port $port --pid $pid --mcPort $mcPort"
 
             return MayaAttachToProcessCliState(conf, env)
         }
