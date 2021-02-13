@@ -4,22 +4,18 @@ import resources.MayaNotifications
 import settings.ApplicationSettings
 
 import com.intellij.execution.configurations.RunProfile
-import com.intellij.execution.configurations.RunProfileState
 import com.intellij.execution.configurations.RuntimeConfigurationException
 import com.intellij.execution.executors.DefaultDebugExecutor
 import com.intellij.execution.process.impl.ProcessListUtil
 import com.intellij.execution.runners.ExecutionEnvironment
-import com.intellij.execution.ui.RunContentDescriptor
 import com.intellij.xdebugger.XDebugProcess
 import com.intellij.xdebugger.XDebugProcessStarter
 import com.intellij.xdebugger.XDebugSession
 import com.intellij.xdebugger.XDebuggerManager
 import com.jetbrains.python.debugger.PyDebugRunner
 import com.jetbrains.python.debugger.PyLocalPositionConverter
-import com.jetbrains.python.debugger.attach.PyAttachToProcessCommandLineState
 import com.jetbrains.python.sdk.PythonSdkUtil
 import debugattach.MayaAttachToProcessCliState
-import org.jetbrains.concurrency.Promise
 import java.net.ServerSocket
 
 class MayaCharmDebugRunner : PyDebugRunner() {
@@ -39,29 +35,28 @@ class MayaCharmDebugRunner : PyDebugRunner() {
         return DefaultDebugExecutor.EXECUTOR_ID == executorId
     }
 
-    override fun execute(environment: ExecutionEnvironment, state: RunProfileState): Promise<RunContentDescriptor?> {
+    override fun execute(environment: ExecutionEnvironment) {
         val sdks = ApplicationSettings.INSTANCE.mayaSdkMapping
         val runConfig = environment.runProfile as MayaCharmRunConfiguration
-        val sdkInfo = sdks[runConfig.mayaSdkPath] ?: return Promise.resolve(null)
+        val sdkInfo = sdks[runConfig.mayaSdkPath] ?: return
 
         val process = ProcessListUtil.getProcessList().firstOrNull { it.commandLine.contains(sdkInfo.mayaPath) }
         if (process == null) {
             MayaNotifications.mayaInstanceNotFound(sdkInfo.mayaPath, environment.project)
-            return Promise.resolve(null)
+            return
         }
 
         val sdk = PythonSdkUtil.findSdkByPath(sdkInfo.mayaPyPath)
         if (sdk == null) {
             MayaNotifications.mayaInstanceNotFound(sdkInfo.mayaPath, environment.project)
-            return Promise.resolve(null)
+            return
         }
 
         val serverSocket = ServerSocket(0) // port 0 forces the ServerSocket to choose its own free port
-//        val cliState = PyAttachToProcessCommandLineState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
         val cliState = MayaAttachToProcessCliState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
         val executionResult = cliState.execute(environment.executor, this)
 
-        val session = XDebuggerManager.getInstance(environment.project).startSession(environment, object : XDebugProcessStarter() {
+        XDebuggerManager.getInstance(environment.project).startSession(environment, object : XDebugProcessStarter() {
             override fun start(session: XDebugSession): XDebugProcess {
                 val debugProcess = MayaCharmDebugProcess(
                         session,
@@ -76,7 +71,5 @@ class MayaCharmDebugRunner : PyDebugRunner() {
                 return debugProcess
             }
         })
-
-        return Promise.resolve(session.runContentDescriptor)
     }
 }

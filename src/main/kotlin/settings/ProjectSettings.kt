@@ -6,6 +6,7 @@ import com.intellij.openapi.project.getProjectCachePath
 import com.intellij.util.io.createDirectories
 import com.intellij.util.io.delete
 import java.io.File
+import java.nio.file.Path
 import java.nio.file.Paths
 
 @State(
@@ -18,7 +19,7 @@ class ProjectSettings(val project: Project) : PersistentStateComponent<ProjectSe
     data class State(var selectedSdk: String? = null)
     private var myState = State()
 
-    val pythonCachePath = Paths.get(project.getProjectCachePath("MayaCharm").toString(), "python")
+    val pythonCachePath: Path = Paths.get(project.getProjectCachePath("MayaCharm").toString(), "python")
 
     init {
         unpackResources()
