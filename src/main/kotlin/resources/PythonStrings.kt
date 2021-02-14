@@ -7,7 +7,6 @@ enum class PythonStrings(val message: String) {
     OPEN_LOG("import maya.cmds as cmds;cmds.cmdFileOutput(o=r\"{0}\")"),
     CLOSE_LOG("import maya.cmds as cmds;cmds.cmdFileOutput(closeAll=True)"),
     EXECFILE("__name__ = \"__main__\";exec(open(\"{0}\").read(), globals(), locals())"),
-//    EXECFILE("python(\"execfile (\\\"{0}\\\")\");"),
     PYSTDERR("# Error: "),
     PYSTDWRN("# Warning: "),
     SETTRACE("import pydevd; pydevd.settrace(host=\"{0}\", port={1,number,#}, suspend={2}, stdoutToServer={3}, stderrToServer={3})"),
