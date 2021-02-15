@@ -11,7 +11,12 @@ enum class PythonStrings(val message: String) {
     PYSTDWRN("# Warning: "),
     SETTRACE("import pydevd; pydevd.settrace(host=\"{0}\", port={1,number,#}, suspend={2}, stdoutToServer={3}, stderrToServer={3})"),
     STOPTRACE("import pydevd; pydevd.stoptrace()"),
-    CMDPORTSETUPSCRIPT(this::class.java.classLoader.getResource("python/command_port_setup.py")?.readText() ?: "");
+    CMDPORTSETUPSCRIPT("python/command_port_setup.py");
 
     fun format(vararg args: Any): String = MessageFormat.format(message, *args)
+
+    fun getResource(vararg args: Any): String {
+        val text = this::class.java.classLoader.getResource(message)?.readText() ?: return ""
+        return MessageFormat.format(text, *args)
+    }
 }

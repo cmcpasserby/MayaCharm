@@ -45,7 +45,7 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
         })
     }
 
-    private val setupText = EditorTextField(PythonStrings.CMDPORTSETUPSCRIPT.format(0),
+    private val setupText = EditorTextField(PythonStrings.CMDPORTSETUPSCRIPT.getResource(0),
             project, FileTypeManager.getInstance().getFileTypeByExtension(".py")).apply {
         setOneLineMode(false)
         isEnabled = false
@@ -96,11 +96,11 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
         return myPanel
     }
 
-    public val result: ApplicationSettings.SdkInfo
+    val result: ApplicationSettings.SdkInfo
         get() = if (isOK) ApplicationSettings.SdkInfo(sdkInfo.mayaPyPath, portField.text.toInt()) else sdkInfo
 
     private fun updateSetupText() {
-        setupText.text = PythonStrings.CMDPORTSETUPSCRIPT.format(portField.text.toInt())
+        setupText.text = PythonStrings.CMDPORTSETUPSCRIPT.getResource(portField.text.toInt())
     }
 
     private fun isModified(): Boolean {
