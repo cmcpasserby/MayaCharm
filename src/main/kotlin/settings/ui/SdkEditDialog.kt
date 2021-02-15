@@ -18,7 +18,8 @@ import javax.swing.JTextField
 import javax.swing.event.DocumentEvent
 import javax.swing.event.DocumentListener
 
-class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.SdkInfo) : DialogWrapper(project, false) {
+class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.SdkInfo) :
+    DialogWrapper(project, false) {
     private val myPanel = JPanel(GridBagLayout())
     private val nameField = JTextField().apply {
         text = sdkInfo.mayaPyPath
@@ -45,8 +46,10 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
         })
     }
 
-    private val setupText = EditorTextField(PythonStrings.CMDPORTSETUPSCRIPT.getResource(0),
-            project, FileTypeManager.getInstance().getFileTypeByExtension(".py")).apply {
+    private val setupText = EditorTextField(
+        PythonStrings.CMDPORTSETUPSCRIPT.getResource(0),
+        project, FileTypeManager.getInstance().getFileTypeByExtension(".py")
+    ).apply {
         setOneLineMode(false)
         isEnabled = false
     }
@@ -84,8 +87,12 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
             gridx = 0
             weightx = 1.0
             gridwidth = 2
-            myPanel.add(JLabel(Loc.message("mayacharm.sdkedit.ExplainUserSetup"),
-                    JLabel.LEFT), this)
+            myPanel.add(
+                JLabel(
+                    Loc.message("mayacharm.sdkedit.ExplainUserSetup"),
+                    JLabel.LEFT
+                ), this
+            )
 
             gridy++
             myPanel.add(setupText, this)

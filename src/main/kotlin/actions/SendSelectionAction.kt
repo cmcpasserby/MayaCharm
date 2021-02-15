@@ -8,9 +8,10 @@ import com.intellij.notification.Notifications
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.LangDataKeys
 
-class SendSelectionAction: BaseSendAction(
-        Loc.message("mayacharm.action.SendSelectionText"),
-        Loc.message("mayacharm.action.SendSelectionDescription"), null) {
+class SendSelectionAction : BaseSendAction(
+    Loc.message("mayacharm.action.SendSelectionText"),
+    Loc.message("mayacharm.action.SendSelectionDescription"), null
+) {
     override fun actionPerformed(e: AnActionEvent) {
         val sdk = ProjectSettings.getInstance(e.project!!).selectedSdk
         if (sdk == null) {
@@ -23,8 +24,7 @@ class SendSelectionAction: BaseSendAction(
 
         if (selectionModel.hasSelection()) {
             selectedText = selectionModel.selectedText
-        }
-        else {
+        } else {
             selectionModel.selectLineAtCaret()
             if (selectionModel.hasSelection()) {
                 selectedText = selectionModel.selectedText

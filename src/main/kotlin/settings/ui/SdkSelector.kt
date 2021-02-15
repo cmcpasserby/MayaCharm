@@ -27,10 +27,12 @@ class SdkSelector : JPanel(GridBagLayout()) {
 
     var selectedItem: String?
         get() = comboBox.selectedItem as String?
-        set(value) {comboBox.selectedItem = value}
+        set(value) {
+            comboBox.selectedItem = value
+        }
 
     var items: List<String>
-        get() = List<String>(comboBox.itemCount) {comboBox.getItemAt(it)}
+        get() = List<String>(comboBox.itemCount) { comboBox.getItemAt(it) }
         set(value) {
             comboBox.removeAllItems()
             for (s in value) {

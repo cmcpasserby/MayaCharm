@@ -6,6 +6,7 @@ enum class PythonStrings(val message: String) {
     UTF8_ENCODING_STR("# -*- coding: utf-8 -*-"),
     OPEN_LOG("import maya.cmds as cmds;cmds.cmdFileOutput(o=r\"{0}\")"),
     CLOSE_LOG("import maya.cmds as cmds;cmds.cmdFileOutput(closeAll=True)"),
+
     // no clue why the maya.cmds part is needed, but it works and prevents things from getting executing twice
     EXECFILE("import maya.cmds;g_tmp=globals();g_tmp[\"__name__\"]=\"__main__\";execfile(\"{0}\", globals())"),
     PYSTDERR("# Error: "),

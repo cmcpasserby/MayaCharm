@@ -10,8 +10,9 @@ import com.intellij.openapi.actionSystem.LangDataKeys
 import com.intellij.openapi.fileEditor.FileDocumentManager
 
 class SendBufferAction : BaseSendAction(
-        Loc.message("mayacharm.action.SendDocumentText"),
-        Loc.message("mayacharm.action.SendDocumentDescription"), null) {
+    Loc.message("mayacharm.action.SendDocumentText"),
+    Loc.message("mayacharm.action.SendDocumentDescription"), null
+) {
     override fun actionPerformed(e: AnActionEvent) {
         val sdk = ProjectSettings.getInstance(e.project!!).selectedSdk
         if (sdk == null) {

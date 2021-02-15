@@ -21,13 +21,13 @@ class LogWindow : ToolWindowFactory, DumbAware {
         val mayaLogPath = PathManager.getPluginTempPath() + String.format(LOG_FILENAME_STRING, port)
 
         val console = LogConsole(
-                project,
-                File(mayaLogPath),
-                Charset.defaultCharset(),
-                0L,
-                "MayaLog",
-                false,
-                GlobalSearchScope.allScope(project)
+            project,
+            File(mayaLogPath),
+            Charset.defaultCharset(),
+            0L,
+            "MayaLog",
+            false,
+            GlobalSearchScope.allScope(project)
         )
 
         val content = contentFactory.createContent(console.component, "", false)

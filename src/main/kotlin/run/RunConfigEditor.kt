@@ -19,21 +19,23 @@ class RunConfigEditor(config: MayaCharmRunConfiguration) : SettingsEditor<MayaCh
     private val buttonGroup = ButtonGroup()
     private val sdkSelector = SdkSelector()
 
-    private val fileRadioButton = JRadioButton(Loc.message("mayacharm.configedit.ExecuteFile"), true).apply { update(this) }
+    private val fileRadioButton =
+        JRadioButton(Loc.message("mayacharm.configedit.ExecuteFile"), true).apply { update(this) }
     private val fileField = TextFieldWithBrowseButton().apply {
         val fileTypeFilter = FileChooserDescriptor(true, false, false, false, false, false)
         addBrowseFolderListener(
-                Loc.message("mayacharm.configedit.SelectFile"),
-                Loc.message("mayacharm.configedit.SelectFileLong"),
-                config.project,
-                fileTypeFilter
+            Loc.message("mayacharm.configedit.SelectFile"),
+            Loc.message("mayacharm.configedit.SelectFileLong"),
+            config.project,
+            fileTypeFilter
         )
     }
 
     private val codeRadioButton = JRadioButton(Loc.message("mayacharm.configedit.ExecuteCode")).apply { update(this) }
-    private val codeField = EditorTextField("", config.project, FileTypeManager.getInstance().getFileTypeByExtension(".py")).apply {
-        setOneLineMode(false)
-    }
+    private val codeField =
+        EditorTextField("", config.project, FileTypeManager.getInstance().getFileTypeByExtension(".py")).apply {
+            setOneLineMode(false)
+        }
 
     init {
         with(GridBagConstraints()) {

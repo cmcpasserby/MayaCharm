@@ -13,7 +13,7 @@ private const val mayaPyExecutableNameMac = "mayapy"
 private const val mayaExecutableNameLinux = "maya"
 private const val mayaPyExecutableNameLinux = "mayapy"
 
-public fun mayaPyFromMaya(path: String): String? {
+fun mayaPyFromMaya(path: String): String? {
     val p = Paths.get(path)
 
     if (p.fileName.toString() != mayaExecutableName) {
@@ -33,7 +33,7 @@ public fun mayaPyFromMaya(path: String): String? {
     return null
 }
 
-public fun mayaFromMayaPy(path: String): String? {
+fun mayaFromMayaPy(path: String): String? {
     val p = Paths.get(path)
 
     if (p.fileName.toString() != mayaPyExecutableName) {
@@ -53,7 +53,7 @@ public fun mayaFromMayaPy(path: String): String? {
     return null
 }
 
-public val mayaExecutableName: String
+val mayaExecutableName: String
     get() {
         if (SystemInfo.isWindows) return mayaExecutableNameWin
         if (SystemInfo.isMac) return mayaExecutableNameMac
@@ -61,7 +61,7 @@ public val mayaExecutableName: String
         return ""
     }
 
-public val mayaPyExecutableName: String
+val mayaPyExecutableName: String
     get() {
         if (SystemInfo.isWindows) return mayaPyExecutableNameWin
         if (SystemInfo.isMac) return mayaPyExecutableNameMac

@@ -14,7 +14,7 @@ import javax.swing.event.AncestorListener
 
 class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurable.NoScroll {
     companion object {
-        public const val ID = "settings.MayaSdkConfigurable"
+        const val ID = "settings.MayaSdkConfigurable"
     }
 
     private val settings = ApplicationSettings.INSTANCE
@@ -27,9 +27,9 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
                 reset()
             }
 
-            override fun ancestorMoved(event: AncestorEvent?) { }
+            override fun ancestorMoved(event: AncestorEvent?) {}
 
-            override fun ancestorRemoved(event: AncestorEvent?) { }
+            override fun ancestorRemoved(event: AncestorEvent?) {}
         })
     }
 

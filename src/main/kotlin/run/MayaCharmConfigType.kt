@@ -18,7 +18,7 @@ class MayaCharmConfigType : ConfigurationType {
     }
 
     override fun getIcon(): Icon {
-        return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png")
+        return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png", this::class.java)
     }
 
     override fun getId(): String {

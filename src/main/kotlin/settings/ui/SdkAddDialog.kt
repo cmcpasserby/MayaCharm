@@ -42,8 +42,8 @@ class SdkAddDialog(project: Project, private val existingSdks: List<Sdk>) : Dial
         return myPanel
     }
 
-    public fun getOrCreateSdk(): Sdk? {
-        return when(val sdk = sdkChooser.selectedSdk) {
+    fun getOrCreateSdk(): Sdk? {
+        return when (val sdk = sdkChooser.selectedSdk) {
             is PyDetectedSdk -> sdk.setup(existingSdks)
             else -> sdk
         }

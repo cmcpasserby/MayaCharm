@@ -27,7 +27,8 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
 
     override fun getLanguageLevelFromVersionString(version: String?): LanguageLevel {
         if (version != null && version.startsWith(verStringPrefix)) {
-            return LanguageLevel.fromPythonVersion(version.substring(verStringPrefix.length)) ?: LanguageLevel.getDefault()
+            return LanguageLevel.fromPythonVersion(version.substring(verStringPrefix.length))
+                ?: LanguageLevel.getDefault()
         }
         return LanguageLevel.getDefault()
     }
@@ -61,7 +62,7 @@ class MayaSdkFlavor private constructor() : PythonSdkFlavor() {
 
         val INSTANCE: MayaSdkFlavor = MayaSdkFlavor()
 
-        private fun isMayaFolder(file: File) : Boolean {
+        private fun isMayaFolder(file: File): Boolean {
             return file.isDirectory && file.name == "Maya.app"
         }
     }

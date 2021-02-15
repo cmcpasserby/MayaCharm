@@ -1,10 +1,10 @@
 package logconsole
 
+import com.intellij.diagnostic.logging.DefaultLogFilterModel
 import mayacomms.LOG_FILENAME_STRING
 import resources.PythonStrings
 import settings.ProjectSettings
 import com.intellij.diagnostic.logging.LogConsoleImpl
-import com.intellij.diagnostic.logging.LogFragment
 import com.intellij.execution.process.ProcessOutputTypes
 import com.intellij.openapi.application.PathManager
 import com.intellij.openapi.project.Project
@@ -13,16 +13,24 @@ import java.io.File
 import java.io.PrintWriter
 import java.nio.charset.Charset
 
-class LogConsole(private val project: Project, file: File, charset: Charset, skippedContents: Long, title: String, buildInActions: Boolean, searchScope: GlobalSearchScope?)
-    : LogConsoleImpl(project, file, charset, skippedContents, title, buildInActions, searchScope) {
+class LogConsole(
+    private val project: Project,
+    file: File,
+    charset: Charset,
+    skippedContents: Long,
+    title: String,
+    buildInActions: Boolean,
+    searchScope: GlobalSearchScope?
+) : LogConsoleImpl(project, file, charset, skippedContents, title, buildInActions, searchScope) {
 
     init {
-        super.setContentPreprocessor(fun(it: String): MutableList<LogFragment> {
-            val lFrag = mutableListOf<LogFragment>()
-            val checks = it.startsWith(PythonStrings.PYSTDERR.message) || it.startsWith(PythonStrings.PYSTDWRN.message)
-            val outType = if (checks) ProcessOutputTypes.STDERR else ProcessOutputTypes.STDOUT
-            lFrag.add(LogFragment(it, outType))
-            return lFrag
+        super.setFilterModel(object : DefaultLogFilterModel(project) {
+            override fun processLine(line: String?): MyProcessingResult {
+                line ?: return MyProcessingResult(ProcessOutputTypes.STDOUT, false, null)
+                val checks = line.startsWith(PythonStrings.PYSTDERR.message) || line.startsWith(PythonStrings.PYSTDWRN.message)
+                val outType = if (checks) ProcessOutputTypes.STDERR else ProcessOutputTypes.STDOUT
+                return MyProcessingResult(outType, true, null)
+            }
         })
     }
 
@@ -42,8 +50,7 @@ class LogConsole(private val project: Project, file: File, charset: Charset, ski
             writer = PrintWriter(mayaLogPath)
             writer.print("")
             writer.close()
-        }
-        finally {
+        } finally {
             writer?.close()
         }
     }

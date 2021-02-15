@@ -8,8 +8,9 @@ import com.intellij.notification.Notifications
 import com.intellij.openapi.actionSystem.AnActionEvent
 
 class ConnectToMayaLogAction : BaseSendAction(
-        Loc.message("mayacharm.action.ConnectLogText"),
-        Loc.message("mayacharm.action.ConnectLogDescription"), null) {
+    Loc.message("mayacharm.action.ConnectLogText"),
+    Loc.message("mayacharm.action.ConnectLogDescription"), null
+) {
     override fun update(e: AnActionEvent) {
         e.presentation.isEnabled = true
     }

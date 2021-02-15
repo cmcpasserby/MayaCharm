@@ -8,21 +8,18 @@ import com.intellij.execution.configurations.*
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.openapi.options.SettingsEditor
 import com.intellij.openapi.project.Project
-import com.intellij.util.xmlb.SkipDefaultValuesSerializationFilters
 import com.intellij.util.xmlb.XmlSerializer
 import org.jdom.Element
 import java.io.File
 
-enum class ExecutionType {FILE, CODE}
+enum class ExecutionType { FILE, CODE }
 
-private val SERIALIZATION_FILTERS = SkipDefaultValuesSerializationFilters()
-
-class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?, name: String?)
-    : RunConfigurationBase<MayaCharmRunConfiguration.ConfigurationState>(project, factory, name) {
-    public var mayaSdkPath: String = ProjectSettings.getInstance(project).selectedSdkName ?: ""
-    public var scriptFilePath: String = ""
-    public var scriptCodeText: String = ""
-    public var executionType: ExecutionType = ExecutionType.FILE
+class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?, name: String?) :
+    RunConfigurationBase<MayaCharmRunConfiguration.ConfigurationState>(project, factory, name) {
+    var mayaSdkPath: String = ProjectSettings.getInstance(project).selectedSdkName ?: ""
+    var scriptFilePath: String = ""
+    var scriptCodeText: String = ""
+    var executionType: ExecutionType = ExecutionType.FILE
 
     data class ConfigurationState(
         var mayaSdkPath: String = "",
@@ -47,7 +44,7 @@ class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?
 
     override fun writeExternal(element: Element) {
         ConfigurationState(mayaSdkPath, scriptFilePath, scriptCodeText, executionType).apply {
-            XmlSerializer.serializeInto(this, element, SERIALIZATION_FILTERS)
+            XmlSerializer.serializeInto(this, element)
             super.writeExternal(element)
         }
     }

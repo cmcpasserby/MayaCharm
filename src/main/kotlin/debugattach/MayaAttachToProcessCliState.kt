@@ -15,11 +15,14 @@ import com.jetbrains.python.sdk.PythonEnvUtil
 import settings.ProjectSettings
 import java.nio.file.Paths
 
-class MayaAttachToProcessCliState(runConfig: PythonRunConfiguration, env: ExecutionEnvironment) : PythonScriptCommandLineState(runConfig, env) {
+class MayaAttachToProcessCliState(runConfig: PythonRunConfiguration, env: ExecutionEnvironment) :
+    PythonScriptCommandLineState(runConfig, env) {
     companion object {
-        fun create(project: Project, sdkPath: String, port: Int, pid: Int) : MayaAttachToProcessCliState {
-            val conf = PythonConfigurationType.getInstance().factory.createTemplateConfiguration(project) as PythonRunConfiguration
-            val env = ExecutionEnvironmentBuilder.create(project, DefaultDebugExecutor.getDebugExecutorInstance(), conf).build()
+        fun create(project: Project, sdkPath: String, port: Int, pid: Int): MayaAttachToProcessCliState {
+            val conf =
+                PythonConfigurationType.getInstance().factory.createTemplateConfiguration(project) as PythonRunConfiguration
+            val env = ExecutionEnvironmentBuilder.create(project, DefaultDebugExecutor.getDebugExecutorInstance(), conf)
+                .build()
             val projectSettings = ProjectSettings.getInstance(project)
 
             val mcPort = projectSettings.selectedSdk!!.port // TODO how do we handle null here

@@ -11,13 +11,14 @@ import com.jetbrains.python.debugger.PyDebugProcess
 import resources.PythonStrings
 import java.net.ServerSocket
 
-class MayaCharmDebugProcess(session: XDebugSession,
-                            serverSocket: ServerSocket,
-                            executionConsole: ExecutionConsole,
-                            processHandler: ProcessHandler?,
-                            private val runConfig: MayaCharmRunConfiguration?,
-                            private val pid: Int)
-                            : PyDebugProcess(session, serverSocket, executionConsole, processHandler, false) {
+class MayaCharmDebugProcess(
+    session: XDebugSession,
+    serverSocket: ServerSocket,
+    executionConsole: ExecutionConsole,
+    processHandler: ProcessHandler?,
+    private val runConfig: MayaCharmRunConfiguration?,
+    private val pid: Int
+) : PyDebugProcess(session, serverSocket, executionConsole, processHandler, false) {
 
     private val mayaCommand = runConfig?.mayaSdkPath?.let {
         val port = ApplicationSettings.INSTANCE.mayaSdkMapping[it]?.port ?: return@let null
@@ -33,7 +34,7 @@ class MayaCharmDebugProcess(session: XDebugSession,
     }
 
     override fun afterConnect() {
-        if (!isConnected){
+        if (!isConnected) {
             printToConsole(Loc.message("mayacharm.debugproc.FailedToConnect"), ConsoleViewContentType.SYSTEM_OUTPUT)
             return
         }

@@ -13,15 +13,14 @@ import com.jetbrains.python.debugger.PyDebugRunner
 import com.jetbrains.python.debugger.PyLocalPositionConverter
 import com.jetbrains.python.debugger.attach.PyAttachToProcessDebugRunner
 import run.MayaCharmDebugProcess
-import settings.ApplicationSettings
 import java.io.IOException
 import java.net.ServerSocket
 
 class MayaAttachToProcessDebugRunner(
-        private val project: Project,
-        private val pid: Int,
-        private val sdkPath: String?,
-        private val mayaSdk: ApplicationSettings.SdkInfo) : PyAttachToProcessDebugRunner(project, pid, sdkPath) {
+    private val project: Project,
+    private val pid: Int,
+    private val sdkPath: String?
+) : PyAttachToProcessDebugRunner(project, pid, sdkPath) {
 
     override fun launch(): XDebugSession? {
         FileDocumentManager.getInstance().saveAllDocuments()
@@ -36,8 +35,8 @@ class MayaAttachToProcessDebugRunner(
         } catch (e: IOException) {
             e.printStackTrace()
             Messages.showErrorDialog(
-                    Loc.message("mayacharm.debugattachproc.FailedFindPort"),
-                    Loc.message("mayacharm.debugattachproc.FailedFindPortTitle")
+                Loc.message("mayacharm.debugattachproc.FailedFindPort"),
+                Loc.message("mayacharm.debugattachproc.FailedFindPortTitle")
             )
         }
         return portSocket
@@ -50,13 +49,21 @@ class MayaAttachToProcessDebugRunner(
 
         val icon = IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png", this::class.java)
 
-        return XDebuggerManager.getInstance(project).startSessionAndShowTab(pid.toString(), icon, null, false, object : XDebugProcessStarter() {
-            override fun start(dSession: XDebugSession): XDebugProcess {
-                val process = MayaCharmDebugProcess(dSession, serverSocket, result.executionConsole, result.processHandler, null, pid)
-                process.positionConverter = PyLocalPositionConverter()
-                PyDebugRunner.createConsoleCommunicationAndSetupActions(project, result, process, dSession)
-                return process
-            }
-        })
+        return XDebuggerManager.getInstance(project)
+            .startSessionAndShowTab(pid.toString(), icon, null, false, object : XDebugProcessStarter() {
+                override fun start(dSession: XDebugSession): XDebugProcess {
+                    val process = MayaCharmDebugProcess(
+                        dSession,
+                        serverSocket,
+                        result.executionConsole,
+                        result.processHandler,
+                        null,
+                        pid
+                    )
+                    process.positionConverter = PyLocalPositionConverter()
+                    PyDebugRunner.createConsoleCommunicationAndSetupActions(project, result, process, dSession)
+                    return process
+                }
+            })
     }
 }

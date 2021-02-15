@@ -18,7 +18,12 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
         return MayaAttachGroup.INSTANCE
     }
 
-    override fun getAvailableDebuggers(project: Project, attachHost: XAttachHost, processInfo: ProcessInfo, userData: UserDataHolder): MutableList<XAttachDebugger> {
+    override fun getAvailableDebuggers(
+        project: Project,
+        attachHost: XAttachHost,
+        processInfo: ProcessInfo,
+        userData: UserDataHolder
+    ): MutableList<XAttachDebugger> {
         if (!processInfo.executableName.toLowerCase().contains("maya")) return mutableListOf()
 
         val exePath = processInfo.executableCannonicalPath.let {
@@ -48,7 +53,7 @@ private class MayaAttachDebugger(sdk: Sdk, private val mayaSdk: ApplicationSetti
     }
 
     override fun attachDebugSession(project: Project, attachHost: XAttachHost, processInfo: ProcessInfo) {
-        val runner = MayaAttachToProcessDebugRunner(project, processInfo.pid, mySdkHome, mayaSdk)
+        val runner = MayaAttachToProcessDebugRunner(project, processInfo.pid, mySdkHome)
         runner.launch()
     }
 }

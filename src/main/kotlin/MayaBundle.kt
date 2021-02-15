@@ -1,13 +1,8 @@
-import com.intellij.DynamicBundle
+import com.intellij.AbstractBundle
 import org.jetbrains.annotations.PropertyKey
 
-class MayaBundle : DynamicBundle(BUNDLE) {
-    companion object {
-        private const val BUNDLE = "MayaCharmBundle"
-        private val INSTANCE = MayaBundle()
+private const val BUNDLE = "MayaCharmBundle"
 
-        fun message(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg parms: Any): String {
-            return INSTANCE.getMessage(key, *parms)
-        }
-    }
+object MayaBundle : AbstractBundle(BUNDLE) {
+    fun message(@PropertyKey(resourceBundle = BUNDLE) key: String, vararg params: Any) = getMessage(key, *params)
 }

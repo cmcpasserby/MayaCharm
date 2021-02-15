@@ -12,8 +12,8 @@ typealias SdkPortMap = MutableMap<String, ApplicationSettings.SdkInfo>
 private val portRange = (4434..4534).toSet()
 
 @State(
-        name = "MCAppSettings",
-        storages = [Storage(value = "mayacharm.settings.xml", roamingType = RoamingType.DISABLED)]
+    name = "MCAppSettings",
+    storages = [Storage(value = "mayacharm.settings.xml", roamingType = RoamingType.DISABLED)]
 )
 class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> {
     data class SdkInfo(var mayaPyPath: String = "", var port: Int = -1) {
@@ -22,6 +22,7 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
     }
 
     data class State(var mayaSdkMapping: SdkPortMap = mutableMapOf())
+
     private var myState = State()
 
     companion object {
@@ -30,7 +31,8 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
     }
 
     init {
-        val mayaSdk = PythonSdkUtil.getAllLocalCPythons().filter { it.homePath?.endsWith(mayaPyExecutableName) ?: false }
+        val mayaSdk =
+            PythonSdkUtil.getAllLocalCPythons().filter { it.homePath?.endsWith(mayaPyExecutableName) ?: false }
         val homePaths = mayaSdk.map { it.homePath!! }
 
         for (path in homePaths) {
@@ -41,14 +43,17 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
 
     var mayaSdkMapping: SdkPortMap
         get() = myState.mayaSdkMapping
-        set(value) {myState.mayaSdkMapping = value}
+        set(value) {
+            myState.mayaSdkMapping = value
+        }
 
     override fun getState(): State {
         return myState
     }
 
     override fun loadState(state: State) {
-        val mayaPySdks = PythonSdkUtil.getAllLocalCPythons().filter { x -> x.homePath?.endsWith(mayaPyExecutableName) ?: false }
+        val mayaPySdks =
+            PythonSdkUtil.getAllLocalCPythons().filter { x -> x.homePath?.endsWith(mayaPyExecutableName) ?: false }
         val homePaths = mayaPySdks.map { it.homePath!! }
 
         mayaSdkMapping.clear()
@@ -64,7 +69,8 @@ class ApplicationSettings : PersistentStateComponent<ApplicationSettings.State> 
     }
 
     fun refreshPythonSdks() {
-        val mayaSdk = PythonSdkUtil.getAllLocalCPythons().filter { it.homePath?.endsWith(mayaPyExecutableName) ?: false }
+        val mayaSdk =
+            PythonSdkUtil.getAllLocalCPythons().filter { it.homePath?.endsWith(mayaPyExecutableName) ?: false }
 
         val homePathsSet = mayaSdk.map { it.homePath!! }.toSet()
         val sdkMappingKeySet = mayaSdkMapping.keys.toSet()

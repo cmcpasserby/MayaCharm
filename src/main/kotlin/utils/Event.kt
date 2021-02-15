@@ -23,7 +23,7 @@ class Delegate<TA> : Event<TA> {
         }
     }
 
-    operator fun invoke(source:TA) {
+    operator fun invoke(source: TA) {
         val list = invocationList ?: return
         for (m in list) {
             m(source)

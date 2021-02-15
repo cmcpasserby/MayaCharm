@@ -35,7 +35,8 @@ private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.
 
 private val model = SdkTableModel()
 
-class SdkTablePanel(private val project: Project) : AddEditRemovePanel<ApplicationSettings.SdkInfo>(model, arrayListOf()) {
+class SdkTablePanel(private val project: Project) :
+    AddEditRemovePanel<ApplicationSettings.SdkInfo>(model, arrayListOf()) {
     private val onChanged = Delegate<SdkTablePanel>()
     val changed: Event<SdkTablePanel> get() = onChanged
 
@@ -61,9 +62,11 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
     }
 
     override fun removeItem(sdkInfo: ApplicationSettings.SdkInfo): Boolean {
-        val result = Messages.showDialog(Loc.message("mayacharm.sdkremove.RemoveWarning"), Loc.message("mayacharm.sdkremove.Title"),
-                arrayOf(Loc.message("mayacharm.Yes"), Loc.message("mayacharm.No")), 0,
-                IconLoader.getIcon("/icons/MayaCharm_Action@2x.png")) == 0
+        val result = Messages.showDialog(
+            Loc.message("mayacharm.sdkremove.RemoveWarning"), Loc.message("mayacharm.sdkremove.Title"),
+            arrayOf(Loc.message("mayacharm.Yes"), Loc.message("mayacharm.No")), 0,
+            IconLoader.getIcon("/icons/MayaCharm_Action@2x.png", this::class.java)
+        ) == 0
 
         if (result) {
             val sdk = PythonSdkUtil.findSdkByPath(sdkInfo.mayaPyPath) ?: return false
@@ -83,9 +86,9 @@ class SdkTablePanel(private val project: Project) : AddEditRemovePanel<Applicati
     override fun initPanel() {
         layout = BorderLayout()
         val decorator = ToolbarDecorator.createDecorator(table).apply {
-            setAddAction {doAdd()}
-            setEditAction {doEdit()}
-            setRemoveAction {doRemove()}
+            setAddAction { doAdd() }
+            setEditAction { doEdit() }
+            setRemoveAction { doRemove() }
         }
 
         val panel = decorator.createPanel()
