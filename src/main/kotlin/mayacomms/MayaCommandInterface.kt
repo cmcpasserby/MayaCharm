@@ -69,15 +69,13 @@ class MayaCommandInterface(private val port: Int) {
             Paths.get(it.toString() + logFileName)
         }
 
-        var message = PythonStrings.CLOSE_LOG.message
-        message += System.lineSeparator() + PythonStrings.OPEN_LOG.format(mayaLogPath)
-        createMayaLog(mayaLogPath.toString())
-        sendCodeToMaya(message)
-    }
-
-    private fun createMayaLog(path: String): File {
-        return File(path).also {
+        File(mayaLogPath.toString()).also {
             if (!it.exists()) it.createNewFile()
         }
+
+        val message = PythonStrings.CLOSE_LOG.message +
+                System.lineSeparator() + PythonStrings.OPEN_LOG.format(mayaLogPath)
+
+        sendCodeToMaya(message)
     }
 }

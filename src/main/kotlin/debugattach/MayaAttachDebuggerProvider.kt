@@ -35,7 +35,7 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
         } ?: return mutableListOf()
 
         PythonSdkUtil.findSdkByPath(currentSdk.mayaPyPath)?.let {
-            return mutableListOf(MayaAttachDebugger(it, currentSdk))
+            return mutableListOf(MayaAttachDebugger(it))
         }
 
         return mutableListOf()
@@ -44,7 +44,7 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
     override fun isAttachHostApplicable(attachHost: XAttachHost): Boolean = attachHost is LocalAttachHost
 }
 
-private class MayaAttachDebugger(sdk: Sdk, private val mayaSdk: ApplicationSettings.SdkInfo) : XAttachDebugger {
+private class MayaAttachDebugger(sdk: Sdk) : XAttachDebugger {
     private val mySdkHome: String? = sdk.homePath
     private val myName: String = "${PythonSdkType.getInstance().getVersionString(sdk)} ($mySdkHome)"
 
