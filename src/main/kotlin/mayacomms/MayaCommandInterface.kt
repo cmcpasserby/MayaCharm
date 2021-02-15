@@ -6,7 +6,6 @@ import com.intellij.notification.Notifications
 import com.intellij.openapi.application.PathManager
 import java.io.*
 import java.net.Socket
-import java.text.MessageFormat
 
 const val LOG_FILENAME_STRING: String = "/mayalog%s.txt"
 
