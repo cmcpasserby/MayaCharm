@@ -8,7 +8,7 @@ enum class PythonStrings(val message: String) {
     CLOSE_LOG("import maya.cmds as cmds;cmds.cmdFileOutput(closeAll=True)"),
 
     // no clue why the maya.cmds part is needed, but it works and prevents things from getting executing twice
-    EXECFILE("import maya.cmds;g_tmp=globals();g_tmp[\"__name__\"]=\"__main__\";execfile(\"{0}\", globals())"),
+    EXECFILE("python(\"execfile(\\\"{0}\\\")\")"),
     PYSTDERR("# Error: "),
     PYSTDWRN("# Warning: "),
     SETTRACE("import pydevd; pydevd.settrace(host=\"{0}\", port={1,number,#}, suspend={2}, stdoutToServer={3}, stderrToServer={3})"),

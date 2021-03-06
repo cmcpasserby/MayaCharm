@@ -52,7 +52,7 @@ def process_command_line(argv):
 def send_command(port, message):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect(("localhost", port))
-    client.sendall(message)
+    client.sendall("python(\"" + message + "\")")
     data = client.recv(1024)
     if data and not data.startswith("None"):
         print(data)
