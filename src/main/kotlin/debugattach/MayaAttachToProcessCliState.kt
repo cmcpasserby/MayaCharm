@@ -34,7 +34,7 @@ class MayaAttachToProcessCliState(runConfig: PythonRunConfiguration, env: Execut
             conf.sdkHome = sdkPath
             conf.isUseModuleSdk = false
             conf.scriptName = Paths.get(projectSettings.pythonCachePath.toString(), "attach_pydevd.py").toString()
-            conf.scriptParameters = "--port $port --pid $pid --mcPort $mcPort --pydevPath $debuggerPath"
+            conf.scriptParameters = "--port $port --pid $pid --mcPort $mcPort --pydevPath \"$debuggerPath\""
 
             return MayaAttachToProcessCliState(conf, env)
         }
