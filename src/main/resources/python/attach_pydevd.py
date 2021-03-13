@@ -74,10 +74,10 @@ attach_script.attach(%(port)s, "%(host)s");
         setup['pythonpath2'] = os.path.dirname(__file__)
         # We have to pass it a bit differently for gdb
         python_code = '''import sys;
-sys.path.append(\\\"%(pythonpath)s\\\");
-sys.path.append(\\\"%(pythonpath2)s\\\");
+sys.path.append("%(pythonpath)s");
+sys.path.append("%(pythonpath2)s");
 import attach_script;
-attach_script.attach(port=%(port)s, host=\\\"%(host)s\\\");
+attach_script.attach(port=%(port)s, host="%(host)s");
 '''.replace('\r\n', '').replace('\r', '').replace('\n', '')
 
     python_code = python_code % setup
