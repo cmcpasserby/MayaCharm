@@ -1,10 +1,9 @@
 # MayaCharm
 
-## [3.2.1] - 2021-02-13
+## [3.2.1] - 2021-03-13
 ### Added
 - Support for PyCharm 2020.3
 ### Modified
-- CommandPort setup, this version will require userSetup.py modifications
 - Updated gradle and build system
 
 ## [3.1.2] - 2020-04-05

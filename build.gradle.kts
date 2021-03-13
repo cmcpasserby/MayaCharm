@@ -19,6 +19,9 @@ val pluginVerifierIdeVersions: String by project
 val platformType: String by project
 val platformVersion: String by project
 val platformDownloadSources: String by project
+val platformPlugins: String by project
+
+val publishToken: String? = System.getenv("IDEA_PLATFORM_PUBLISH")
 
 group = pluginGroup
 version = pluginVersion
@@ -31,8 +34,6 @@ repositories {
 dependencies {
 }
 
-val publishToken: String? = System.getenv("IntellijPublishToken")
-
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     pluginName = pluginName_
@@ -40,7 +41,7 @@ intellij {
     type = platformType
     downloadSources = platformDownloadSources.toBoolean()
     updateSinceUntilBuild = true
-    setPlugins("python") // TODO pull from properties file
+    setPlugins(*platformPlugins.split(",").map(String::trim).filter(String::isNotEmpty).toTypedArray())
 }
 
 changelog {
@@ -84,5 +85,11 @@ tasks {
 
     runPluginVerifier {
         ideVersions(pluginVerifierIdeVersions)
+    }
+
+    publishPlugin {
+        dependsOn("patchChangelog")
+        token(publishToken)
+        channels(pluginVersion.split('-').getOrElse(1) {"default"}.split('.').first())
     }
 }
