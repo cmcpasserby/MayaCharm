@@ -1,5 +1,7 @@
 # MayaCharm
 
+## [Unreleased]
+
 ## [3.2.2] - 2021-03-17
 ### Added
 - Display of Maya path in the "Attach to process popup"
