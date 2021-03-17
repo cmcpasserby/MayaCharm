@@ -15,7 +15,7 @@ def attach(port, host):
             trace_only_current_thread=False,
             patch_multiprocessing=False,
         )
-        print("successfully attached to maya")
+        print("Successfully attached to Maya")
     except:
         import traceback
         traceback.print_exc()

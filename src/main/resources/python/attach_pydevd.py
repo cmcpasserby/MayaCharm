@@ -51,12 +51,14 @@ def process_command_line(argv):
 
 def send_command(port, message):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect(("localhost", port))
-    client.sendall('python("' + message.replace(r'"', r'\"') + '")')
-    data = client.recv(1024)
-    if data and not data.startswith("None"):
-        print(data)
-    client.close()
+    try:
+        client.connect(("localhost", port))
+        client.sendall('python("' + message.replace(r'"', r'\"') + '")')
+        data = client.recv(1024)
+        if data.strip().strip("\x00"):
+            print(data)
+    finally:
+        client.close()
 
 
 def main(setup):
