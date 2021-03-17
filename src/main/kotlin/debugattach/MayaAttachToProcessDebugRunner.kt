@@ -13,13 +13,15 @@ import com.jetbrains.python.debugger.PyDebugRunner
 import com.jetbrains.python.debugger.PyLocalPositionConverter
 import com.jetbrains.python.debugger.attach.PyAttachToProcessDebugRunner
 import run.MayaCharmDebugProcess
+import settings.ApplicationSettings
 import java.io.IOException
 import java.net.ServerSocket
 
 class MayaAttachToProcessDebugRunner(
     private val project: Project,
     private val pid: Int,
-    private val sdkPath: String?
+    private val sdkPath: String?,
+    private val mayaSdk: ApplicationSettings.SdkInfo
 ) : PyAttachToProcessDebugRunner(project, pid, sdkPath) {
 
     override fun launch(): XDebugSession? {
@@ -44,7 +46,7 @@ class MayaAttachToProcessDebugRunner(
 
     private fun launchRemoteDebugServer(): XDebugSession? {
         val serverSocket = getDebuggerSocket() ?: return null
-        val state = MayaAttachToProcessCliState.create(project, sdkPath!!, serverSocket.localPort, pid)
+        val state = MayaAttachToProcessCliState.create(project, sdkPath!!, serverSocket.localPort, pid, mayaSdk)
         val result = state.execute(state.environment.executor, this)
 
         val icon = IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png", this::class.java)

@@ -54,7 +54,7 @@ class MayaCharmDebugRunner : PyDebugRunner() {
 
         val serverSocket = ServerSocket(0) // port 0 forces the ServerSocket to choose its own free port
         val cliState =
-            MayaAttachToProcessCliState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid)
+            MayaAttachToProcessCliState.create(environment.project, sdk.homePath!!, serverSocket.localPort, process.pid, sdkInfo)
         val executionResult = cliState.execute(environment.executor, this)
 
         XDebuggerManager.getInstance(environment.project).startSession(environment, object : XDebugProcessStarter() {

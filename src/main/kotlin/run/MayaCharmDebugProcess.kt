@@ -19,7 +19,7 @@ class MayaCharmDebugProcess(
     private val runConfig: MayaCharmRunConfiguration?,
     private val pid: Int
 ) : PyDebugProcess(session, serverSocket, executionConsole, processHandler, false) {
-
+    // TODO maybe the maya sdk should be passed in here as well
     private val mayaCommand = runConfig?.mayaSdkPath?.let {
         val port = ApplicationSettings.INSTANCE.mayaSdkMapping[it]?.port ?: return@let null
         MayaCommandInterface(port)
