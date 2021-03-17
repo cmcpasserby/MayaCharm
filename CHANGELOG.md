@@ -1,6 +1,8 @@
 # MayaCharm
 
 ## [Unreleased]
+### Fixes
+- issue where the proper mayaSdk port number was not always selected when attaching to a maya instance
 
 ## [3.2.1] - 2021-03-13
 ### Added
