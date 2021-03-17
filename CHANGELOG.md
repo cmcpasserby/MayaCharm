@@ -1,10 +1,10 @@
 # MayaCharm
 
-## [Unreleased]
+## [3.2.2] - 2021-03-17
 ### Added
-- display of Maya path in the "Attach to process popup"
+- Display of Maya path in the "Attach to process popup"
 ### Fixes
-- issue where the proper mayaSdk port number was not always selected when attaching to a maya instance
+- Issue where the proper mayaSdk port number was not always selected when attaching to a Maya instance
 
 ## [3.2.1] - 2021-03-13
 ### Added
@@ -50,6 +50,7 @@
 - Better support for multiple Maya installs
 - Removed dependencies on PyCharm Professional's remote debugger as well as PyCharm Professional
 
+[3.2.2]: https://github.com/cmcpasserby/MayaCharm/releases/tag/v3.2.2
 [3.2.1]: https://github.com/cmcpasserby/MayaCharm/releases/tag/v3.2.1
 [3.1.2]: https://github.com/cmcpasserby/MayaCharm/releases/tag/v3.1.2
 [3.1.1]: https://github.com/cmcpasserby/MayaCharm/releases/tag/v3.1.1
