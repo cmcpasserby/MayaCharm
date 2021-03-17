@@ -13,7 +13,7 @@ import com.jetbrains.python.sdk.PythonSdkType
 import com.jetbrains.python.sdk.PythonSdkUtil
 import javax.swing.Icon
 
-private val mayaPathKey = Key<String>("mayaPath")
+private val mayaPathsKey = Key<MutableMap<Int, String>>("mayaPathsMap")
 
 class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
     override fun getPresentationGroup(): XAttachPresentationGroup<ProcessInfo> {
@@ -31,7 +31,9 @@ class MayaAttachDebuggerProvider : XAttachDebuggerProvider {
             exePath.contains(it.mayaPath.toLowerCase())
         } ?: return mutableListOf()
 
-        userData.putUserData(mayaPathKey, currentSdk.mayaPath)
+        val mayaPathMap = userData.getUserData(mayaPathsKey) ?: mutableMapOf()
+        mayaPathMap[processInfo.pid] = currentSdk.mayaPath
+        userData.putUserData(mayaPathsKey, mayaPathMap)
 
         PythonSdkUtil.findSdkByPath(currentSdk.mayaPyPath)?.let {
             return mutableListOf(MayaAttachDebugger(it, currentSdk))
@@ -63,7 +65,8 @@ private class MayaAttachGroup : XAttachProcessPresentationGroup {
     }
 
     override fun getItemDisplayText(project: Project, processInfo: ProcessInfo, userData: UserDataHolder): String {
-        return userData.getUserData(mayaPathKey) ?: processInfo.executableDisplayName
+        val mayaPaths = userData.getUserData(mayaPathsKey) ?: return processInfo.executableDisplayName
+        return mayaPaths[processInfo.pid] ?: processInfo.executableDisplayName
     }
 
     override fun getProcessDisplayText(project: Project, info: ProcessInfo, userData: UserDataHolder): String {
