@@ -1,6 +1,8 @@
 # MayaCharm
 
 ## [Unreleased]
+### Added
+- display of Maya path in the "Attach to process popup"
 ### Fixes
 - issue where the proper mayaSdk port number was not always selected when attaching to a maya instance
 
