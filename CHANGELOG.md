@@ -1,6 +1,18 @@
 # MayaCharm
 
 ## [Unreleased]
+### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+## [3.2.2]
 
 ## [3.2.2] - 2021-03-17
 ### Added
