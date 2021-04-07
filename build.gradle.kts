@@ -14,6 +14,7 @@ val pluginName_: String by project
 val pluginVersion: String by project
 
 val pluginSinceVersion: String by project
+val pluginUntilVersion: String by project
 val pluginVerifierIdeVersions: String by project
 
 val platformType: String by project
@@ -61,6 +62,7 @@ tasks {
     patchPluginXml {
         version(pluginVersion)
         sinceBuild(pluginSinceVersion)
+        untilBuild(pluginUntilVersion)
 
         pluginDescription(
             closure {
