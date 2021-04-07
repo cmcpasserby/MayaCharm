@@ -4,9 +4,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.4.30"
-    id("org.jetbrains.intellij") version "0.6.5"
-    id("org.jetbrains.changelog") version "1.1.1"
+    id("org.jetbrains.kotlin.jvm") version "1.4.32"
+    id("org.jetbrains.intellij") version "0.7.2"
+    id("org.jetbrains.changelog") version "1.1.2"
 }
 
 val pluginGroup: String by project
@@ -47,10 +47,12 @@ intellij {
 
 changelog {
     version = pluginVersion
+    groups = emptyList()
 }
 
 tasks {
     withType<JavaCompile> {
+        options.release.set(8)
         sourceCompatibility = "1.8"
         targetCompatibility = "1.8"
     }
@@ -80,7 +82,7 @@ tasks {
 
         changeNotes(
             closure {
-                changelog.getLatest().toHTML()
+                changelog.get(pluginVersion).toHTML()
             }
         )
     }
