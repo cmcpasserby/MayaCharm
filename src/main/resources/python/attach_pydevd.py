@@ -53,9 +53,9 @@ def send_command(port, message):
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         client.connect(("localhost", port))
-        client.sendall('python("' + message.replace(r'"', r'\"') + '")')
+        client.sendall(('python("' + message.replace(r'"', r'\"') + '")').encode())
         data = client.recv(1024)
-        if data.strip().strip("\x00"):
+        if data.strip().strip(b"\x00"):
             print(data)
     finally:
         client.close()
