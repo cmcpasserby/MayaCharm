@@ -22,7 +22,7 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
     DialogWrapper(project, false) {
     private val myPanel = JPanel(GridBagLayout())
     private val nameField = JTextField().apply {
-        text = sdkInfo.mayaPyPath
+        text = sdkInfo.mayaPath
         isEnabled = false
     }
 
@@ -99,12 +99,9 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
         }
     }
 
-    override fun createCenterPanel(): JComponent {
-        return myPanel
-    }
+    override fun createCenterPanel(): JComponent = myPanel
 
-    val result: ApplicationSettings.SdkInfo
-        get() = if (isOK) ApplicationSettings.SdkInfo(sdkInfo.mayaPyPath, portField.text.toInt()) else sdkInfo
+    val result: ApplicationSettings.SdkInfo = if (isOK) sdkInfo.copy(port = portField.text.toInt()) else sdkInfo.copy()
 
     private fun updateSetupText() {
         setupText.text = PythonStrings.CMDPORTSETUPSCRIPT.getResource(portField.text.toInt())
@@ -112,7 +109,7 @@ class SdkEditDialog(project: Project, private val sdkInfo: ApplicationSettings.S
 
     private fun isModified(): Boolean {
         val port = portField.text.toIntOrNull() ?: return false
-        return sdkInfo != ApplicationSettings.SdkInfo(sdkInfo.mayaPyPath, port)
+        return sdkInfo != sdkInfo.copy(port = port)
     }
 
     private fun updateOkButton() {

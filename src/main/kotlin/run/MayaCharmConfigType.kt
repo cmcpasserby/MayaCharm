@@ -13,33 +13,20 @@ class MayaCharmConfigType : ConfigurationType {
         return "MayaCharm"
     }
 
-    override fun getConfigurationTypeDescription(): String {
-        return Loc.message("mayacharm.runconfig.ConfigType")
-    }
+    override fun getConfigurationTypeDescription(): String = Loc.message("mayacharm.runconfig.ConfigType")
 
-    override fun getIcon(): Icon {
-        return IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png", this::class.java)
-    }
+    override fun getIcon(): Icon = IconLoader.getIcon("/icons/MayaCharm_ToolWindow.png", this::class.java)
 
-    override fun getId(): String {
-        return "MAYACHARM_RUN_CONFIGURATION"
-    }
+    override fun getId(): String = "MAYACHARM_RUN_CONFIGURATION"
 
-    override fun getConfigurationFactories(): Array<ConfigurationFactory> {
-        return arrayOf(MayaCharmConfigFactory(this))
-    }
+    override fun getConfigurationFactories(): Array<ConfigurationFactory> = arrayOf(MayaCharmConfigFactory(this))
 }
 
 class MayaCharmConfigFactory(type: MayaCharmConfigType) : ConfigurationFactory(type) {
-    override fun createTemplateConfiguration(project: Project): RunConfiguration {
-        return MayaCharmRunConfiguration(project, this, "MayaCharm")
-    }
+    override fun createTemplateConfiguration(project: Project): RunConfiguration =
+        MayaCharmRunConfiguration(project, this, "MayaCharm")
 
-    override fun getName(): String {
-        return Loc.message("mayacharm.runconfig.ConfigFactory")
-    }
+    override fun getName(): String = Loc.message("mayacharm.runconfig.ConfigFactory")
 
-    override fun getId(): String {
-        return "MAYACHARM_RUN_CONFIGURATION"
-    }
+    override fun getId(): String = "MAYACHARM_RUN_CONFIGURATION"
 }

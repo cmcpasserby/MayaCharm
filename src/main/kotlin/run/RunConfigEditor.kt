@@ -105,7 +105,5 @@ class RunConfigEditor(config: MayaCharmRunConfiguration) : SettingsEditor<MayaCh
         config.executionType = if (codeRadioButton.isSelected) ExecutionType.CODE else ExecutionType.FILE
     }
 
-    override fun createEditor(): JComponent {
-        return myPanel
-    }
+    override fun createEditor(): JComponent = myPanel
 }

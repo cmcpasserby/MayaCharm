@@ -4,8 +4,6 @@ import MayaBundle as Loc
 import settings.ApplicationSettings
 import utils.Delegate
 import utils.Event
-import flavors.MayaSdkFlavor as MyMayaSdkFlavor
-
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.projectRoots.impl.SdkConfigurationUtil
 import com.intellij.openapi.ui.Messages
@@ -15,21 +13,23 @@ import com.intellij.ui.IdeBorderFactory
 import com.intellij.ui.ToolbarDecorator
 import com.intellij.util.ui.UIUtil
 import com.jetbrains.python.sdk.PythonSdkUtil
-import com.jetbrains.python.sdk.flavors.MayaSdkFlavor
-import com.jetbrains.python.sdk.getOrCreateAdditionalData
 import java.awt.BorderLayout
 
 private class SdkTableModel : AddEditRemovePanel.TableModel<ApplicationSettings.SdkInfo>() {
-    override fun getColumnCount(): Int {
-        return 2
+    override fun getColumnCount(): Int = 3
+
+    override fun getColumnName(cIndex: Int): String = when (cIndex) {
+        0 -> "Maya Version"
+        1 -> "MayaPy2"
+        2 -> "MayaPy3"
+        else -> throw IndexOutOfBoundsException()
     }
 
-    override fun getColumnName(cIndex: Int): String {
-        return if (cIndex == 0) Loc.message("mayacharm.sdktable.MayaVersion") else Loc.message("mayacharm.sdktable.CommandPort")
-    }
-
-    override fun getField(o: ApplicationSettings.SdkInfo, cIndex: Int): Any {
-        return if (cIndex == 0) o.mayaPyPath else o.port
+    override fun getField(o: ApplicationSettings.SdkInfo, cIndex: Int): Any = when (cIndex) {
+        0 -> o.mayaPath
+        1 -> o.mayaPy2Path
+        2 -> o.mayaPy3Path
+        else -> throw IndexOutOfBoundsException()
     }
 }
 
@@ -41,23 +41,12 @@ class SdkTablePanel(private val project: Project) :
     val changed: Event<SdkTablePanel> get() = onChanged
 
     override fun addItem(): ApplicationSettings.SdkInfo? {
-        val existingSdks = PythonSdkUtil.getAllLocalCPythons().filter {
-            !data.map { sdkInfo -> sdkInfo.mayaPyPath }.contains(it.homePath) && it.getOrCreateAdditionalData().run {
-                flavor == MayaSdkFlavor.INSTANCE || flavor == MyMayaSdkFlavor.INSTANCE
-            }
-        }
-
-        val dialog = SdkAddDialog(project, existingSdks)
+        val dialog = SdkAddDialog(project)
         dialog.show()
 
-        val selectedSdk = dialog.getOrCreateSdk() ?: return null
-        SdkConfigurationUtil.addSdk(selectedSdk)
+        val result = dialog.result ?: return null
+        // TODO check if path from dialog is valid and add to path if ok was pressed
 
-        selectedSdk.homePath?.let {
-            val unusedPort = ApplicationSettings.INSTANCE.getUnusedPort()
-            onChanged(this)
-            return ApplicationSettings.SdkInfo(it, unusedPort)
-        }
         return null
     }
 
@@ -69,8 +58,8 @@ class SdkTablePanel(private val project: Project) :
         ) == 0
 
         if (result) {
-            val sdk = PythonSdkUtil.findSdkByPath(sdkInfo.mayaPyPath) ?: return false
-            SdkConfigurationUtil.removeSdk(sdk)
+            PythonSdkUtil.findSdkByPath(sdkInfo.mayaPy2Path)?.let { SdkConfigurationUtil.removeSdk(it) }
+            PythonSdkUtil.findSdkByPath(sdkInfo.mayaPy3Path)?.let { SdkConfigurationUtil.removeSdk(it) }
         }
         onChanged(this)
         return result

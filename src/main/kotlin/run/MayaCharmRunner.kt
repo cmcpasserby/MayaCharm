@@ -15,9 +15,7 @@ import com.intellij.execution.ui.RunContentDescriptor
 import com.intellij.openapi.fileEditor.FileDocumentManager
 
 class MayaCharmRunner : GenericProgramRunner<RunnerSettings>() {
-    override fun getRunnerId(): String {
-        return "MayaCharmRunner"
-    }
+    override fun getRunnerId(): String = "MayaCharmRunner"
 
     override fun canRun(executorId: String, runProfile: RunProfile): Boolean {
         val runConfig = runProfile as? MayaCharmRunConfiguration ?: return false

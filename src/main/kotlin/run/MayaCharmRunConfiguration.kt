@@ -28,9 +28,7 @@ class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?
         var executionType: ExecutionType = ExecutionType.FILE
     )
 
-    override fun getConfigurationEditor(): SettingsEditor<out RunConfiguration> {
-        return RunConfigEditor(this)
-    }
+    override fun getConfigurationEditor(): SettingsEditor<out RunConfiguration> = RunConfigEditor(this)
 
     override fun readExternal(element: Element) {
         super.readExternal(element)
@@ -65,7 +63,6 @@ class MayaCharmRunConfiguration(project: Project, factory: ConfigurationFactory?
         }
     }
 
-    override fun getState(executor: Executor, executionEnv: ExecutionEnvironment): RunProfileState {
-        return RunProfileState { _, _ -> null }
-    }
+    override fun getState(executor: Executor, executionEnv: ExecutionEnvironment): RunProfileState =
+        RunProfileState { _, _ -> null }
 }

@@ -61,21 +61,13 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
         }
     }
 
-    override fun getId(): String {
-        return ID
-    }
+    override fun getId(): String = ID
 
-    override fun getDisplayName(): String {
-        return "MayaCharm"
-    }
+    override fun getDisplayName(): String = "MayaCharm"
 
-    override fun getHelpTopic(): String? {
-        return null // TODO
-    }
+    override fun getHelpTopic(): String? = null // TODO
 
-    override fun createComponent(): JComponent {
-        return myPanel
-    }
+    override fun createComponent(): JComponent = myPanel
 
     override fun isModified(): Boolean {
         val entries = settings.mayaSdkMapping.values.toSet() != mySdkPanel.data.toSet()
@@ -85,14 +77,14 @@ class MayaSdkConfigurable(project: Project) : SearchableConfigurable, Configurab
 
     override fun reset() {
         mySdkPanel.data.clear()
-        mySdkPanel.data.addAll(settings.mayaSdkMapping.values.sortedBy { it.mayaPyPath })
+        mySdkPanel.data.addAll(settings.mayaSdkMapping.values.sortedBy { it.mayaPath })
 
         mySdkSelector.items = settings.mayaSdkMapping.keys.sorted()
         mySdkSelector.selectedItem = projectSettings.selectedSdkName
     }
 
     override fun apply() {
-        settings.mayaSdkMapping = mySdkPanel.data.map { it.mayaPyPath to it }.toMap().toMutableMap()
+        settings.mayaSdkMapping = mySdkPanel.data.associateBy { it.mayaPath }.toMutableMap()
         projectSettings.selectedSdkName = mySdkSelector.selectedItem
     }
 }

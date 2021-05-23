@@ -18,7 +18,7 @@ class ProjectSettings(val project: Project) : PersistentStateComponent<ProjectSe
 
     data class State(var selectedSdk: String? = null)
 
-    private var myState = State()
+    private val myState = State()
 
     val pythonCachePath: Path = Paths.get(project.getProjectCachePath("MayaCharm").toString(), "python")
 
@@ -26,9 +26,7 @@ class ProjectSettings(val project: Project) : PersistentStateComponent<ProjectSe
         unpackResources()
     }
 
-    override fun getState(): State {
-        return myState
-    }
+    override fun getState(): State = myState
 
     override fun loadState(state: State) {
         myState.selectedSdk = state.selectedSdk
@@ -55,8 +53,6 @@ class ProjectSettings(val project: Project) : PersistentStateComponent<ProjectSe
     }
 
     companion object {
-        fun getInstance(project: Project): ProjectSettings {
-            return project.service()
-        }
+        fun getInstance(project: Project): ProjectSettings = project.service()
     }
 }

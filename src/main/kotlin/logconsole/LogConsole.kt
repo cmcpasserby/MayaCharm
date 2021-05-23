@@ -34,9 +34,7 @@ class LogConsole(
         })
     }
 
-    override fun isActive(): Boolean {
-        return true
-    }
+    override fun isActive(): Boolean = true
 
     override fun clear() {
         super.clear()

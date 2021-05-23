@@ -41,13 +41,7 @@ private fun pathForPidUnix(pid: Int): String? = try {
 }
 
 fun pathForPid(pid: Int): String? = when {
-    SystemInfo.isWindows -> {
-        pathForPidWin(pid)
-    }
-    SystemInfo.isMac -> {
-        pathForPidMac(pid)
-    }
-    else -> {
-        pathForPidUnix(pid)
-    }
+    SystemInfo.isWindows -> pathForPidWin(pid)
+    SystemInfo.isMac -> pathForPidMac(pid)
+    else -> pathForPidUnix(pid)
 }

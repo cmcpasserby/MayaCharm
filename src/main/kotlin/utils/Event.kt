@@ -9,24 +9,17 @@ class Delegate<TA> : Event<TA> {
     private var invocationList: MutableList<(TA) -> Unit>? = null
 
     override fun plusAssign(m: (TA) -> Unit) {
-        val list = invocationList ?: mutableListOf<(TA) -> Unit>().apply { invocationList = this }
-        list.add(m)
+        invocationList = invocationList ?: mutableListOf(m)
     }
 
     override fun minusAssign(m: (TA) -> Unit) {
-        val list = invocationList
-        if (list != null) {
-            list.remove(m)
-            if (list.isEmpty()) {
+        invocationList?.let {
+            it.remove(m)
+            if (it.isEmpty()) {
                 invocationList = null
             }
         }
     }
 
-    operator fun invoke(source: TA) {
-        val list = invocationList ?: return
-        for (m in list) {
-            m(source)
-        }
-    }
+    operator fun invoke(source: TA) = invocationList?.forEach { it(source) }
 }

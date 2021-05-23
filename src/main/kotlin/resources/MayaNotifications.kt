@@ -24,12 +24,10 @@ object MayaNotifications {
         Loc.message("mayacharm.notifications.NoSdkSelected"), NotificationType.ERROR
     )
 
-    fun mayaInstanceNotFound(instancePath: String, project: Project) {
-        Notification(
-            displayGroup,
-            titleText,
-            Loc.message("mayacharm.notifications.NoRunningMayaInstanceFor", instancePath),
-            NotificationType.ERROR
-        ).notify(project)
-    }
+    fun mayaInstanceNotFound(instancePath: String, project: Project) = Notification(
+        displayGroup,
+        titleText,
+        Loc.message("mayacharm.notifications.NoRunningMayaInstanceFor", instancePath),
+        NotificationType.ERROR
+    ).notify(project)
 }

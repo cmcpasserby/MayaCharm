@@ -25,13 +25,9 @@ class MayaCharmDebugProcess(
         MayaCommandInterface(port)
     }
 
-    override fun getConnectionMessage(): String {
-        return Loc.message("mayacharm.debugproc.ConnectionMessage", pid.toString())
-    }
+    override fun getConnectionMessage(): String = Loc.message("mayacharm.debugproc.ConnectionMessage", pid.toString())
 
-    override fun getConnectionTitle(): String {
-        return Loc.message("mayacharm.debugproc.ConnectionTitle")
-    }
+    override fun getConnectionTitle(): String = Loc.message("mayacharm.debugproc.ConnectionTitle")
 
     override fun afterConnect() {
         if (!isConnected) {

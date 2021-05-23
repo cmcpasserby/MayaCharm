@@ -19,9 +19,7 @@ import debugattach.MayaAttachToProcessCliState
 import java.net.ServerSocket
 
 class MayaCharmDebugRunner : PyDebugRunner() {
-    override fun getRunnerId(): String {
-        return "MayaCharmDebugRunner"
-    }
+    override fun getRunnerId(): String = "MayaCharmDebugRunner"
 
     override fun canRun(executorId: String, runProfile: RunProfile): Boolean {
         val runConfig = runProfile as? MayaCharmRunConfiguration ?: return false
@@ -46,7 +44,7 @@ class MayaCharmDebugRunner : PyDebugRunner() {
             return
         }
 
-        val sdk = PythonSdkUtil.findSdkByPath(sdkInfo.mayaPyPath)
+        val sdk = PythonSdkUtil.findSdkByPath(sdkInfo.mayaPyPath) // TODO logic to sort out the selected interpreter to use based on python version used in project
         if (sdk == null) {
             MayaNotifications.mayaInstanceNotFound(sdkInfo.mayaPath, environment.project)
             return

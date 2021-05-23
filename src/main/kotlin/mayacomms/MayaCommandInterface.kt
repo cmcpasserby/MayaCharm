@@ -53,15 +53,9 @@ class MayaCommandInterface(private val port: Int) {
         }
     }
 
-    fun sendCodeToMaya(message: String) {
-        val file = writeFile(message)
-        sendToPort(file!!)
-    }
+    fun sendCodeToMaya(message: String) = sendToPort(writeFile(message)!!)
 
-    fun sendFileToMaya(path: String) {
-        val file = File(path)
-        sendToPort(file)
-    }
+    fun sendFileToMaya(path: String) = sendToPort(File(path))
 
     fun connectMayaLog() {
         val mayaLogPath = Paths.get(PathManager.getPluginTempPath()).let {
