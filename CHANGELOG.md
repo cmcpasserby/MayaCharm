@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [3.2.5] - 2021-08-03
+### Added
+- PyCharm 2021.2 support
+
 ## [3.2.4] - 2021-04-8
 ### Added
 - support Python 3
