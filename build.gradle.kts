@@ -64,7 +64,7 @@ tasks {
     patchPluginXml {
         version(pluginVersion)
         sinceBuild(pluginSinceVersion)
-        untilBuild(pluginUntilVersion)
+        untilBuild(null)
 
         pluginDescription(
             closure {

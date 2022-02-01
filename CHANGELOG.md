@@ -1,7 +1,12 @@
 # MayaCharm
 
 ## [Unreleased]
+## [3.2.6]
 
+## [3.2.6] - 2022-02-31
+### Added
+- PyCharm 2021.3 support
+ 
 ## [3.2.5] - 2021-08-03
 ### Added
 - PyCharm 2021.2 support
