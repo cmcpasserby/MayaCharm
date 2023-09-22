@@ -1,7 +1,10 @@
 # MayaCharm
 
 ## [Unreleased]
-## [3.2.6]
+
+## [3.2.7] - 2023-09-22
+### Fixes
+- now properly recognized UTf-8 code points in remotely executed scripts
 
 ## [3.2.6] - 2022-02-31
 ### Added
